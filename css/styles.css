@@ -615,15 +615,39 @@ h5 {
 }
 
 .list > * {
+    position: relative;
     padding: 6rem 18rem;
 }
 
-.list > *:nth-child(odd) {
+.list > li {
+    margin-left: 40rem;
+    padding-left: 0;
+}
+
+.list > *::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 20rem);
+    height: 100%;
+    z-index: -1;
+}
+
+.list > li::before {
+    left: -40rem;
+}
+
+.list > *:nth-child(odd)::before {
     background: var(--dark-main-bg);
 }
 
-.list > *:nth-child(even) {
+.list > *:nth-child(even)::before {
     background: var(--dark-body-bg);
+}
+
+.list > *::marker {
+    position: relative;
 }
 
 .list-element-yes,
@@ -632,8 +656,8 @@ h5 {
     padding-left: 40rem;
 }
 
-.list-element-yes::before,
-.list-element-no::before {
+.list-element-yes::after,
+.list-element-no::after {
     content: '';
     position: absolute;
     top: 12rem;
@@ -642,11 +666,11 @@ h5 {
     height: 15rem;
 }
 
-.list-element-yes::before {
+.list-element-yes::after {
     background: url(../img/icons/check-green.svg);
 }
 
-.list-element-no::before {
+.list-element-no::after {
     background: url(../img/icons/cross-red.svg);
 }
 /* end lists */
