@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    // анимация меню
+	$('.menu').click(function(e){
+        e.preventDefault();
+        (this.classList.contains('active') === true) ? this.classList.remove('active') : this.classList.add('active');
+
+        $('.header').toggleClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.menu-links-wrapper, .menu');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $('.header, .menu').removeClass('active');
+            }
+        });
+    });
+
     // якоря для ссылок
     $('.anchor[href^="#"]').click(function () {
         $('.header').removeClass('active'); 
@@ -106,6 +121,24 @@ $(document).ready(function() {
         });
     }
 
+    // параметры билда
+    $('body').on('click', '.js-button-build-parameters', function(e){
+        e.preventDefault();
+        $('.aside-navigation-parameters').addClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.aside-navigation-parameters, .js-button-build-parameters');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $('.aside-navigation-parameters').removeClass('active');
+            }
+        });
+    });
+
+    // селект лиги
+    NiceSelect.bind(document.getElementById("select-league"), {
+        
+    });
+
     // табы
     $('body').on('click','.tab-trigger', function(e){
         e.preventDefault();
@@ -115,5 +148,97 @@ $(document).ready(function() {
         $(this).addClass('active');
         $(this).parent().next().find('.tab-item').removeClass('active');
         $(this).parent().next().find('.tab-item[data-tab="'+ tab +'"]').addClass('active');
+    });
+
+    // кнопка копирования
+    new ClipboardJS('.copy-link');
+
+    // new ClipboardJS('.copy-link', {
+    //     text: function() {
+    //         return alert('Скопировано');
+    //     }
+    // });
+
+    // if ($('.copy-link').length) {
+    //     $('.copy-link').click(function() {
+    //         let $this = $(this);
+    //         let code = $(this).siblings('.copied-code').text().trim();
+
+    //         new ClipboardJS('.copy-link', {
+    //             text: function() {
+    //                 return alert('Скопировано');
+    //             }
+    //         });
+
+    //         $this.addClass('copied');
+    //         setTimeout(function() {
+    //             $this.removeClass('copied')
+    //         }, 3000)
+    //     });
+    // }
+
+    // слайдер
+    let swiper = new Swiper('.slider-images', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    // fancybox
+    Fancybox.bind("[data-fancybox]", {
+        // options
+    });
+
+    // комментарии
+    $('.comment-reply-btn').click(function() {
+        let reply_id = $(this).attr('target');
+        let article_id = $(this).attr('article');
+        let comment_root = $(this).parent().parent();
+        let reply_author = comment_root.find(".comment-author").text();
+        let comment_reply_html = '<span class="comment-reply-info">Ответ на <span class="comment-reply-name-ref">' + reply_author + '</span><i class="material-icons">close</i></span>';
+        $(".comment-reply-info").remove();
+        $("#user-comment-name").after(comment_reply_html);
+        $('#comment input[name="reply_id"]').val(reply_id);
+        $("#comment").detach().appendTo(comment_root);
+    });
+    $("#add-comment-btn").click(function(e) {
+        e.preventDefault();
+        sendAjaxForm("user_comment_form", "/lk/comment/", true, "Комментарий добавлен<br>Страница будет перезагружена", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз");
+        return false;
+    });
+    $("#comment").on("click", ".comment-reply-info", function() {
+        $(this).remove();
+        $('#comment input[name="reply_id"]').val("");
+        $("#comment").detach().appendTo($(".init-comment-form-here"));
+    });
+    $(".hide-re-tree").click(function() {
+        $(this).parent().addClass("comments-collapsed");
+    });
+    $(".expand-re-tree").click(function() {
+        $(this).parent().removeClass("comments-collapsed");
+    });
+    $("#user-comment-name").keydown(function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    $("#user-comment-text").keydown(function(e) {
+        checkCommentForAccLink($(this), false);
+        if (e.ctrlKey && e.keyCode == 13) {
+            $("#add-comment-btn").click();
+        }
+        if (!e.ctrlKey && e.keyCode == 13) {
+            let currentRowsNum = parseInt($(this).attr('rows'));
+            $(this).attr('rows', currentRowsNum + 1);
+        }
+    });
+    $("#user-comment-text").on('paste', function() {
+        checkCommentForAccLink($(this), true);
     });
 });

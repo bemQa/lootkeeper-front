@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="libs/simplebar/simplebar.css"/>
     <!-- tippyjs / tooltips -->
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <!-- nice select -->
+	<link rel="stylesheet" href="libs/nice-select2/css/nice-select2.css"/>
     <!-- styles -->
 	<link rel="stylesheet" href="fonts/stylesheet.css"/>
 	<link rel="stylesheet" href="css/styles.css"/>
@@ -29,6 +31,10 @@
     <script src="libs/inputmask.min.js"></script>
     <!-- validate -->
     <script src="libs/validate.min.js"></script>
+    <!-- clipboard -->
+    <script src="libs/clipboard.min.js"></script>
+    <!-- nice select -->
+    <script src="libs/nice-select2/js/nice-select2.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
 
@@ -106,7 +112,7 @@
 
                             <div class="build-page-content-block anchor-block" id="obshchaya-informaciya">
                                 <h2><span>ОБЩАЯ ИНФОРМАЦИЯ</span></h2>
-                                <ul class="list">
+                                <ul class="list-elements">
                                     <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptatum.</li>
                                     <li>Qui atque aliquam maiores accusantium est voluptates accusamus dolore quae!</li>
                                     <li>Qui reprehenderit saepe placeat cumque perspiciatis tempora sint atque fugit!</li>
@@ -130,7 +136,7 @@
 
                                 <h3>Прогрессия билда будет идти в четыре этапа и примерная стоимость каждой сборки:</h3>
 
-                                <div class="list">
+                                <div class="list-elements">
                                     <div class="list-element"><b>1.</b> Начальная — около <b>20-50</b> <poeitem class="poe-items lk_color_30" data-template="test"><img src="img/metka.png" alt=""> Сфера хаоса</poeitem></div>
                                     <div class="list-element"><b>2.</b> Переходная — около <b>5-10</b>        Божественная сфера</div>
                                     <div class="list-element"><b>3.</b> Основная — около <b>40-70</b>        Божественная сфера</div>
@@ -150,7 +156,7 @@
                                 <h2><span>ПРЕИМУЩЕСТВА И НЕДОСТАТКИ</span></h2>
 
                                 <h3>Преимущества</h3>
-                                <div class="list">
+                                <div class="list-elements">
                                     <div class="list-element list-element-yes">Богоподобная зачистка, без преувеличения одна из лучших в игре на данный момент</div>
                                     <div class="list-element list-element-yes">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
                                     <div class="list-element list-element-yes">Optio soluta ratione veritatis unde distinctio corporis! Et, cum quas!</div>
@@ -161,7 +167,7 @@
                                 </div>
 
                                 <h3>Недостатки</h3>
-                                <div class="list">
+                                <div class="list-elements">
                                     <div class="list-element list-element-no">
                                         <b>БИЛД НЕ ПОДХОДИТ ДЛЯ НАЧАЛА ЛИГИ ДЛЯ НОВИЧКОВ.</b> Если вы только начали осваивать PoE и у вас наблюдаются проблемы с валютой на ранних этапах игры - этим билдом <b>КАТЕГОРИЧЕСКИ НЕЛЬЗЯ ИГРАТЬ</b>. Без валюты вы не сможете нормально прогрессировать, соберете билд из говна и палок и он будет слаб, будете постоянно умирать, возненавидите авторов гайда, начнете бить жену, хамить людям в метро, в общем не стоит этого делать
                                     </div>
@@ -241,6 +247,24 @@
                                 <div class="separate"></div>
                             </div>
                             <div class="build-page-content-block anchor-block" id="anchor1">
+                                <h2><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis.</span></h2>
+                                <div class="two-columns-block">
+                                    <div class="left-column-block">
+                                        <h3>Класс восхождения - Снайпер</h3>
+                                        <p>Прокачиваем таланты в следующем порядке:</p>
+                                        <ol class="list-elements">
+                                            <li>Lorem ipsum dolor sit amet.</li>
+                                            <li>Praesentium rerum architecto ut accusamus.</li>
+                                            <li>Exercitationem voluptatibus consequuntur dicta maiores?</li>
+                                            <li>Deserunt id ullam aliquid aperiam.</li>
+                                        </ol>
+                                    </div>
+                                    <div class="right-column-block">
+                                        <a href="img/talents.png" data-fancybox data-caption="Таланты">
+                                            <img src="img/talents.png" alt="Таланты">
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="tabs-block">
                                     <div class="tabs">
                                         <!-- первый таб по умолчанию активный -->
@@ -253,7 +277,7 @@
                                         <!-- первый таб по умолчанию активный -->
                                         <div class="tab-item active" data-tab="Начальная">
                                             <h4>Вкладка Начальная</h4>
-                                            <div class="list">
+                                            <div class="list-elements">
                                                 <div class="list-element"><b>1.</b> Начальная — около <b>20-50</b> <poeitem class="poe-items lk_color_30" data-template="test"><img src="img/metka.png" alt=""> Сфера хаоса</poeitem></div>
                                                 <div class="list-element"><b>2.</b> Переходная — около <b>5-10</b>        Божественная сфера</div>
                                                 <div class="list-element"><b>3.</b> Основная — около <b>40-70</b>        Божественная сфера</div>
@@ -284,8 +308,8 @@
                                         <div class="copy-detail-element">
                                             <div class="copy-detail-title">
                                                 РоВ Максимальной версии
-                                                <button class="copy-link"></button>
-                                                <a href="" class="detail-link">Перейти</a>
+                                                <button class="copy-link" data-clipboard-action data-clipboard-text="https://guides.lootkeeper.com"></button>
+                                                <a href="https://guides.lootkeeper.com" class="detail-link" target="_blank">Перейти</a>
                                             </div>
                                             <div class="copy-detail-text">Содержит три разных сетапа предметов (для редкого пояса, Охотник за головами и Волшебная кровь), и два дерева талантов - на 97 и 100 уровни.</div>
                                         </div>
@@ -295,6 +319,284 @@
                                                 <button class="copy-link"></button>
                                                 <a href="" class="detail-link">Перейти</a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Влияние</th>
+                                            <th>Префикс</th>
+                                            <th>Суффикс</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Создатель</td>
+                                            <td>Древний</td>
+                                            <td>Крестоносец</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Созданная The shaper’s</td>
+                                            <td>Мистический Eldtrich</td>
+                                            <td>Крестовый Crusader’s</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Изменения Of shaping</td>
+                                            <td>Древнего Of The Elder</td>
+                                            <td>Крестоносца Of The Crusade</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <blockquote>
+                                    <h3>Вариант 1</h3>
+                                    <p>
+                                        <b>По 5% подавления / 2.5% избегания состояний</b> за каждый малый талант в кластере Укоренение
+                                    </p>
+                                </blockquote>
+                                <h3>Слайдер изображений</h3>
+                                <div class="slider-images swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название1">
+                                                <img src="img/image.png" alt="Название1">
+                                                <span class="slide-image-caption">Название1</span>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название2">
+                                                <img src="img/image.png" alt="Название2">
+                                                <span class="slide-image-caption">Название2</span>
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название3">
+                                                <img src="img/image.png" alt="Название3">
+                                                <span class="slide-image-caption">Название3</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                </div>
+                                <h3>Одиночное изобрежение</h3>
+                                <a href="img/image.png" data-fancybox data-caption="Название4">
+                                    <img src="img/image.png" alt="Название1">
+                                </a>
+                                <h3>Галерея изображений</h3>
+                                <div class="gallery-images">
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/talents.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/talents.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                    <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                                        <img src="img/image.png" alt="Название1">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="build-page-content-block">
+                                <h2><span>ПОПУЛЯРНЫЕ СТАТЬИ</span></h2>
+                                <!-- популярные статьи -->
+                                <div class="attention-block interesting">
+                                    <div class="attention-block-label">Интересно</div>
+                                    Если вам понравился этот гайд и вы хотите поддержать наш проект, а следовательно ускорить выход новых гайдов и билдов - перейдите по ссылке ниже.
+                                    <a href="" class="button">Поддержать проект</a>
+                                </div>
+                            </div>
+                            <div class="build-page-content-block anchor-block" id="comments">
+                                <h2><span>КОММЕНТАРИИ</span></h2>
+                                <div class="init-comment-form-here">
+                                    <div id="comment">
+                                        <form id="user_comment_form">
+                                            <input type="hidden" name="article_id" value="112">
+                                            <input type="hidden" name="reply_id" value="">
+                                            <header>
+                                                <input type="text" name="name" placeholder="Ваше имя" id="user-comment-name" class="browser-default">
+                                            </header>    
+                                            <div class="user-comment">
+                                                <textarea name="comment" id="user-comment-text" rows="6" placeholder="Напишите текст комментария и нажмите Ctrl+Enter"></textarea>
+                                                <button type="submit" article="112" id="add-comment-btn" class="button">Отправить</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="comments-block">
+                                    <div class="comment-item">
+                                        <div class="comment-item-self">
+                                            <header class="comment-item-header">
+                                                <span class="comment-author">Mih</span>
+                                                <div class="comment-author-info">
+                                                    <a href="#74191" name="74191" class="comment-date-anchor">
+                                                        <time class="comment-date" datetime="17 августа 2024 г. 15:09">7&nbsp;часов, 23&nbsp;минут назад</time> 
+                                                    </a>
+                                                    <span class="comment-author-league">Некрополь [3.24]</span>
+                                                </div>
+                                            </header>
+                                            <div class="comment-item-content">
+                                                <p>
+                                                    почему до сих пор нету ссылки на покупку  самоцветов смертельной гордости
+                                                </p>                                  
+                                            </div>
+                                            <footer class="comment-item-footer">
+                                                <div class="comment-likes">
+                                                    <button class="comment-like-button"></button>
+                                                    <div class="comment-likes-count">0</div>
+                                                    <button class="comment-like-button"></button>
+                                                </div>
+                                                <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                <button class="button-comment-more-info"></button>
+                                                <div class="tooltip comment-more-info">
+                                                    <a href="" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                    <a href="" class="comment-more-info-link comment-copy">Скопировать ссылку</a>
+                                                    <a href="" class="comment-more-info-link comment-delete">Удалить</a>
+                                                </div>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                    <div class="comment-item">
+                                        <div class="comment-item-self">
+                                            <header class="comment-item-header">
+                                                <span class="comment-author">111</span>
+                                                <a href="#73085" name="73085" class="comment-date-anchor">
+                                                    <time class="comment-date" datetime="8 августа 2024 г. 17:34">1&nbsp;неделя, 2&nbsp;дня назад</time>
+                                                </a>
+                                            </header>
+                                            <div class="comment-item-content">
+                                                <p>
+                                                    5 уровень Пробужденный: Урон от стихий атаками даёт соединенной с ним способности неуязвимость к
+                                                    отражению стихийного урона. почему имея такой камень, и заходя на карту где есть отражение
+                                                    стихийного урона, используя связку где стоит этот камень - все равно отражается урон и персонаж
+                                                    шотается?
+                                                </p>
+                                            </div>
+                                            <footer class="comment-item-footer">
+                                                <button article="112" target="73085" class="comment-reply-btn" href="#comment">Ответить</button>
+                                            </footer>
+                                        </div>
+                                        <div class="comment-reply">
+                                            <div class="comment-reply-self">
+                                                <div class="comment-item">
+                                                    <div class="comment-item-self">
+                                                        <header class="comment-item-header">
+                                                            <span class="comment-author">Lozrak</span>
+                                                            <a href="#73202" name="73202" class="comment-date-anchor">
+                                                                <time class="comment-date" datetime="9 августа 2024 г. 13:19">1&nbsp;неделя, 1&nbsp;день
+                                                                    назад</time>
+                                                            </a>
+                                                        </header>
+                                                        <div class="comment-item-content">
+                                                            <p>
+                                                                Френзи вынимай на картах с отражением
+                                                            </p>
+                                                        </div>
+                                                        <footer class="comment-item-footer">
+                                                            <button article="112" target="73202" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                        </footer>
+                                                    </div>
+                                                    <div class="comment-reply">
+                                                        <div class="comment-reply-self">
+                                    
+                                                            <div class="comment-item">
+                                                                <div class="comment-item-self">
+                                                                    <header class="comment-item-header">
+                                                                        <span class="comment-author">111</span>
+                                                                        <a href="#73228" name="73228" class="comment-date-anchor">
+                                                                            <time class="comment-date" datetime="9 августа 2024 г. 16:27">1&nbsp;неделя,
+                                                                                1&nbsp;день назад</time>
+                                                                        </a>
+                                                                    </header>
+                                                                    <div class="comment-item-content">
+                                                                        <p>
+                                                                            странно что в этом "подробном" гайде этого не написали
+                                                                        </p>
+                                                                    </div>
+                                                                    <footer class="comment-item-footer">
+                                                                        <button article="112" target="73228" class="comment-reply-btn"
+                                                                            href="#comment">Ответить</button>
+                                                                    </footer>
+                                                                </div>
+                                                                <div class="comment-reply">
+                                                                    <div class="comment-reply-self">
+                                                                        <div class="comment-item">
+                                                                            <div class="comment-item-self">
+                                                                                <header class="comment-item-header">
+                                                                                    <span class="comment-author">ZK</span>
+                                                                                    <a href="#73231" name="73231" class="comment-date-anchor">
+                                                                                        <time class="comment-date"
+                                                                                            datetime="9 августа 2024 г. 17:02">1&nbsp;неделя, 1&nbsp;день
+                                                                                            назад</time>
+                                                                                    </a>
+                                                                                </header>
+                                                                                <div class="comment-item-content">
+                                                                                    <p>
+                                                                                        В разделе "часто задаваемые вопросы" - "Какие свойства карт не
+                                                                                        проходит билд" это написано же
+                                                                                    </p>
+                                                                                </div>
+                                                                                <footer class="comment-item-footer">
+                                                                                    <button article="112" target="73231" class="comment-reply-btn"
+                                                                                        href="#comment">Ответить</button>
+                                                                                </footer>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="comment-item">
+                                                                            <div class="comment-item-self">
+                                                                                <header class="comment-item-header">
+                                                                                    <span class="comment-author admin-answer">LootKeeper</span>
+                                                                                    <a href="#73238" name="73238" class="comment-date-anchor">
+                                                                                        <time class="comment-date"
+                                                                                            datetime="9 августа 2024 г. 17:49">1&nbsp;неделя, 1&nbsp;день
+                                                                                            назад</time>
+                                                                                    </a>
+                                                                                </header>
+                                                                                <div class="comment-item-content">
+                                                                                    <p>
+                                                                                    </p>
+                                                                                    <p>Какой же вы душный чел, я в шоке.&nbsp;</p>
+                                                                                    <p>Вы смотрите, скоро не сможете сходить в туалет, если мы гайд по
+                                                                                        туалетам не сделаем.</p>
+                                                                                    <p></p>
+                                                                                </div>
+                                                                                <footer class="comment-item-footer">
+                                                                                    <button article="112" target="73238" class="comment-reply-btn"
+                                                                                        href="#comment">Ответить</button>
+                                                                                </footer>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="hide-re-tree"></div>
+                                                                    <div class="expand-re-tree">Развернуть комментарии</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="hide-re-tree"></div>
+                                                        <div class="expand-re-tree">Развернуть комментарии</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hide-re-tree"></div>
+                                            <div class="expand-re-tree">Развернуть комментарии</div>
                                         </div>
                                     </div>
                                 </div>
@@ -312,7 +614,42 @@
                                     <a href="#anchor1" class="navigation-menu-link anchor">Тестовый блок 1</a>
                                 </div>
                                 <div class="buttons">
-                                    <button class="button invert">Параметры</button>
+                                    <button class="button invert js-button-build-parameters">Параметры</button>
+                                </div>
+                                <div class="aside-navigation-parameters">
+                                    <div class="aside-navigation-parameter-block">
+                                        <div class="aside-navigation-parameter-title">Лига</div>
+                                        <div class="aside-navigation-parameter-text">
+                                            Выберите лигу на которой играете. После смены лиги — все ссылки на покупку предметов изменятся и будут направлять на выбранную лигу.
+                                        </div>
+                                        <select id="select-league" class="aside-navigation-parameter-select">
+                                            <option value="standart">Стандарт</option>
+                                            <option value="standart_hardcore">Стандарт - Одна жизнь</option>
+                                            <option value="necropole">Некрополь</option>
+                                            <option value="necropole_hardcore">Некрополь - Одна жизнь</option>
+                                        </select>
+                                    </div>
+                                    <div class="aside-navigation-parameter-block">
+                                        <div class="aside-navigation-parameter-title">Язык игры</div>
+                                        <div class="aside-navigation-parameter-text">
+                                            Выберите язык на котором играете. После смены — названия предметов, умений и камней изменятся.
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="button button-configuration active">Русский</button>
+                                            <button class="button button-configuration">Английский</button>
+                                        </div>
+                                    </div>
+                                    <div class="aside-navigation-parameter-block">
+                                        <div class="aside-navigation-parameter-title">Платформа</div>
+                                        <div class="aside-navigation-parameter-text">
+                                            Выберите платформу на которой играете. После смены платформы — все ссылки на покупку предметов изменятся и будут направлять на выбранную категорию.
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="button button-configuration active">ПК</button>
+                                            <button class="button button-configuration">XBOX</button>
+                                            <button class="button button-configuration">PlayStation</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </aside>
