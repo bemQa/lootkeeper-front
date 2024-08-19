@@ -14,6 +14,19 @@ $(document).ready(function() {
         });
     });
 
+    // выпадающие меню
+    $('body').on('click', '.dropdown', function(){
+        let $this = $(this);
+        $this.toggleClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.dropdown, .dropdown-current');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $this.removeClass('active');
+            }
+        });
+    });
+
     // якоря для ссылок
     $('.anchor[href^="#"]').click(function () {
         $('.header').removeClass('active'); 
