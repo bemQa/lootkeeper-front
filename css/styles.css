@@ -459,6 +459,19 @@ body {
     cursor: pointer;
 }
 
+.dropdown-current.menu-link {
+    position: relative;
+    padding-right: 16rem;
+    font-size: 18rem;
+    line-height: 1.2;
+    color: #A3A4A5;
+    cursor: pointer;
+}
+
+.dropdown-current.menu-link.active {
+    color: var(--dark-main-color);
+}
+
 .dropdown-current::after {
     content: '';
     position: absolute;
@@ -470,6 +483,14 @@ body {
     height: 4rem;
     background: url(../img/icons/arrow-down-gray.svg) center/contain no-repeat;
     transition: all .3s ease;
+}
+
+.dropdown-current.menu-link::after {
+    background-image: url(../img/icons/arrow-down-gray.svg);
+}
+
+.dropdown-current.menu-link.active::after {
+    background-image: url(../img/icons/arrow-down-hline.svg);
 }
 
 .active .dropdown-current::after {
@@ -489,8 +510,68 @@ body {
     transition: all .3s ease;
 }
 
+.footer-menu .dropdown-list {
+    top: auto;
+    bottom: 30rem;
+}
+
 .dropdown-mini .dropdown-list {
     top: 20rem;
+}
+
+.footer-menu .dropdown-mini .dropdown-list {
+    top: auto;
+    bottom: 20rem;
+}
+
+.dropdown-builds .dropdown-list {
+    width: 558rem;
+    padding: 18rem 24rem;
+    background: var(--dark-block-bg);
+}
+
+.footer-menu .dropdown-builds .dropdown-list {
+    top: auto;
+    bottom: 30rem;
+}
+
+.dropdown-builds {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 36rem;
+}
+
+.dropdown-builds-list {
+    width: 146rem;
+}
+
+.dropdown-builds-list-title {
+    display: block;
+    margin-bottom: 6rem;
+    font-weight: bold;
+    font-size: 20rem;
+}
+
+a.dropdown-builds-list-title:hover {
+    color: #A3A4A5;
+}
+
+.dropdown-builds-list-link {
+    position: relative;
+    display: flex;
+    place-items: flex-start;
+    gap: 6rem;
+    padding: 5rem;
+    background: var(--dark-block-bg);
+    font-size: 18rem;
+    line-height: 1.2;
+    color: #A3A4A5;
+}
+
+.dropdown-builds-list-link:hover {
+    background: #282830;
+    color: var(--dark-main-color);
 }
 
 .active .dropdown-list {
@@ -499,7 +580,7 @@ body {
     pointer-events: auto;
 }
 
-.dropdown-list a {
+.dropdown-list-link {
     display: flex;
     place-items: center flex-start;
     padding: 10rem 18rem;
@@ -509,12 +590,12 @@ body {
     color: #A3A4A5;
 }
 
-.dropdown-mini .dropdown-list a {
+.dropdown-mini .dropdown-list-link {
     padding: 8rem 12rem;
     font-size: 16rem;
 }
 
-.dropdown-list a:hover {
+.dropdown-list-link:hover {
     background: #282830;
     color: var(--dark-main-color);
 }
@@ -611,10 +692,69 @@ body {
     gap: 0 36rem;
 }
 
+.menu-link {
+    position: relative;
+    font-size: 18rem;
+    line-height: 1.2;
+    color: #A3A4A5;
+}
+
+.menu-link::before {
+    content: '';
+    position: absolute;
+    bottom: -24rem;
+    width: 100%;
+    height: 4rem;
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+    background: var(--accent-blue);
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.menu-link:hover,
+.menu-link.active {
+    color: var(--dark-main-color);
+}
+
+.menu-link.active::before {
+    opacity: 1;
+}
+
 .footer {
     position: relative;
     padding: 48rem 0 30rem;
     background: var(--dark-heading-bg);
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48rem 0;
+}
+
+.footer-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 60rem;
+}
+
+.copyright {
+    margin-top: 20rem;
+    font-size: 15rem;
+    line-height: 1.5;
+    text-align: center;
+    color: #8B8E9B;
+}
+
+.copyright a {
+    color: var(--accent-blue);
+    text-decoration: underline;
+}
+
+.copyright a:hover {
+    text-decoration: none;
 }
 
 /* buttons */
@@ -1646,6 +1786,10 @@ blockquote * {
     padding-right: 18rem;
 }
 
+.footer .socs-block {
+    padding-right: 0;
+}
+
 .socs-block::after {
     content: '';
     position: absolute;
@@ -1658,10 +1802,18 @@ blockquote * {
     background: var(--dark-border-color);
 }
 
+.footer .socs-block::after {
+    display: none;
+}
+
 .socs {
     display: flex;
     align-items: center;
     gap: 0 12rem;
+}
+
+.footer .socs {
+    justify-content: center;
 }
 
 .soc {
