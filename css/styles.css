@@ -986,13 +986,15 @@ h5 {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% + 20rem);
+    /* width: calc(100% + 20rem); */
+    width: 100%;
     height: 100%;
     z-index: -1;
 }
 
 .list-elements > li::before {
     left: -40rem;
+    width: calc(100% + 40rem);
 }
 
 .list-elements > *:nth-child(odd)::before {
@@ -2713,7 +2715,10 @@ blockquote * {
     /* end copy-details */
 
     /* table */
-
+    table {
+        display: block;
+        overflow-x: auto;
+    }
     /* end table */
 
     /* quote */
