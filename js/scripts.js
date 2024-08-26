@@ -154,9 +154,11 @@ $(document).ready(function() {
     });
 
     // селект лиги
-    NiceSelect.bind(document.getElementById("select-league"), {
+    if($('.aside-navigation-parameter-select').length) {
+        NiceSelect.bind(document.getElementById("select-league"), {
         
-    });
+        });
+    }
 
     // табы
     $('body').on('click','.tab-trigger', function(e){

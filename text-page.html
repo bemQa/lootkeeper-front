@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>LootKeeper</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!-- <link rel="icon" type="image/png" href="img/favicon.png" /> -->
+    <!-- fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <!-- swiper slider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!-- simplebar -->
+    <link rel="stylesheet" href="libs/simplebar/simplebar.css"/>
+    <!-- tippyjs / tooltips -->
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <!-- nice select -->
+	<link rel="stylesheet" href="libs/nice-select2/css/nice-select2.css"/>
+    <!-- styles -->
+	<link rel="stylesheet" href="fonts/stylesheet.css"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+    <!-- цвета, файл с текущего сайта с гайдами -->
+    <link rel="stylesheet" href="css/colors.css"/>
+
+    <!-- fancybox -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <!-- swiper slider -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="libs/simplebar/simplebar.min.js"></script>
+    <!-- inputmask -->
+    <script src="libs/inputmask.min.js"></script>
+    <!-- validate -->
+    <script src="libs/validate.min.js"></script>
+    <!-- clipboard -->
+    <script src="libs/clipboard.min.js"></script>
+    <!-- nice select -->
+    <script src="libs/nice-select2/js/nice-select2.js"></script>
+    <!-- jquery -->
+    <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
+
+	<!--[if lte IE 9]>
+    <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <header class="header">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="header-top-wrapper">
+                            <div class="dropdown-block">
+                                <div class="dropdown-block-title">Игра</div>
+                                <div class="dropdown dropdown-mini">
+                                    <span class="dropdown-current">Path of Exile</span>
+                                    <div class="dropdown-list">
+                                        <a href="" class="dropdown-list-link">Path of Exile</a>
+                                        <a href="" class="dropdown-list-link">Path of Exile 2</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-header-block">
+                                <input type="text" class="input-search" placeholder="Поиск по сайту">
+                                <button class="button-search"></button>
+                                <div class="input-search-overlay"></div>
+                                <div class="search-header-result">
+
+                                </div>
+                            </div>
+                            <div class="theme-switch-block">
+                                <div class="theme-switch">
+                                    <div class="light-switch"></div>
+                                    <input id="theme-switch" class="theme-switch" type="checkbox" checked>
+                                    <label for="theme-switch"></label>
+                                    <div class="dark-switch"></div>
+                                </div> 
+                            </div>
+                            <div class="socs-block">
+                                <div class="socs">
+                                    <a href="" class="soc soc-yt" target="_blank" rel="noopener"></a>
+                                    <a href="" class="soc soc-vk" target="_blank" rel="noopener"></a>
+                                    <a href="" class="soc soc-tg" target="_blank" rel="noopener"></a>
+                                </div>
+                            </div>
+                            <!-- <a href="" class="notice-header-link"></a>
+                            <div class="notice-block">
+                                
+                            </div> -->
+                            <div class="profile-header-block">
+                                <a href="" class="profile-header-link">Войти</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <div class="container">
+                        <div class="header-main-wrapper">
+                            <a href="" class="logo"></a>
+                            <div class="menu-links">
+                                <div class="dropdown dropdown-builds">
+                                    <!-- <span class="dropdown-current">Path of Exile</span> -->
+                                    <span class="dropdown-current menu-link current">Билды</span>
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-builds">
+                                            <div class="dropdown-builds-list">
+                                                <a href="" class="dropdown-builds-list-title">Дикарь</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_bers.png" alt="">Берсерк</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/button_chief.png" alt="">Вождь</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Дуэлянт</div>
+                                                <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Охотница</div>
+                                                <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Снайпер</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Налетчик</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Следопыт</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Бандит</div>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Ведьма</div>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Жрец</div>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                            </div>
+                                            <div class="dropdown-builds-list">
+                                                <div class="dropdown-builds-list-title">Дворянка</div>
+                                                <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Вознесшаяся</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-current menu-link">Гайды</span>
+                                    <div class="dropdown-list">
+                                        <a href="" class="dropdown-list-link">Программы и инструменты</a>
+                                        <a href="" class="dropdown-list-link">Лиги</a>
+                                        <a href="" class="dropdown-list-link">Для новичков</a>
+                                        <a href="" class="dropdown-list-link">Крафт</a>
+                                        <a href="" class="dropdown-list-link">Валюта</a>
+                                        <a href="" class="dropdown-list-link">Испытания</a>
+                                    </div>
+                                </div>
+                                <a href="" class="menu-link">Предметы</a>
+                                <a href="" class="menu-link">Новости</a>
+                                <a href="" class="menu-link">Вакансии</a>
+                            </div>
+                            <a href="" class="button button-icon"><img src="img/orb.png" alt="Сферы PoE"> Купить сферы PoE</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <header class="header-mob">
+                <div class="container">
+                    <div class="header-mob-wrapper">
+                        <a href="" class="logo"></a>
+                        <!-- <a href="" class="notice-header-link"></a>
+                        <div class="notice-block">
+
+                        </div> -->
+                        <a href="" class="profile-header-link">Войти</a>
+                        <!-- <a href="" class="profile-header-link auth">lootkeeper.ru</a> -->
+                        <div class="menu"><span>Меню</span></div>
+                        <div class="menu-links-wrapper">
+                            <div class="search-header-block">
+                                <input type="text" class="input-search" placeholder="Поиск по сайту">
+                                <button class="button-search"></button>
+                                <div class="input-search-overlay"></div>
+                                <div class="search-header-result">
+
+                                </div>
+                            </div>
+                            <div class="dropdown-block">
+                                <div class="dropdown-block-title">Игра</div>
+                                <div class="dropdown dropdown-mini">
+                                    <span class="dropdown-current">Path of Exile</span>
+                                    <div class="dropdown-list">
+                                        <a href="" class="dropdown-list-link">Path of Exile</a>
+                                        <a href="" class="dropdown-list-link">Path of Exile 2</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-links">
+                                <div class="accordion-block">
+                                    <div class="accordion-item">
+                                        <div class="accordion-title menu-link current">Билды</div>
+                                        <div class="accordion-text">
+                                            <div class="dropdown-builds">
+                                                <div class="dropdown-builds-list">
+                                                    <a href="" class="dropdown-builds-list-title">Дикарь</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_bers.png" alt="">Берсерк</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/button_chief.png" alt="">Вождь</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Дуэлянт</div>
+                                                    <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Охотница</div>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Снайпер</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Налетчик</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Следопыт</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Бандит</div>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Ведьма</div>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Жрец</div>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                                </div>
+                                                <div class="dropdown-builds-list">
+                                                    <div class="dropdown-builds-list-title">Дворянка</div>
+                                                    <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Вознесшаяся</a>
+                                                </div>
+                                                <div class="buttons">
+                                                    <a href="" class="button gray">Все билды</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-block">
+                                    <div class="accordion-item">
+                                        <div class="accordion-title menu-link">Гайды</div>
+                                        <div class="accordion-text">
+                                            <div class="menu-links">
+                                                <a href="" class="menu-link">Программы и инструменты</a>
+                                                <a href="" class="menu-link">Лиги</a>
+                                                <a href="" class="menu-link">Для новичков</a>
+                                                <a href="" class="menu-link">Крафт</a>
+                                                <a href="" class="menu-link">Валюта</a>
+                                                <a href="" class="menu-link">Испытания</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="" class="menu-link">Предметы</a>
+                                <a href="" class="menu-link">Новости</a>
+                                <a href="" class="menu-link">Вакансии</a>
+                            </div>
+                            <div class="theme-switch-block">
+                                <div class="theme-switch">
+                                    <div class="dark-switch">Темное оформление</div>
+                                    <input id="theme-switch-mob" class="theme-switch" type="checkbox" checked>
+                                    <label for="theme-switch-mob"></label>
+                                </div> 
+                            </div>
+                            <a href="" class="button button-icon"><img src="img/orb.png" alt="Сферы PoE"> Купить сферы PoE</a>
+                            <div class="socs-block">
+                                <div class="socs">
+                                    <a href="" class="soc soc-yt" target="_blank" rel="noopener"></a>
+                                    <a href="" class="soc soc-vk" target="_blank" rel="noopener"></a>
+                                    <a href="" class="soc soc-tg" target="_blank" rel="noopener"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section class="section section-text-page">
+                <div class="container">
+                    <h2><span>АВТОРЫ ГАЙДОВ ПО БИЛДАМ POE</span></h2>
+                    <p>
+                        Мы ищем новых авторов в команду LootKeeper.com для написания гайдов по билдам <b>Path of Exile</b>. <br>
+                        Если вы любите PoE так же как и мы, обладаете глубокими познаниями в этой игре (которыми хотите поделится) и при этом хотите зарабатывать - значит эта работа для вас. <br>
+                        Работа полностью удаленная, а значит:
+                    </p>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptatum.</li>
+                        <li>Qui atque aliquam maiores accusantium est voluptates accusamus dolore quae!</li>
+                        <li>Qui reprehenderit saepe placeat cumque perspiciatis tempora sint atque fugit!</li>
+                    </ul>
+                    <p><a href="">Пример одного</a> из наших гайдов, к которому вам нужно будет стремится.</p>
+                    <h3>Обязательные требования</h3>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptatum.</li>
+                        <li>Qui atque aliquam maiores accusantium est voluptates accusamus dolore quae!</li>
+                        <li>Qui reprehenderit saepe placeat cumque perspiciatis tempora sint atque fugit!</li>
+                    </ul>
+                    <h4>Серьезными плюсами также будут:</h4>
+                    <ol>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptatum.</li>
+                        <li>Qui atque aliquam maiores accusantium est voluptates accusamus dolore quae!</li>
+                        <li>Qui reprehenderit saepe placeat cumque perspiciatis tempora sint atque fugit!</li>
+                    </ol>
+
+                    <img src="img/banner1.png" class="desktop-adaptive-visible" alt="">
+                    <img src="img/banner1.png" class="mobile-visible" alt="">
+
+                    <h2><span>Поставщики сфер PoE</span></h2>
+                    <div class="video-container">
+                        <div class="youtube-wrapper">
+                            <div class="youtube" data-embed="arUQzrTl5yY">
+                                <div class="play-button">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-elements">
+                        <div class="list-element"><b>1.</b> Начальная — около <b>20-50</b> <poeitem class="poe-items lk_color_30" data-template="test"><img src="img/metka.png" alt=""> Сфера хаоса</poeitem></div>
+                        <div class="list-element"><b>2.</b> Переходная — около <b>5-10</b>        Божественная сфера</div>
+                        <div class="list-element"><b>3.</b> Основная — около <b>40-70</b>        Божественная сфера</div>
+                        <div class="list-element"><b>4.</b> Максимальная — около <b>110-250+</b>        Божественная сфера</div>
+                    </div>
+                    <div class="accordion-block">
+                        <div class="accordion-item">
+                            <div class="accordion-title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto, tenetur.</div>
+                            <div class="accordion-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae veritatis inventore id harum. Consequuntur in commodi, totam placeat harum doloribus, tempora esse neque ex sint non fuga explicabo laborum nisi.
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-title"><div class="tag lk_bg_9">Средне</div> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore tenetur nostrum ut voluptatem unde totam cumque debitis voluptatum dolorem temporibus.</div>
+                            <div class="accordion-text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae veritatis inventore id harum. Consequuntur in commodi, totam placeat harum doloribus, tempora esse neque ex sint non fuga explicabo laborum nisi.
+                            </div>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Влияние</th>
+                                <th>Префикс</th>
+                                <th>Суффикс</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Создатель</td>
+                                <td>Древний</td>
+                                <td>Крестоносец</td>
+                            </tr>
+                            <tr>
+                                <td>Созданная The shaper’s</td>
+                                <td>Мистический Eldtrich</td>
+                                <td>Крестовый Crusader’s</td>
+                            </tr>
+                            <tr>
+                                <td>Изменения Of shaping</td>
+                                <td>Древнего Of The Elder</td>
+                                <td>Крестоносца Of The Crusade</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Слайдер изображений</h3>
+                    <div class="slider-images swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название1">
+                                    <img src="img/image.png" alt="Название1">
+                                    <span class="slide-image-caption">Название1</span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название2">
+                                    <img src="img/image.png" alt="Название2">
+                                    <span class="slide-image-caption">Название2</span>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="img/image.png" class="slide-image" data-fancybox="gallery_id" data-caption="Название3">
+                                    <img src="img/image.png" alt="Название3">
+                                    <span class="slide-image-caption">Название3</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <h3>Одиночное изобрежение</h3>
+                    <a href="img/image.png" data-fancybox data-caption="Название4">
+                        <img src="img/image.png" alt="Название1">
+                    </a>
+                    <h3>Галерея изображений</h3>
+                    <div class="gallery-images">
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/talents.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/talents.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                        <a href="img/image.png" class="gallery-image" data-fancybox="gallery_id2" data-caption="Название1">
+                            <img src="img/image.png" alt="Название1">
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <a href="" class="logo"></a>
+                    <div class="footer-menu desktop-adaptive-visible">
+                        <div class="dropdown dropdown-builds">
+                            <!-- <span class="dropdown-current">Path of Exile</span> -->
+                            <span class="dropdown-current menu-link">Билды</span>
+                            <div class="dropdown-list">
+                                <div class="dropdown-builds">
+                                    <div class="dropdown-builds-list">
+                                        <a href="" class="dropdown-builds-list-title">Дикарь</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_bers.png" alt="">Берсерк</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/button_chief.png" alt="">Вождь</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Дуэлянт</div>
+                                        <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Охотница</div>
+                                        <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Снайпер</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Налетчик</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_11"><img src="img/buttons_classes/buttons_ranger/icon_deadeye.png" alt="">Следопыт</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Бандит</div>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Ведьма</div>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Жрец</div>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Покоритель</a>
+                                    </div>
+                                    <div class="dropdown-builds-list">
+                                        <div class="dropdown-builds-list-title">Дворянка</div>
+                                        <a href="" class="dropdown-builds-list-link lk_color_10"><img src="img/buttons_classes/buttons_marouder/icon_jugger.png" alt="">Вознесшаяся</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <span class="dropdown-current menu-link">Гайды</span>
+                            <div class="dropdown-list">
+                                <a href="" class="dropdown-list-link">Программы и инструменты</a>
+                                <a href="" class="dropdown-list-link">Лиги</a>
+                                <a href="" class="dropdown-list-link">Для новичков</a>
+                                <a href="" class="dropdown-list-link">Крафт</a>
+                                <a href="" class="dropdown-list-link">Валюта</a>
+                                <a href="" class="dropdown-list-link">Испытания</a>
+                            </div>
+                        </div>
+                        <a href="" class="menu-link">Предметы</a>
+                        <a href="" class="menu-link">Новости</a>
+                        <a href="" class="menu-link">Вакансии</a>
+                    </div>
+                    <div class="socs-block">
+                        <div class="socs">
+                            <a href="" class="soc soc-yt" target="_blank" rel="noopener"></a>
+                            <a href="" class="soc soc-vk" target="_blank" rel="noopener"></a>
+                            <a href="" class="soc soc-tg" target="_blank" rel="noopener"></a>
+                        </div>
+                    </div>
+                    <div class="footer-menu mobile-visible">
+                        <a href="" class="menu-link">Билды</a>
+                        <a href="" class="menu-link">Гайды</a>
+                        <a href="" class="menu-link">Предметы</a>
+                        <a href="" class="menu-link">Новости</a>
+                        <a href="" class="menu-link">Вакансии</a>
+                    </div>
+                    <div class="copyright">
+                        © <b>Все права соблюдены.</b> Копирование материалов с сайта разрешается только с указанием ссылки на источник. <br>
+                        Этот сайт защищен <b>reCAPTCHA</b> и применяются <a href="">Политика конфиденциальности</a> и <a href="">Условия обслуживания</a> Google.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- test poeitem tooltip -->
+    <div style="display: none;">
+        <div id="test">
+            <img src="img/poedb.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- tippyjs / tooltips -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <!-- scripts -->
+    <script src="js/scripts.js"></script>
+
+    <!-- триггеримся по специальному html-элементу poeitem по data-атрибуту -->
+    <!-- тестовый пример переписать на аякс -->
+    <script>
+        tippy('poeitem', {
+            content(reference) {
+                const id = reference.getAttribute('data-template');
+                const template = document.getElementById(id);
+                return template.innerHTML;
+            },
+            followCursor: true,
+            allowHTML: true,
+            //placement: 'right',
+        });
+    </script>
+</body>
+</html>
