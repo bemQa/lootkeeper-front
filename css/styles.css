@@ -922,7 +922,7 @@ h5 {
 .section-text-page h4,
 .build-page-content-column h5,
 .section-text-page h5 {
-    font-family: 'Play';
+    font-family: var(--second-font);
 }
 
 .build-page-content-column h2,
@@ -1939,7 +1939,7 @@ blockquote * {
 
 .section {
     position: relative;
-    padding: 48rem 0;
+    padding: 48rem 0 80rem;
 }
 
 .header + .section,
@@ -2320,16 +2320,119 @@ p a:hover {
     gap: 20rem;
 }
 
-.section-text-page {
-    padding: 48rem 0 80rem;
-}
-
 .section-text-page .container {
     display: flex;
     flex-direction: column;
     gap: 24rem 0;
     font-size: 18rem;
     line-height: 1.6;
+}
+
+.tarifs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24rem;
+}
+
+.tarif {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18rem 0;
+    max-width: calc(33% - 12rem);
+    width: 100%;
+    padding: 24rem;
+    border: 1rem solid var(--dark-border-color);
+    border-radius: var(--border-radius);
+    font-size: 18rem;
+    line-height: 1.5;
+}
+
+.tarif-best {
+    border-color: var(--accent-blue)
+}
+
+.tarif-title {
+    display: block;
+    vertical-align: middle;
+    font-family: var(--second-font);
+    font-weight: bold;
+    font-size: 24rem;
+    line-height: 1.4;
+}
+
+.tarif-title img {
+    max-width: 60rem;
+    max-height: 30rem;
+    height: auto;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.tarif-text {
+    font-weight: 500;
+    text-align: center;
+}
+
+.tarif .possibility-list {
+    position: relative;
+    padding: 30rem 0;
+}
+
+.tarif .possibility-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background: var(--dark-border-color);
+}
+
+.tarif .possibility-list::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    background: var(--dark-border-color);
+}
+
+.tarif .possibility-element-cant {
+    color: #B0B0B1;
+}
+
+.tarif-price {
+    font-family: var(--second-font);
+    font-weight: bold;
+    font-size: 24rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.tarif .button {
+    width: 100%;
+}
+
+.premium-nickname {
+    display: inline-block;
+    padding: 2rem 4rem;
+    background: var(--gray-btn);
+    border-radius: var(--small-border-radius);
+    font-weight: 600;
+}
+
+.premium-lite {
+    background: #682D30;
+}
+
+.premium-medium {
+    background: #1B614A;
+}
+
+.premium-best {
+    background: #A07434;
 }
 
 /*end main styles*/
@@ -2710,23 +2813,28 @@ p a:hover {
         font-size: 14rem;
     }
     
-    .build-page-content-column h2 {
+    .build-page-content-column h2,
+    .section-text-page h2 {
         font-size: 24rem;
     }
     
-    .build-page-content-column h3 {
+    .build-page-content-column h3,
+    .section-text-page h3 {
         font-size: 22rem;
     }
     
-    .build-page-content-column h4 {
+    .build-page-content-column h4,
+    .section-text-page h4 {
         font-size: 18rem;
     }
     
-    .build-page-content-column h5 {
+    .build-page-content-column h5,
+    .section-text-page h5 {
         font-size: 16rem;
     }
     
-    .build-page-content-block h2::after {
+    .build-page-content-block h2::after,
+    .section-text-page h2::after {
         display: none;
     }
     /* end typography */
@@ -3168,14 +3276,51 @@ p a:hover {
         padding-left: 0;
     }
 
-
-
     .two-columns-block {
         flex-direction: column;
     }
 
     .two-columns-block > * {
         max-width: 100%;
+    }
+
+    .tarifs {
+        gap: 18rem 0;
+    }
+
+    .tarif {
+        max-width: 100%;
+        padding: 24rem 18rem;
+        font-size: 16rem;
+    }
+
+    .tarif-title,
+    .tarif-price {
+        font-size: 22rem;
+    }
+
+    .tarif .possibility-list {
+        padding: 18rem 0;
+    }
+
+    .premium-nickname {
+        padding: 0;
+        background: none;
+    }
+
+    .premium-lite {
+        background: none;
+        color: #CB1D26;
+    }
+
+    .premium-medium {
+        background: none;
+        color: #2AD999;
+    }
+
+    .premium-best {
+        background: none;
+        color: #DE9F42;
     }
 }
 
