@@ -978,40 +978,49 @@ h5 {
 
 .build-page-content-column h1,
 .section-text-page h1,
+.section-mainpage-cards h1,
 .build-page-content-column h2,
 .section-text-page h2,
+.section-mainpage-cards h3,
 .build-page-content-column h3,
 .section-text-page h3,
+.section-mainpage-cards h3,
 .build-page-content-column h4,
 .section-text-page h4,
+.section-mainpage-cards h4,
 .build-page-content-column h5,
-.section-text-page h5 {
+.section-text-page h5,
+.section-mainpage-cards h5 {
     font-family: var(--second-font);
 }
 
 .build-page-content-column h2,
-.section-text-page h2 {
+.section-text-page h2,
+.section-mainpage-cards h2 {
     font-weight: bold;
     font-size: 26rem;
     line-height: 1.4;
 }
 
 .build-page-content-column h3,
-.section-text-page h3 {
+.section-text-page h3,
+.section-mainpage-cards h3 {
     font-weight: bold;
     font-size: 24rem;
     line-height: 1.4;
 }
 
 .build-page-content-column h4,
-.section-text-page h4 {
+.section-text-page h4,
+.section-mainpage-cards h4 {
     font-weight: bold;
     font-size: 18rem;
     line-height: 1.4;
 }
 
 .build-page-content-column h5,
-.section-text-page h5 {
+.section-text-page h5,
+.section-mainpage-cards h5 {
     font-weight: bold;
     font-size: 16rem;
     line-height: 1.4;
@@ -1064,6 +1073,38 @@ h5 {
     height: 1rem;
     background: var(--dark-border-color);
 }
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0 12rem;
+}
+
+.title-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40rem;
+    height: 40rem;
+    background: var(--dark-main-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.title-icon img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    max-width: 24rem;
+    height: 100%;
+    object-fit: contain;
+}
+
 /* end typography */
 
 /* lists */
@@ -2878,22 +2919,26 @@ p a:hover {
     }
     
     .build-page-content-column h2,
-    .section-text-page h2 {
+    .section-text-page h2,
+    .section-mainpage-cards h2 {
         font-size: 24rem;
     }
     
     .build-page-content-column h3,
-    .section-text-page h3 {
+    .section-text-page h3,
+    .section-mainpage-cards h3 {
         font-size: 22rem;
     }
     
     .build-page-content-column h4,
-    .section-text-page h4 {
+    .section-text-page h4,
+    .section-mainpage-cards h4 {
         font-size: 18rem;
     }
     
     .build-page-content-column h5,
-    .section-text-page h5 {
+    .section-text-page h5,
+    .section-mainpage-cards h5 {
         font-size: 16rem;
     }
     
