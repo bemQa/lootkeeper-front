@@ -3798,6 +3798,15 @@ p a:hover {
         padding: 18rem;
     }
 
+    .card-tags {
+        gap: 6rem;
+    }
+
+    .card-tag {
+        padding: 4rem 10rem;
+        font-size: 10rem;
+    }
+
     .card-date {
         font-size: 12rem;
     }
