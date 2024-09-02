@@ -290,8 +290,55 @@
             </header>
             <section class="section section-registration">
                 <div class="container">
-                    <div class="registration-block">
-                        
+                    <div class="form-wrapper">
+                        <h3 class="form-title">Регистрация</h3>
+                        <form class="form">
+                            <div class="ip-cell">
+                                <label class="input-label">Имя пользователя <span class="required-symbol">*</span></label>
+                                <input type="text" class="input-text" name="name" required="">
+                            </div>
+                            <div class="ip-cell">
+                                <label class="input-label">E-mail <span class="required-symbol">*</span></label>
+                                <input type="text" class="input-text" name="email" required="">
+                            </div>
+                            <div class="ip-cell">
+                                <label class="input-label">Пароль <span class="required-symbol">*</span></label>
+                                <input type="password" class="input-text" name="password" required="">
+                            </div>
+                            <div class="ip-cell">
+                                <label class="input-label">Подтвердите пароль <span class="required-symbol">*</span></label>
+                                <input type="password" class="input-text" name="password" required="">
+                            </div>
+                            <div class="ip-cell">
+                                <label class="input-label">Discord</label>
+                                <input type="text" class="input-text" name="discord">
+                            </div>
+                            <div class="ip-cell">
+                                <label class="input-label with-tooltip">Профиль PoE 
+                                    <div class="tooltip-wrapper">
+                                        <div class="tooltip-trigger"></div>
+                                        <div class="tooltip">
+                                            Ваш никнейм который отображается в профиле на сайте Path of Exile. <br>
+                                            Не имя персонажа в игре!
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="text" class="input-text" name="profile-poe">
+                            </div>
+                            <div class="buttons">
+                                <button class="button button-configuration active">ПК</button>
+                                <button class="button button-configuration">XBOX</button>
+                                <button class="button button-configuration">PlayStation</button>
+                            </div>
+                            <div class="ip-cell">
+                                <input type="checkbox" id="chk1" class="ch" value="">
+                                <label for="chk1">Я даю согласие на обработку моих <a href="">персональных данных</a></label>
+                            </div>
+                            <button class="button">Зарегистрироваться</button>
+                        </form>
+                        <div class="form-text">
+                            Уже есть аккаунт? <a href="">Войти</a>
+                        </div>
                     </div>
                 </div>
             </section>

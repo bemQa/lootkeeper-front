@@ -215,6 +215,36 @@ $(document).ready(function() {
         // options
     });
 
+    // тултипы
+    $('body').on('click', '.tooltip-trigger', function(e){
+        e.preventDefault();
+        $(this).siblings('.tooltip').toggleClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.tooltip-trigger, .tooltip');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $('.tooltip').removeClass('active');
+            }
+        });
+    });
+
+    // медальки и всплывающие тултипы на новой странице эксперта
+    $('body').on('click', '.expert-page-medal-img', function(){
+        $this = $(this);
+        if(!$this.siblings('.expert-page-medal-tooltip').hasClass('active')) {
+            $('.expert-page-medal-tooltip').removeClass('active');
+            $this.siblings('.expert-page-medal-tooltip').addClass('active');
+        } else $this.siblings('.expert-page-medal-tooltip').removeClass('active')
+
+        $('body').on('click', function (e) {
+            var div = $('.expert-page-medal');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $this.siblings('.expert-page-medal-tooltip').removeClass('active');
+            }
+        });
+    });
+
     // комментарии
     $('.comment-reply-btn').click(function() {
         let reply_id = $(this).attr('target');
