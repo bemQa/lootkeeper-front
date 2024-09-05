@@ -218,12 +218,14 @@ $(document).ready(function() {
     // тултипы
     $('body').on('click', '.tooltip-trigger', function(e){
         e.preventDefault();
-        $(this).siblings('.tooltip').toggleClass('active');
+        let $this = $(this);
+        let tooltip = $this.siblings('.tooltip');
+        tooltip.toggleClass('active');
         $('body').on('click', function (e) {
-            let div = $('.tooltip-trigger, .tooltip');
+            let div = $($this, tooltip);
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $('.tooltip').removeClass('active');
+                tooltip.removeClass('active');
             }
         });
     });
