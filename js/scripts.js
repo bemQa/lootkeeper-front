@@ -1,4 +1,26 @@
 $(document).ready(function() {
+    // Check to see if Media-Queries are supported
+    if (window.matchMedia) {
+        // Check if the dark-mode Media-Query matches
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+            document.body.classList.add('theme-dark');
+            document.body.classList.remove('theme-default');
+            $('.theme-switch').prop('checked', true);
+        } else {
+            document.body.classList.add('theme-light');
+            $('.theme-switch').prop('checked', false);
+        }
+    } else {
+        // Default (when Media-Queries are not supported)
+        document.body.classList.remove('theme-dark');
+        document.body.classList.remove('theme-light');
+    }
+
+    $('body').on('click', '#theme-switch', function(e) {
+        console.log($(this).prop('checked'))
+        $(this).prop('checked') == true ? $('body').addClass('theme-dark').removeClass('theme-default theme-light') : $('body').addClass('theme-light').removeClass('theme-dark');
+    })
+
     // анимация меню
 	$('.menu').click(function(e){
         e.preventDefault();

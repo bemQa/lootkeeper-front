@@ -240,6 +240,30 @@ body {
 }
 /* installation root vars */
 :root {
+    --ON_toggle: initial;
+    --OFF_toggle: ;
+}
+
+.theme-default,
+.theme-light {
+    --light: var(--ON_toggle);
+    --dark: var(--OFF_toggle)
+}
+
+.theme-dark {
+    --light: var(--OFF_toggle);
+    --dark: var(--ON_toggle)
+}
+
+body {
+    --body-bg: var(--light, #F0F0F0) var(--dark, #101015);
+    --heading-bg: var(--light, #08080B) var(--dark, #08080B);
+    --main-bg: var(--light, #F7F7F7) var(--dark, #17171C);
+    --main-color: var(--light, #313131) var(--dark, #F4F4F4);
+    --hlines-color: var(--light, #161616) var(--dark, #F9F9F9);
+    --gray-color: var(--light, #79798B) var(--dark, #A6A6C1);
+    --border-color: var(--light, #DEDEDE) var(--dark, #2F2F2F);
+
     --dark-body-bg: #101015;
     --dark-heading-bg: #08080B;
     --dark-main-bg: #17171C;
@@ -278,64 +302,9 @@ body {
     --small-border-radius: 6rem;
 }
 
-/* for example */
-:root {
-    --ON_toggle: initial;
-    --OFF_toggle: ;
-}
-
-.theme-default,.theme-light {
-    --light: var(--ON_toggle);
-    --dark: var(--OFF_toggle)
-}
-
-.theme-dark {
-    --light: var(--OFF_toggle);
-    --dark: var(--ON_toggle)
-}
-
-body {
-    --white_text_black: var(--light, #222) var(--dark, white);
-    --white_text_black_reverse: var(--light, #fff) var(--dark, #222);
-    --basic_text_black: var(--light, #555) var(--dark, #ccc);
-    --lite_basic_text_black: var(--light, #666) var(--dark, #ccc);
-    --black_bg_black: var(--light, #fff) var(--dark, #1b1b1b);
-    --darkerblack_bg_black: var(--light, #f8f8f8) var(--dark, #121212);
-    --darkgrey_bg_black: var(--light, #f4f4f4) var(--dark, #343434);
-    --stroke_black: var(--light, #ededed) var(--dark, #3a3a3a);
-    --stroke_black_hover: var(--light, #fff) var(--dark, #3a3a3a);
-    --card_bg_black: var(--light, #fff) var(--dark, #232323);
-    --card_bg_hover_black: var(--light, #fff) var(--dark, #2b2b2b);
-    --arrows_bg_black: var(--light, #fff) var(--dark, #444);
-    --lite_bg_black: var(--light, #fafafa) var(--dark, #1b1b1b);
-    --light2_bg_black: var(--light, #fafafa) var(--dark, #232323);
-    --gray_bg_black: var(--light, #ccc) var(--dark, #3a3a3a);
-    --white_bg_ccc: var(--light, #fff) var(--dark, #ccc);
-    --fill_dark_light: var(--light, #222) var(--dark, #fff);
-    --fill_dark_lite_ccc: var(--light, #222) var(--dark, #ccc);
-    --fill_dark_lite_hover: var(--light, var(--theme-base-color)) var(--dark, #ccc);
-    --fill_dark_lite_white_hover: var(--light, var(--theme-base-color)) var(--dark, #fff);
-    --dark_light-wtheme-hue: var(--light, var(--theme-base-color-hue)) var(--dark, 0);
-    --dark_light-wtheme-saturation: var(--light, var(--theme-base-color-saturation)) var(--dark, 0%);
-    --dark_light-wtheme-lightness: var(--light, var(--theme-base-color-lightness)) var(--dark, 100%);
-    --dark_light-hue: var(--light, 0) var(--dark, 0);
-    --dark_light-saturation: var(--light, 0%) var(--dark, 0%);
-    --dark_light-lightness: var(--light, 97%) var(--dark, 7%);
-    --checkbox_dark_light: var(--light, #afafaf) var(--dark, #3a3a3a);
-    --opacity_dark_lite_hover: var(--light, var(--theme-base-opacity-color)) var(--dark, #3a3a3a);
-    --dff_dark_light: var(--light, #fff) var(--dark, #121212);
-    --input_color: var(--light, #222) var(--dark, var(--basic_text_black));
-    --input_bg_color: var(--black_bg_black);
-    --input_bg_color-hover: var(--black_bg_black);
-    --input_bg_color-focus: var(--card_bg_hover_black);
-    --input_border_color: var(--light, #dadada) var(--dark, var(--stroke_black));
-    --input_border_color-hover: var(--light, #dadada) var(--dark, var(--stroke_black_hover));
-    --input_border_color-focus: var(--light, #999) var(--dark, #999)
-}
-
 @media (prefers-color-scheme: dark) {
     .theme-default {
-        --light:var(--OFF_toggle);
+        --light: var(--OFF_toggle);
         --dark: var(--ON_toggle)
     }
 }
@@ -436,9 +405,9 @@ body .adaptive-visible {
 /*main styles*/
 body {
     margin: 0;
-    color: var(--dark-main-color);
+    color: var(--main-color);
     font: normal 16rem/normal var(--main-font), sans-serif;
-    background: var(--dark-body-bg);
+    background: var(--body-bg);
 }
 
 .wrapper {
@@ -1035,7 +1004,7 @@ h5 {
     display: flex;
     align-items: center;
     gap: 0 18rem;
-    background: var(--dark-body-bg);
+    background: var(--body-bg);
 }
 
 .section-text-page h2 {
@@ -1048,7 +1017,7 @@ h5 {
     position: relative;
     display: inline-block;
     min-width: fit-content;
-    background: var(--dark-body-bg);
+    background: var(--body-bg);
     z-index: 1;
 }
 
@@ -1180,7 +1149,7 @@ h5 {
 }
 
 .list-elements > *:nth-child(even)::before {
-    background: var(--dark-body-bg);
+    background: var(--body-bg);
 }
 
 .list-elements > *::marker {
