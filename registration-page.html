@@ -89,7 +89,7 @@
                                 
                             </div> -->
                             <div class="profile-header-block">
-                                <a href="" class="profile-header-link">Войти</a>
+                                <a href="#auth_modal" class="profile-header-link js-open-modal">Войти</a>
                             </div>
                         </div>
                     </div>
@@ -325,10 +325,24 @@
                                 </label>
                                 <input type="text" class="input-text" name="profile-poe">
                             </div>
-                            <div class="buttons">
+                            <!-- <div class="buttons">
                                 <button class="button button-configuration active">ПК</button>
                                 <button class="button button-configuration">XBOX</button>
                                 <button class="button button-configuration">PlayStation</button>
+                            </div> -->
+                            <div class="buttons">
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform1" class="button button-configuration" name="platform" value="PC">
+                                    <label for="ch-platform1">ПК</label>
+                                </div>
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform2" class="button button-configuration" name="platform" value="XBOX">
+                                    <label for="ch-platform2">XBOX</label>
+                                </div>
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform3" class="button button-configuration" name="platform" value="SONY">
+                                    <label for="ch-platform3">PlayStation</label>
+                                </div>
                             </div>
                             <div class="ip-cell">
                                 <input type="checkbox" id="chk1" class="ch" value="">
@@ -337,11 +351,33 @@
                             <button class="button">Зарегистрироваться</button>
                         </form>
                         <div class="form-text">
-                            Уже есть аккаунт? <a href="">Войти</a>
+                            Уже есть аккаунт? <a href="#auth_modal" class="js-open-modal">Войти</a>
                         </div>
                     </div>
                 </div>
             </section>
+        </div>
+        <!-- модалки -->
+        <div id="auth_modal" class="modal">
+            <div class="modal-content">
+                <div class="form-wrapper">
+                    <h3 class="form-title">Авторизация</h3>
+                    <form class="form">
+                        <div class="ip-cell">
+                            <label class="input-label">Имя пользователя <span class="required-symbol">*</span></label>
+                            <input type="text" class="input-text" name="name" required="">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Пароль <span class="required-symbol">*</span></label>
+                            <input type="password" class="input-text" name="password" required="">
+                        </div>
+                        <button class="button">Зарегистрироваться</button>
+                    </form>
+                    <div class="form-text">
+                        Еще нет учетной записи? <a href="/registration-page.html" class="js-open-modal">Регистрация</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="footer">
             <div class="container">

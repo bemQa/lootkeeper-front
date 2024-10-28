@@ -54,6 +54,7 @@ $(document).ready(function() {
     // выпадающие меню
     $('body').on('click', '.dropdown', function(){
         let $this = $(this);
+        $('.dropdown').not($this).removeClass('active');
         $this.toggleClass('active');
         $('body').on('click', function (e) {
             let div = $('.dropdown, .dropdown-current');
@@ -275,7 +276,7 @@ $(document).ready(function() {
         let article_id = $(this).attr('article');
         let comment_root = $(this).parent().parent();
         let reply_author = comment_root.find(".comment-author").text();
-        let comment_reply_html = '<span class="comment-reply-info">Ответ на <span class="comment-reply-name-ref">' + reply_author + '</span><i class="material-icons">close</i></span>';
+        let comment_reply_html = '<span class="comment-reply-info">Ответ на <i class="comment-reply-name-ref">' + reply_author + '</i><span class="close-comment-reply"></span></span>';
         $(".comment-reply-info").remove();
         $("#user-comment-name").after(comment_reply_html);
         $('#comment input[name="reply_id"]').val(reply_id);
@@ -315,5 +316,33 @@ $(document).ready(function() {
     });
     $("#user-comment-text").on('paste', function() {
         checkCommentForAccLink($(this), true);
+    });
+    $('body').on('click', '.show-hidden-comment', function(){
+        $(this).hide();
+        $(this).parents('.comment-item').find('.comment-item-content').removeClass('hidden-comment');
+    });
+
+    // выпадающие меню в комментариях
+    $('body').on('click', '.button-comment-more-info', function(){
+        let $this = $(this);
+        $('.comment-more-info').not($this).removeClass('active');
+        $this.next().toggleClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.button-comment-more-info, .comment-more-info');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $this.next().removeClass('active');
+            }
+        });
+    });
+
+    // открытие модалок
+    $('body').on('click','.js-open-modal', function(e){
+        e.preventDefault();
+        let id = $(this).attr('href');
+        Fancybox.show({
+            src: id,
+            type: 'inline'
+        });
     });
 });
