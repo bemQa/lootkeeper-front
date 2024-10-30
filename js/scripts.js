@@ -528,14 +528,14 @@ $(document).ready(function() {
   	$.cookie('i_lang',i_lang,{ expires: expire_date});
   	//set ui
   	if(i_lang!='ru'){
-        $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
-  		$('.poe-lang-chosen .ch-button-configuration[value="ru"]').prop('checked', true);
+        $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
+  		$('.poe-lang-choose .ch-button-configuration[value="ru"]').prop('checked', true);
   		$('.en-poe').show();
   		$('.ru-poe').hide();
   	}
   	else{
-        $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
-  		$('.poe-lang-chosen .ch-button-configuration[value="en"]').prop('checked', true);
+        $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
+  		$('.poe-lang-choose .ch-button-configuration[value="en"]').prop('checked', true);
   		$('.en-poe').hide();
   		$('.ru-poe').show();
   	}
@@ -601,16 +601,16 @@ $(document).ready(function() {
 	// ПоЕ выбор языка игры и лиги для трейд-ссылок
 
 	// lang select
-	$('.poe-lang-chosen .ch-button-configuration').change(function(){
+	$('.poe-lang-choose .ch-button-configuration').change(function(){
 		if ($(this).parent().find('.ch-button-configuration[value="ru"]').is(':checked')){
-            $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
-            $('.poe-lang-chosen .ch-button-configuration[value="ru"]').prop('checked', true);
+            $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
+            $('.poe-lang-choose .ch-button-configuration[value="ru"]').prop('checked', true);
 			i_lang='ru';
 			$('.en-poe').hide();
 			$('.ru-poe').show();
 		} else {
-            $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
-			$('.poe-lang-chosen .ch-button-configuration[value="en"]').prop('checked', true);	
+            $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
+			$('.poe-lang-choose .ch-button-configuration[value="en"]').prop('checked', true);	
 			i_lang='en';
 	  		$('.en-poe').show();
 	  		$('.ru-poe').hide();
@@ -625,10 +625,10 @@ $(document).ready(function() {
 		});
 		//remake select
 		$.when.apply($, league_list.map((value) => {
-		    return $('.poe-league-choose select option[value="' + value.slug + '"]').text(i_lang=='ru'?value.name:value.name_en); 
+		    return $('select.poe-league-choose option[value="' + value.slug + '"]').text(i_lang=='ru'?value.name:value.name_en); 
 		}));
-		$('select').formSelect();
-		$('.poe-league-chosen').text($('.poe-league-choose select option:selected').text());
+		NiceSelect.bind(document.getElementById("select-league"), {});
+		$('.poe-league-chosen').text($('select.poe-league-choose option:selected').text());
 
 		remakeItems();
 	});
