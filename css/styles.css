@@ -974,6 +974,10 @@ h5 {
     line-height: 1.4;
 }
 
+.build-page-content-column h2 {
+    text-transform: uppercase;
+}
+
 .build-page-content-column h3,
 .section-text-page h3,
 .section-mainpage-cards h3 {
@@ -1959,7 +1963,6 @@ blockquote * {
     justify-content: center;
     gap: 8rem;
     height: 30rem;
-    margin-left: 15rem;
     padding: 0 10rem;
     background: var(--main-bg);
     border-radius: var(--border-radius);
@@ -2463,6 +2466,40 @@ textarea.input-text {
 .form .button:not(.button-configuration) {
     width: 100%;
 }
+
+.ch-button-configuration {
+    display: none;
+}
+
+.ch-button-configuration + label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 8rem 16rem;
+    background: transparent;
+    border: 2rem solid var(--dark-main-bg);
+    border-radius: var(--border-radius);
+    font-family: var(--second-font);
+    font-weight: 700;
+    font-size: 16rem;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--dark-main-color);
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.ch-button-configuration:hover + label {
+    background: var(--dark-main-bg);
+}
+
+.ch-button-configuration:checked + label {
+    color: var(--accent-blue);
+    background: var(--dark-main-bg);
+}
 /* end forms */
 
 /* modals */
@@ -2602,6 +2639,12 @@ textarea.input-text {
     padding: 18rem 24rem;
 }
 
+.ch-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6rem;
+}
+
 .navigation-menu .button {
     width: 100%;
 }
@@ -2614,7 +2657,7 @@ textarea.input-text {
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 18rem;
+    padding: 18rem 12rem;
     background: var(--dark-block-bg);
     border-radius: var(--border-radius);
     box-shadow: 0rem 8rem 40rem 0rem #0A0A0D;
@@ -3689,6 +3732,11 @@ p a:hover {
 
 .vote-minus {
     color: #E51039;
+}
+
+.tippy-box {
+    max-width: 400rem !important;
+    font-size: 14rem;
 }
 
 /*end main styles*/
@@ -4843,11 +4891,19 @@ p a:hover {
     .profile-info-block {
         position: relative;
     }
+
+    .tippy-box {
+        font-size: 12rem;
+    }
 }
 
 @media (max-width: 390px) {
     html {
         font-size: calc(100vw / 390);
+    }
+
+    .tippy-box {
+        font-size: 10rem;
     }
 }
 /*end mobile styles*/

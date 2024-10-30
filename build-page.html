@@ -915,12 +915,12 @@
                             <div class="navigation-menu">
                                 <div class="navigation-menu-title">Навигация</div>
                                 <div class="navigation-menu-list">
-                                    <a href="#obnovlenie-gaida" class="navigation-menu-link anchor">Обновление гайда</a>
+                                    <!-- <a href="#obnovlenie-gaida" class="navigation-menu-link anchor">Обновление гайда</a>
                                     <a href="#obshchaya-informaciya" class="navigation-menu-link anchor">Общая информация</a>
                                     <a href="#preimushchestva-i-nedostatki" class="navigation-menu-link anchor">Преимущества и недостатки</a>
                                     <a href="#vozmozhnosti-bilda" class="navigation-menu-link anchor">Возможности билда</a>
                                     <a href="#razbor-mehanik-bilda" class="navigation-menu-link anchor">Механики билда</a>
-                                    <a href="#anchor1" class="navigation-menu-link anchor">Тестовый блок 1</a>
+                                    <a href="#anchor1" class="navigation-menu-link anchor">Тестовый блок 1</a> -->
                                 </div>
                                 <div class="buttons">
                                     <button class="button invert js-button-build-parameters">Параметры</button>
@@ -943,9 +943,15 @@
                                         <div class="aside-navigation-parameter-text">
                                             Выберите язык на котором играете. После смены — названия предметов, умений и камней изменятся.
                                         </div>
-                                        <div class="buttons">
-                                            <button class="button button-configuration active">Русский</button>
-                                            <button class="button button-configuration">Английский</button>
+                                        <div class="ch-buttons">
+                                            <div class="ip-cell">
+                                                <input type="radio" id="ch-lang1" class="ch-button-configuration" name="lang" value="ru" checked>
+                                                <label for="ch-lang1">Русский</label>
+                                            </div>
+                                            <div class="ip-cell">
+                                                <input type="radio" id="ch-lang2" class="ch-button-configuration" name="lang" value="en">
+                                                <label for="ch-lang2">Английский</label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="aside-navigation-parameter-block">
@@ -953,10 +959,19 @@
                                         <div class="aside-navigation-parameter-text">
                                             Выберите платформу на которой играете. После смены платформы — все ссылки на покупку предметов изменятся и будут направлять на выбранную категорию.
                                         </div>
-                                        <div class="buttons">
-                                            <button class="button button-configuration active">ПК</button>
-                                            <button class="button button-configuration">XBOX</button>
-                                            <button class="button button-configuration">PlayStation</button>
+                                        <div class="ch-buttons">
+                                            <div class="ip-cell">
+                                                <input type="radio" id="ch-platform1" class="ch-button-configuration" name="platform" value="PC" checked>
+                                                <label for="ch-platform1">ПК</label>
+                                            </div>
+                                            <div class="ip-cell">
+                                                <input type="radio" id="ch-platform2" class="ch-button-configuration" name="platform" value="XBOX">
+                                                <label for="ch-platform2">XBOX</label>
+                                            </div>
+                                            <div class="ip-cell">
+                                                <input type="radio" id="ch-platform3" class="ch-button-configuration" name="platform" value="SONY">
+                                                <label for="ch-platform3">PlayStation</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1067,6 +1082,7 @@
     <!-- tippyjs / tooltips -->
     <script src="libs/tippy/popper.min.js"></script>
     <script src="libs/tippy/tippy-bundle.umd.min.js"></script>
+    <script src="libs/jquery.cookie.js"></script>
     <!-- scripts -->
     <script src="js/scripts.js"></script>
 

@@ -1,4 +1,27 @@
+const _unescape = str =>
+    str.replace(
+      /&amp;|&lt;|&gt;|&#39;|&quot;/g,
+      tag =>
+        ({
+          '&amp;': '&',
+          '&lt;': '<',
+          '&gt;': '>',
+          '&#39;': "'",
+          '&quot;': '"'
+        }[tag] || tag)
+    );
+
 $(document).ready(function() {
+    //init items
+	let color_list=[];
+	let name_list_ru=[];
+	let name_list_en=[];
+	let type_list=[];
+	let image_list=[];
+	let i_lang=null;
+    let expire_date = new Date();
+	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
+
     // Check to see if Media-Queries are supported
     if (window.matchMedia) {
         // Check if the dark-mode Media-Query matches
@@ -66,7 +89,7 @@ $(document).ready(function() {
     });
 
     // якоря для ссылок
-    $('.anchor[href^="#"]').click(function () {
+    $('body').on('click', '.anchor[href^="#"]', function () {
         $('.header-mob, .menu, .aside-navigation, .aside-navigation-menu').removeClass('active'); 
 
         elementClick = $(this).attr("href");
@@ -178,16 +201,14 @@ $(document).ready(function() {
 
     // селект лиги
     if($('.aside-navigation-parameter-select').length) {
-        NiceSelect.bind(document.getElementById("select-league"), {
-        
-        });
+        NiceSelect.bind(document.getElementById("select-league"), {});
     }
 
     // табы
     $('body').on('click','.tab-trigger', function(e){
         e.preventDefault();
         $(this).parent().find('.tab-trigger').removeClass('active');
-        var tab = $(this).data('tab');
+        let tab = $(this).data('tab');
         $(this).parent().find('.tab').removeClass('active');
         $(this).addClass('active');
         $(this).parent().next().find('.tab-item').removeClass('active');
@@ -262,7 +283,7 @@ $(document).ready(function() {
         } else $this.siblings('.expert-page-medal-tooltip').removeClass('active')
 
         $('body').on('click', function (e) {
-            var div = $('.expert-page-medal');
+            let div = $('.expert-page-medal');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
                 $this.siblings('.expert-page-medal-tooltip').removeClass('active');
@@ -271,40 +292,61 @@ $(document).ready(function() {
     });
 
     // комментарии
-    $('.comment-reply-btn').click(function() {
+    if ($('.section').data('article-id')) {
+        $.ajax({
+            url:    '/lk/get_comments/',
+            type:   "GET",
+            dataType: "html",
+            data: {'article_id': parseInt($('.section').data('article-id'))},
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    $('.comments-ajax').html(response.data);
+                }
+                if (response.result == 'error') {
+                    console.log('Ошибка получения комментариев');
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки');
+            }
+        });
+    }
+
+    $('body').on('click', '.comment-reply-btn', function() {
         let reply_id = $(this).attr('target');
         let article_id = $(this).attr('article');
         let comment_root = $(this).parent().parent();
         let reply_author = comment_root.find(".comment-author").text();
         let comment_reply_html = '<span class="comment-reply-info">Ответ на <i class="comment-reply-name-ref">' + reply_author + '</i><span class="close-comment-reply"></span></span>';
         $(".comment-reply-info").remove();
-        $("#user-comment-name").after(comment_reply_html);
+        $("#user_comment_form header").html(comment_reply_html);
         $('#comment input[name="reply_id"]').val(reply_id);
         $("#comment").detach().appendTo(comment_root);
     });
-    $("#add-comment-btn").click(function(e) {
+    $('body').on('click', '#add-comment-btn', function(e) {
         e.preventDefault();
         sendAjaxForm("user_comment_form", "/lk/comment/", true, "Комментарий добавлен<br>Страница будет перезагружена", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз");
         return false;
     });
-    $("#comment").on("click", ".comment-reply-info", function() {
+    $('body').on('click', '#comment .comment-reply-info', function() {
         $(this).remove();
         $('#comment input[name="reply_id"]').val("");
         $("#comment").detach().appendTo($(".init-comment-form-here"));
     });
-    $(".hide-re-tree").click(function() {
+    $('body').on('click', '.hide-re-tree', function() {
         $(this).parent().addClass("comments-collapsed");
     });
-    $(".expand-re-tree").click(function() {
+    $('body').on('click', '.expand-re-tree', function() {
         $(this).parent().removeClass("comments-collapsed");
     });
-    $("#user-comment-name").keydown(function(e) {
+    $('body').on('keydown', '.expand-re-tree', function(e) {
         if (e.keyCode == 13) {
             e.preventDefault();
             return false;
         }
     });
-    $("#user-comment-text").keydown(function(e) {
+    $('body').on('keydown', '#user-comment-text', function(e) {
         checkCommentForAccLink($(this), false);
         if (e.ctrlKey && e.keyCode == 13) {
             $("#add-comment-btn").click();
@@ -314,7 +356,7 @@ $(document).ready(function() {
             $(this).attr('rows', currentRowsNum + 1);
         }
     });
-    $("#user-comment-text").on('paste', function() {
+    $('body').on('paste', '#user-comment-text', function() {
         checkCommentForAccLink($(this), true);
     });
     $('body').on('click', '.show-hidden-comment', function(){
@@ -345,4 +387,419 @@ $(document).ready(function() {
             type: 'inline'
         });
     });
+
+    //Генерация навигации (боковое меню) на странице статьи
+	let navigationHtml = '';
+	$('.section-build-page h2').each(function(){
+		let $this = $(this);
+		let title = $this.text();
+		let anchor = $this.parent().attr('id');
+
+		navigationHtml += '<a href="#' + anchor + '" class="navigation-menu-link anchor">' + title + '</a>';
+	});
+	// navigationHtml += "<li><a href='#comments-block'>Комментарии</a></li>"
+	$(navigationHtml).appendTo(".navigation-menu-list");
+	// Генерация навигации (боковое меню) на странице статьи END
+
+    
+    $.ajaxSetup({
+	    beforeSend: function(xhr, settings) {
+	        if (!csrfSafeMethod(settings.type) && !this.crossDomain && typeof csrftoken !== 'undefined') {
+	            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        }
+	    }
+	});
+
+    function csrfSafeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    // лайки/дизлайки
+    $('body').on('click', '.js-like-click', function(){
+        let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
+        let comment_data = '&comment_id=' + $(this).parents('.comment-item').data('id') + '&type=' + $(this).data('like');
+        let comment_likes = $(this).siblings('.comment-likes-count');
+        let comment_likes_count = parseInt(comment_likes.text());
+        let result_likes = 0;
+        $.ajax({
+            url:    '/lk/like/',
+            type:   "POST",
+            dataType: "html",
+            data: form_data + comment_data,
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    // response.value == '+' + -
+                    // response.type == 'l' l d cl
+                    console.log('лайк/дизлайк поставлен');
+                    if(response.value == '+') {
+                        if(response.type == 'l') {
+                            result_likes = comment_likes_count+1;
+                        } else if (response.type == 'd') {
+                            result_likes = comment_likes_count-1;
+                        }
+                    } else if (response.value == '-') {
+                        if(response.type == 'l') {
+                            result_likes = comment_likes_count-1;
+                        } else if (response.type == 'd') {
+                            result_likes = comment_likes_count+1;
+                        }
+                    }
+                    if (result_likes > 0) {
+                        result_likes = '+' + result_likes.toString();
+                    }
+                    comment_likes.text(result_likes);
+                }
+                if (response.result == 'error') {
+                    console.log('ошибка'); 
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки'); 
+            }
+        });
+        return false; 
+    });
+
+    // reg
+    $("#btn_reg").click(
+		function(){
+			sendAjaxForm(
+				'reg_form', 
+				'/lk/register/',
+				false,
+				"Вы успешно зарегистрированы",
+				"Ошибка"
+			);
+			return false; 
+		}
+	);
+    // reset password
+    $("#btn_reset_pwd").click(
+		function(){
+			sendAjaxForm(
+				'reset_password_form', 
+				'/lk/reset_password/',
+				false,
+				"Пароль сброшен",
+				"Ошибка"
+			);
+			return false; 
+		}
+	);
+    //login-logout
+	$("#btn_auth").click(
+		function(){
+			sendAjaxForm(
+				'auth_form', 
+				'/lk/auth/',
+				true,
+				"Вы успешно вошли в аккаунт",
+				"Ошибка"
+			);
+			return false; 
+		}
+	);
+	$("#btn_logout").click(
+		function(){
+			sendAjaxForm(
+				'logout_form', 
+				'/lk/logout/',
+				true,
+				"Вы вышли из аккаунта",
+				"Ошибка"
+			);
+			return false; 
+		}
+	);
+
+    //init lang
+  	i_lang=$.cookie('i_lang');
+  	let i_league=$.cookie('i_league');
+	let i_platform=$.cookie('i_platform');
+  	if(locale=='en'){
+  		i_lang='en';
+  	}
+  	//cookie not set or ru
+  	if(!i_lang){
+  		i_lang='ru';
+  	}
+  	//set lang cookie
+  	$.cookie('i_lang',i_lang,{ expires: expire_date});
+  	//set ui
+  	if(i_lang!='ru'){
+        $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
+  		$('.poe-lang-chosen .ch-button-configuration[value="ru"]').prop('checked', true);
+  		$('.en-poe').show();
+  		$('.ru-poe').hide();
+  	}
+  	else{
+        $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
+  		$('.poe-lang-chosen .ch-button-configuration[value="en"]').prop('checked', true);
+  		$('.en-poe').hide();
+  		$('.ru-poe').show();
+  	}
+
+  	// check poe
+	if (typeof poe !== 'undefined' && poe) {
+		let league_list=[];
+		$.ajax('/lk/poeleaguelist/')
+		.done((response) => {
+			$.when.apply($, response.map((value) => {
+			    return $('select.poe-league-choose').append($('<option></option>').attr('value',value.slug).text(i_lang=='ru'?value.name:value.name_en)); 
+			})).then(() => {
+                // ???
+				$('.poe-platform-choose select').append($('<option></option>').attr('value','PC').text('ПК')); 
+				$('.poe-platform-choose select').append($('<option></option>').attr('value','XBOX').text('Xbox')); 
+				$('.poe-platform-choose select').append($('<option></option>').attr('value','SONY').text('PlayStation')); 
+
+				league_list=response;
+				//from ivanjs
+                NiceSelect.bind(document.getElementById("select-league"), {});
+
+				//init league
+			    if(!i_league){
+			    	if($('select.poe-league-choose')[0] && $('select.poe-league-choose')[0].options.length){
+			    		i_league = $('select.poe-league-choose')[0].options[0].value;
+			    	}
+			    	else{
+			    		i_league = i_lang=='ru'?'Стандарт':'Standard';
+			    	}
+			    }
+			    else{
+				    if(!$('select.poe-league-choose option[value="' + i_league + '"]').prop('selected', true).length){
+				    	i_league = $('select.poe-league-choose')[0].options[0].value;
+				    }
+				    $('.poe-league-chosen').text($('select.poe-league-choose option:selected').text());
+			    }
+			    //set league cookie
+			    $.cookie('i_league',i_league,{ expires: expire_date});
+
+				//init platform
+				if(!i_platform){
+					if($('.poe-platform-choose select')[0] && $('.poe-platform-choose select')[0].options.length){
+						i_platform = $('.poe-platform-choose select')[0].options[0].value;
+					}
+					else{
+						i_platform = 'PC';
+					}
+				}
+				else{
+					if(!$('.poe-platform-choose select option[value="' + i_platform + '"]').prop('selected', true).length){
+						i_platform = $('.poe-platform-choose select')[0].options[0].value;
+					}
+					$('.poe-platform-chosen').text($('.poe-platform-choose select option:selected').text());
+				}
+				//set platform cookie
+				$.cookie('i_platform',i_platform,{ expires: expire_date});
+			});
+	    });
+
+	// end check poe
+	}
+
+	// ПоЕ выбор языка игры и лиги для трейд-ссылок
+
+	// lang select
+	$('.poe-article-settings input[type="checkbox"]').change(function(){
+		if ($(this).is(':checked')){
+			$('.poe-lang-chosen').text('Русский');
+            $('.poe-lang-chosen .ch-button-configuration[value="ru"]').prop('checked', true);
+			i_lang='ru';
+			$('.en-poe').hide();
+			$('.ru-poe').show();
+		} else {
+			$('.poe-lang-chosen').text('Английский');	
+			i_lang='en';
+	  		$('.en-poe').show();
+	  		$('.ru-poe').hide();
+		}
+		$.cookie('i_lang',i_lang,{ expires: expire_date});
+		//remake tooltips
+		$('.item_lk').each( (i,e) => {
+			let tip = M.Tooltip.getInstance($(e));
+			if(tip){
+				tip.destroy();
+			}
+		});
+		//remake select
+		$.when.apply($, league_list.map((value) => {
+		    return $('.poe-league-choose select option[value="' + value.slug + '"]').text(i_lang=='ru'?value.name:value.name_en); 
+		}));
+		$('select').formSelect();
+		$('.poe-league-chosen').text($('.poe-league-choose select option:selected').text());
+
+		remakeItems();
+	});
+
+	// league select
+	$('select.poe-league-choose').change(function(){
+		let laegueName =  $('select.poe-league-choose option:selected').text();
+		$('.poe-league-chosen').text(laegueName);
+		i_league = $('select.poe-league-choose option:selected').val();
+		$.cookie('i_league',i_league,{ expires: expire_date});
+	});
+	// platform select
+	$(".poe-platform-choose select").change(function(){
+		let platformName =  $(".poe-platform-choose select option:selected").text();
+		$(".poe-platform-chosen").text(platformName);
+		i_platform = $(".poe-platform-choose select option:selected").val();
+		$.cookie('i_platform',i_platform,{ expires: expire_date});
+	});
+
+    //tooltips
+    let tippy_placement = 'right';
+    if(window.innerWidth < 481) {
+        tippy_placement = 'top';
+    }
+    tippy('poeitem', {
+        content: '...',
+        onCreate(instance) {
+            // Setup our own custom state properties
+            instance._isFetching = false;
+            instance._error = null;
+            
+            console.log('create');
+        },
+        onShow(instance) {
+            console.log('show')
+            if (instance._isFetching ||  instance._error) {
+                console.log('return')
+                return;
+            }
+        
+            instance._isFetching = true;
+            let target = instance.reference.getAttribute('data-target');
+            console.log(target);
+            fetch('/lk/item/?item='+target+'&lang='+i_lang)
+                .then((response) => response.json())
+                .then((blob) => {
+                    instance.setContent(_unescape(blob.data));
+                    console.log(_unescape(blob.data));
+                })
+                .catch((error) => {
+                    // Fallback if the network request failed
+                    instance._error = error;
+                    instance.setContent(`Request failed. ${error}`);
+                })
+                .finally(() => {
+                    instance._isFetching = false;
+                });
+                console.log('fetch')
+        },
+        onHidden(instance) {
+            //instance.setContent('...');
+            // Unset these properties so new network requests can be initiated
+            instance._error = null;
+            instance._isFetching = true;
+            console.log('hide')
+        },
+        followCursor: true,
+        allowHTML: true,
+        placement: tippy_placement,
+    });
+
+
+    // let elems = document.querySelectorAll('.poe-items');
+    // $(elems).each( (e,el)=> { if(M.Tooltip.getInstance($(el)))M.Tooltip.getInstance($(el)).close() })
+    // let item = $(e.target);
+    // let target = $(this).attr('data-target');
+    // let check_tooptip = M.Tooltip.getInstance($(item));
+    // if(check_tooptip){
+    // 	check_tooptip.open();
+    // } else{
+    // 	$.ajax('/lk/item/'+target+'&lang='+i_lang,{
+    // 		beforeSend: () => {
+    // 	        $(item).tooltip({
+    // 				html: '. . .',
+    // 				position: 'right'
+    // 			});
+    // 			let instance = M.Tooltip.getInstance($(item));
+    // 			instance.open();
+    // 		}
+    // 	})
+    // 	.always((content) => {
+    //         $(item).tooltip({
+    // 			html: htmlDecode(content),
+    // 			position: 'right'
+    // 		});
+    // 		let instance = M.Tooltip.getInstance($(item));
+    // 		if ($(item).is(":hover")){
+    // 			instance.open();
+    // 		}
+    //     });
+    // }
+
+	// $('.poe-items').mouseout(function(e){
+	// 	let elems = document.querySelectorAll('.poe-items');
+	// 	$(elems).each( (e,el)=> { if(M.Tooltip.getInstance($(el)))M.Tooltip.getInstance($(el)).close() })
+	// });
 });
+
+//ajax form
+function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
+    $.ajax({
+        url:    url,
+        type:   "POST",
+        dataType: "html",
+        data: $("#" + ajax_form).serialize(), 
+        success: function(response) { 
+			response = $.parseJSON(response);
+			if (response.result == 'ok') {
+
+				alert(successText);
+
+				if (reload){
+					// infoModal('Готово', 'Данные успешно отправлены.');
+					// $('#infomodal .modal-close').click(function(){
+					// 	document.location.reload(true);
+					// });
+
+					setTimeout(function() {
+						document.location.reload(true);
+					}, 5000);
+				}
+			}
+        	if (response.result == 'error') {
+				// infoModal('Ошибка', 'Данные не верны.');
+				// console.log('Ошибка. Данные не верны.');
+
+				alert(errorText);
+                alert(response.text);
+			}
+            if (response.code != 200) {
+                alert(response.text);
+			}
+    	},
+    	error: function(response) {
+			// infoModal('Ошибка', 'Данные не отправлены.');
+			// console.log('Ошибка. Данные не отправлены.');
+
+			alert(errorText);
+    	}
+ 	});
+}
+
+// Element - textarea input
+// Delay (bool) - we need delay if we Paste link, because Paste not changing input.val instantly
+function checkCommentForAccLink(element, delay){
+	let delayTime;
+
+	if (delay){
+		delayTime = 1000;
+	} else {
+		delayTime = 0;
+	}
+				
+	setTimeout(function() {
+		let commentText = element.val();
+		let warnElem = $('.poe-paste-profile-warn');
+		let regExp = /(http(s)?):\/\/(www\.)?(ru\.)?(pathofexile\.com){1}(\/account)/;
+
+		if (commentText.search(regExp) >= 0){
+			warnElem.removeClass("hide");
+		} else {
+			warnElem.addClass("hide");
+		}
+	}, delayTime);
+}
