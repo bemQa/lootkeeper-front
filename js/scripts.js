@@ -601,15 +601,16 @@ $(document).ready(function() {
 	// ПоЕ выбор языка игры и лиги для трейд-ссылок
 
 	// lang select
-	$('.poe-article-settings input[type="checkbox"]').change(function(){
-		if ($(this).is(':checked')){
-			$('.poe-lang-chosen').text('Русский');
+	$('.poe-lang-chosen .ch-button-configuration').change(function(){
+		if ($(this).parent().find('.ch-button-configuration[value="ru"]').is(':checked')){
+            $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
             $('.poe-lang-chosen .ch-button-configuration[value="ru"]').prop('checked', true);
 			i_lang='ru';
 			$('.en-poe').hide();
 			$('.ru-poe').show();
 		} else {
-			$('.poe-lang-chosen').text('Английский');	
+            $('.poe-lang-chosen .ch-button-configuration').prop('checked', false);
+			$('.poe-lang-chosen .ch-button-configuration[value="en"]').prop('checked', true);	
 			i_lang='en';
 	  		$('.en-poe').show();
 	  		$('.ru-poe').hide();
