@@ -1197,6 +1197,7 @@ h5 {
     max-width: 60rem;
     max-height: 30rem;
     height: auto;
+    margin-right: 5rem;
     vertical-align: middle;
     pointer-events: none;
 }
@@ -1994,6 +1995,15 @@ blockquote * {
     white-space: normal;
 }
 
+.nice-select .current {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14rem;
+}
+
 .nice-select:hover,
 .nice-select:active, 
 .nice-select.open, 
@@ -2700,13 +2710,19 @@ textarea.input-text {
     font-size: 14rem;
 }
 
-p a {
+p a,
+li a:not([class]),
+.item_poetrade {
     font-weight: 600;
     color: var(--accent-blue);
     text-decoration: underline;
+    cursor: pointer;
+    transition: all .3s ease;
 }
 
-p a:hover {
+p a:hover,
+li a:hover,
+.item_poetrade:hover {
     color: var(--accent-blue-hover);
     text-decoration: none;
 }

@@ -13,12 +13,9 @@ const _unescape = str =>
 
 $(document).ready(function() {
     //init items
-	let color_list=[];
-	let name_list_ru=[];
-	let name_list_en=[];
-	let type_list=[];
-	let image_list=[];
-	let i_lang=null;
+    let tippyinst=[];
+    let league_list=[];
+	let i_lang='ru';
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
@@ -293,6 +290,26 @@ $(document).ready(function() {
 
     // комментарии
     if ($('.section').data('article-id')) {
+        //избранное
+        $.ajax({
+            url:    '/lk/get_comments_high/',
+            type:   "GET",
+            dataType: "html",
+            data: {'article_id': parseInt($('.section').data('article-id'))},
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    $('.comments-high').html(response.data);
+                }
+                if (response.result == 'error') {
+                    console.log('Ошибка получения комментариев');
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки');
+            }
+        });
+        
         $.ajax({
             url:    '/lk/get_comments/',
             type:   "GET",
@@ -401,6 +418,8 @@ $(document).ready(function() {
 	$(navigationHtml).appendTo(".navigation-menu-list");
 	// Генерация навигации (боковое меню) на странице статьи END
 
+    //Покраска предметов
+    remakeItems();
     
     $.ajaxSetup({
 	    beforeSend: function(xhr, settings) {
@@ -514,35 +533,34 @@ $(document).ready(function() {
 	);
 
     //init lang
-  	i_lang=$.cookie('i_lang');
-  	let i_league=$.cookie('i_league');
-	let i_platform=$.cookie('i_platform');
   	if(locale=='en'){
   		i_lang='en';
   	}
-  	//cookie not set or ru
+    i_lang=$.cookie('i_lang');
+  	let i_league=$.cookie('i_league');
+	let i_platform=$.cookie('i_platform');
+    //cookie not set or ru
   	if(!i_lang){
-  		i_lang='ru';
-  	}
+        i_lang='ru';
+    }
   	//set lang cookie
   	$.cookie('i_lang',i_lang,{ expires: expire_date});
   	//set ui
-  	if(i_lang!='ru'){
+  	if(i_lang=='ru'){
         $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
   		$('.poe-lang-choose .ch-button-configuration[value="ru"]').prop('checked', true);
-  		$('.en-poe').show();
-  		$('.ru-poe').hide();
+  		$('.en-poe').hide();
+  		$('.ru-poe').show();
   	}
   	else{
         $('.poe-lang-choose .ch-button-configuration').prop('checked', false);
   		$('.poe-lang-choose .ch-button-configuration[value="en"]').prop('checked', true);
-  		$('.en-poe').hide();
-  		$('.ru-poe').show();
+  		$('.en-poe').show();
+  		$('.ru-poe').hide();
   	}
 
   	// check poe
 	if (typeof poe !== 'undefined' && poe) {
-		let league_list=[];
 		$.ajax('/lk/poeleaguelist/')
 		.done((response) => {
 			$.when.apply($, response.map((value) => {
@@ -555,7 +573,7 @@ $(document).ready(function() {
 
 				league_list=response;
 				//from ivanjs
-                NiceSelect.bind(document.getElementById("select-league"), {});
+                //NiceSelect.bind(document.getElementById("select-league"), {});
 
 				//init league
 			    if(!i_league){
@@ -616,13 +634,6 @@ $(document).ready(function() {
 	  		$('.ru-poe').hide();
 		}
 		$.cookie('i_lang',i_lang,{ expires: expire_date});
-		//remake tooltips
-		$('.item_lk').each( (i,e) => {
-			let tip = M.Tooltip.getInstance($(e));
-			if(tip){
-				tip.destroy();
-			}
-		});
 		//remake select
 		$.when.apply($, league_list.map((value) => {
 		    return $('select.poe-league-choose option[value="' + value.slug + '"]').text(i_lang=='ru'?value.name:value.name_en); 
@@ -648,94 +659,103 @@ $(document).ready(function() {
 		$.cookie('i_platform',i_platform,{ expires: expire_date});
 	});
 
-    //tooltips
-    let tippy_placement = 'right';
-    if(window.innerWidth < 481) {
-        tippy_placement = 'top';
-    }
-    tippy('poeitem', {
-        content: '...',
-        onCreate(instance) {
-            // Setup our own custom state properties
-            instance._isFetching = false;
-            instance._error = null;
-            
-            console.log('create');
-        },
-        onShow(instance) {
-            console.log('show')
-            if (instance._isFetching ||  instance._error) {
-                console.log('return')
-                return;
+	$('.item_poetrade').click((e) => {
+		if (!i_league)i_league = 'Standard';
+		if (!i_platform)i_platform = 'PC';
+		let platform_url = '';
+		if(i_platform!='PC'){
+			platform_url = i_platform.toLowerCase() + '/';
+		}
+
+		let isBulk = $(e.target).attr('data-bulk'),
+			linkType = ''; // if bulk = exchange, else = search
+
+		if (isBulk == 'true'){
+			linkType = 'exchange';
+		} else {
+			linkType = 'search';
+		}
+
+		if(i_lang=='ru'){
+			window.open("https://ru.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_ru'), '_blank');
+		} else{
+			window.open("https://www.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_en'), '_blank');
+		}
+	});
+
+
+
+    function remakeItems(){
+        //item colors and names
+        $('poeitem').each( (e,el)=> { 
+            $(el).find('img').remove();
+            let color = $(el).attr('data-color');
+            if(color){
+                $(el).css('color', color);
             }
-        
-            instance._isFetching = true;
-            let target = instance.reference.getAttribute('data-target');
-            console.log(target);
-            fetch('/lk/item/?item='+target+'&lang='+i_lang)
-                .then((response) => response.json())
-                .then((blob) => {
-                    instance.setContent(_unescape(blob.data));
-                    console.log(_unescape(blob.data));
-                })
-                .catch((error) => {
-                    // Fallback if the network request failed
-                    instance._error = error;
-                    instance.setContent(`Request failed. ${error}`);
-                })
-                .finally(() => {
-                    instance._isFetching = false;
-                });
-                console.log('fetch')
-        },
-        onHidden(instance) {
-            //instance.setContent('...');
-            // Unset these properties so new network requests can be initiated
-            instance._error = null;
-            instance._isFetching = true;
-            console.log('hide')
-        },
-        followCursor: true,
-        allowHTML: true,
-        placement: tippy_placement,
-    });
-
-
-    // let elems = document.querySelectorAll('.poe-items');
-    // $(elems).each( (e,el)=> { if(M.Tooltip.getInstance($(el)))M.Tooltip.getInstance($(el)).close() })
-    // let item = $(e.target);
-    // let target = $(this).attr('data-target');
-    // let check_tooptip = M.Tooltip.getInstance($(item));
-    // if(check_tooptip){
-    // 	check_tooptip.open();
-    // } else{
-    // 	$.ajax('/lk/item/'+target+'&lang='+i_lang,{
-    // 		beforeSend: () => {
-    // 	        $(item).tooltip({
-    // 				html: '. . .',
-    // 				position: 'right'
-    // 			});
-    // 			let instance = M.Tooltip.getInstance($(item));
-    // 			instance.open();
-    // 		}
-    // 	})
-    // 	.always((content) => {
-    //         $(item).tooltip({
-    // 			html: htmlDecode(content),
-    // 			position: 'right'
-    // 		});
-    // 		let instance = M.Tooltip.getInstance($(item));
-    // 		if ($(item).is(":hover")){
-    // 			instance.open();
-    // 		}
-    //     });
-    // }
-
-	// $('.poe-items').mouseout(function(e){
-	// 	let elems = document.querySelectorAll('.poe-items');
-	// 	$(elems).each( (e,el)=> { if(M.Tooltip.getInstance($(el)))M.Tooltip.getInstance($(el)).close() })
-	// });
+            let name_ru = $(el).attr('data-name_ru');
+            if(i_lang=='ru' && name_ru){
+                $(el).text(name_ru);
+            }
+            let name_en = $(el).attr('data-name_en');
+            if(i_lang=='en' && name_en){
+                $(el).text(name_en);
+            }
+            let image = $(el).attr('data-image');
+            if(image){
+                $(el).prepend('<img class="item-image" src="'+image+'" />')
+            }
+        });
+        //remove old
+        for (let i=0; i<tippyinst.length; i++) {
+            tippyinst[i].destroy();
+        }
+        //add tooltips
+        let tippy_placement = 'right';
+        if(window.innerWidth < 481) {
+            tippy_placement = 'top';
+        }
+        tippyinst = tippy('poeitem', {
+            content: '...',
+            onCreate(instance) {
+                // Setup our own custom state properties
+                instance._isFetching = false;
+                instance._error = null;
+            },
+            onShow(instance) {
+                if (instance._isFetching ||  instance._error) {
+                    return;
+                }
+            
+                instance._isFetching = true;
+                let target = instance.reference.getAttribute('data-target');
+                fetch('/lk/item/?item='+target+'&lang='+i_lang)
+                    .then((response) => response.json())
+                    .then((blob) => {
+                        instance.setContent(_unescape(blob.data));
+                    })
+                    .catch((error) => {
+                        // Fallback if the network request failed
+                        instance._error = error;
+                        instance.setContent(`Request failed. ${error}`);
+                    })
+                    .finally(() => {
+                        instance._isFetching = false;
+                    });
+            },
+            onHidden(instance) {
+                //instance.setContent('...');
+                // Unset these properties so new network requests can be initiated
+                instance._error = null;
+                instance._isFetching = true;
+            },
+            followCursor: true,
+            allowHTML: true,
+            placement: tippy_placement,
+        });
+    }
 });
+
 
 //ajax form
 function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
