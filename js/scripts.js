@@ -140,12 +140,15 @@ $(document).ready(function() {
     // youtube lazyload
     let youtube = document.querySelectorAll(".youtube");
     for (let i = 0; i < youtube.length; i++) {
-        let source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/maxresdefault.jpg";
-        let image = new Image();
-        image.src = source;
-        image.addEventListener("load", function() {
-            youtube[i].appendChild(image);
-        }(i));
+        let existingImage = youtube[i].querySelector("img");
+        if (!existingImage) {
+            let source = "https://img.youtube.com/vi/" + youtube[i].dataset.embed + "/maxresdefault.jpg";
+            let image = new Image();
+            image.src = source;
+            image.addEventListener("load", function() {
+                youtube[i].appendChild(image);
+            });
+        }
         youtube[i].addEventListener("click", function() {
             let iframe = document.createElement("iframe");
             iframe.setAttribute("frameborder", "0");
