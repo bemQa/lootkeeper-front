@@ -197,8 +197,9 @@ $(document).ready(function() {
     });
 
     // селект лиги
+    let select_league;
     if($('.aside-navigation-parameter-select').length) {
-        NiceSelect.bind(document.getElementById("select-league"), {});
+        select_league = NiceSelect.bind(document.getElementById("select-league"), {});
     }
 
     // табы
@@ -417,9 +418,6 @@ $(document).ready(function() {
 	// navigationHtml += "<li><a href='#comments-block'>Комментарии</a></li>"
 	$(navigationHtml).appendTo(".navigation-menu-list");
 	// Генерация навигации (боковое меню) на странице статьи END
-
-    //Покраска предметов
-    remakeItems();
     
     $.ajaxSetup({
 	    beforeSend: function(xhr, settings) {
@@ -559,6 +557,9 @@ $(document).ready(function() {
   		$('.ru-poe').hide();
   	}
 
+    //Покраска предметов
+    remakeItems();
+
   	// check poe
 	if (typeof poe !== 'undefined' && poe) {
 		$.ajax('/lk/poeleaguelist/')
@@ -572,8 +573,9 @@ $(document).ready(function() {
 				$('.poe-platform-choose select').append($('<option></option>').attr('value','SONY').text('PlayStation')); 
 
 				league_list=response;
-				//from ivanjs
-                //NiceSelect.bind(document.getElementById("select-league"), {});
+                
+                // NiceSelect.bind(document.getElementById("select-league"), {});
+                select_league.update();
 
 				//init league
 			    if(!i_league){
@@ -588,7 +590,8 @@ $(document).ready(function() {
 				    if(!$('select.poe-league-choose option[value="' + i_league + '"]').prop('selected', true).length){
 				    	i_league = $('select.poe-league-choose')[0].options[0].value;
 				    }
-				    $('.poe-league-chosen').text($('select.poe-league-choose option:selected').text());
+				    $('select.poe-league-choose').trigger('change');
+                    select_league.update();
 			    }
 			    //set league cookie
 			    $.cookie('i_league',i_league,{ expires: expire_date});
@@ -638,16 +641,16 @@ $(document).ready(function() {
 		$.when.apply($, league_list.map((value) => {
 		    return $('select.poe-league-choose option[value="' + value.slug + '"]').text(i_lang=='ru'?value.name:value.name_en); 
 		}));
-		NiceSelect.bind(document.getElementById("select-league"), {});
-		$('.poe-league-chosen').text($('select.poe-league-choose option:selected').text());
+		// NiceSelect.update(document.getElementById("select-league"), {});
+		$('select.poe-league-choose').trigger('change');
+        select_league.update();
 
 		remakeItems();
 	});
 
 	// league select
 	$('select.poe-league-choose').change(function(){
-		let laegueName =  $('select.poe-league-choose option:selected').text();
-		$('.poe-league-chosen').text(laegueName);
+		select_league.update();
 		i_league = $('select.poe-league-choose option:selected').val();
 		$.cookie('i_league',i_league,{ expires: expire_date});
 	});
