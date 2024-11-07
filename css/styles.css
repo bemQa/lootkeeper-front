@@ -3474,6 +3474,10 @@ li a:hover,
     position: relative;
 }
 
+.tooltip-trigger {
+    cursor: pointer;
+}
+
 .help-click {
     position: relative;
     width: 18rem;

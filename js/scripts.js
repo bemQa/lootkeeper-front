@@ -571,9 +571,9 @@ $(document).ready(function() {
 			    return $('select.poe-league-choose').append($('<option></option>').attr('value',value.slug).text(i_lang=='ru'?value.name:value.name_en)); 
 			})).then(() => {
                 // ???
-				$('.poe-platform-choose select').append($('<option></option>').attr('value','PC').text('ПК')); 
-				$('.poe-platform-choose select').append($('<option></option>').attr('value','XBOX').text('Xbox')); 
-				$('.poe-platform-choose select').append($('<option></option>').attr('value','SONY').text('PlayStation')); 
+				// $('.poe-platform-choose select').append($('<option></option>').attr('value','PC').text('ПК')); 
+				// $('.poe-platform-choose select').append($('<option></option>').attr('value','XBOX').text('Xbox')); 
+				// $('.poe-platform-choose select').append($('<option></option>').attr('value','SONY').text('PlayStation')); 
 
 				league_list=response;
                 
@@ -601,18 +601,17 @@ $(document).ready(function() {
 
 				//init platform
 				if(!i_platform){
-					if($('.poe-platform-choose select')[0] && $('.poe-platform-choose select')[0].options.length){
-						i_platform = $('.poe-platform-choose select')[0].options[0].value;
+					if($('.poe-platform-choose .ch-button-configuration').length){
+						i_platform = $('.poe-platform-choose .ch-button-configuration:checked').val();
 					}
 					else{
 						i_platform = 'PC';
 					}
 				}
 				else{
-					if(!$('.poe-platform-choose select option[value="' + i_platform + '"]').prop('selected', true).length){
-						i_platform = $('.poe-platform-choose select')[0].options[0].value;
+					if(!$('.poe-platform-choose .ch-button-configuration[value="' + i_platform + '"]').prop('checked', true).length){
+						i_platform = $('.poe-platform-choose .ch-button-configuration:checked').val();
 					}
-					$('.poe-platform-chosen').text($('.poe-platform-choose select option:selected').text());
 				}
 				//set platform cookie
 				$.cookie('i_platform',i_platform,{ expires: expire_date});
@@ -658,10 +657,8 @@ $(document).ready(function() {
 		$.cookie('i_league',i_league,{ expires: expire_date});
 	});
 	// platform select
-	$(".poe-platform-choose select").change(function(){
-		let platformName =  $(".poe-platform-choose select option:selected").text();
-		$(".poe-platform-chosen").text(platformName);
-		i_platform = $(".poe-platform-choose select option:selected").val();
+	$(".poe-platform-choose .ch-button-configuration").change(function(){
+		i_platform = $(this).val();
 		$.cookie('i_platform',i_platform,{ expires: expire_date});
 	});
 
