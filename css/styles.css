@@ -4163,6 +4163,12 @@ li a:hover,
         background: url(../img/icons/account.svg) center/contain no-repeat;
     }
 
+    .profile-header-block .dropdown-list {
+        left: auto;
+        right: -40rem;
+        width: max-content;
+    }
+
     .notice-header-block + .profile-header-block {
         margin-left: 18rem;
     }
