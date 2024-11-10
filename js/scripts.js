@@ -99,7 +99,7 @@ $(document).ready(function() {
     });
 
     // кнопка раскрытия/сворачивания уведомлений
-    $('.notice-block-more').on('click', function(e) {
+    $('body').on('click', '.notice-block-more', function(e){
         e.preventDefault();
         $(this).toggleClass('active');
         $('.notice-hidden').toggle();
