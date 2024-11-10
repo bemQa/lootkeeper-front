@@ -1,0 +1,37 @@
+[
+    {
+        "target": "/url",
+        "icon": "/img/icon_bigboy.png",
+        "text": "[3.24] Испытания лиги Некрополь",
+        "tag": "Гайды",
+        "color": "#ff0000"
+    },
+    {
+        "target": "/url",
+        "icon": "/img/icon_bigboy.png",
+        "text": "[3.24] Испытания лиги Некрополь 1",
+        "tag": "Билды",
+        "color": "#ff2000"
+    },
+    {
+        "target": "/url",
+        "icon": "/img/icon_bigboy.png",
+        "text": "[3.24] Испытания лиги Некрополь 2",
+        "tag": "Гайды",
+        "color": "#ff0005"
+    },
+    {
+        "target": "/url",
+        "icon": "/img/icon_bigboy.png",
+        "text": "[3.24] ИИИспытания лиги Некрополь",
+        "tag": "Предметы",
+        "color": "#fff000"
+    },
+    {
+        "target": "/url",
+        "icon": "/img/icon_bigboy.png",
+        "text": "[3.55] Испытания лиги Некрополь",
+        "tag": "Гайды",
+        "color": "#ff0d00"
+    }
+]

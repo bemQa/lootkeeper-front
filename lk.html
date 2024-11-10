@@ -35,6 +35,8 @@
     <script src="libs/clipboard.min.js"></script>
     <!-- nice select -->
     <script src="libs/nice-select2/js/nice-select2.js"></script>
+    <!-- autocomplete -->
+    <script src="libs/autoComplete.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
 
@@ -62,12 +64,9 @@
                                 </div>
                             </div>
                             <div class="search-header-block">
-                                <input type="text" class="input-search" placeholder="Поиск по сайту">
+                                <input type="text" class="input-search" id="autoComplete" placeholder="Поиск по сайту" autocomplete="off">
                                 <button class="button-search"></button>
                                 <div class="input-search-overlay"></div>
-                                <div class="search-header-result">
-
-                                </div>
                             </div>
                             <div class="theme-switch-block">
                                 <div class="theme-switch">
@@ -84,12 +83,63 @@
                                     <a href="" class="soc soc-tg" target="_blank" rel="noopener"></a>
                                 </div>
                             </div>
-                            <!-- <a href="" class="notice-header-link"></a>
-                            <div class="notice-block">
-                                
-                            </div> -->
+                            <div class="notice-header-block">
+                                <!-- добавить класс have-notice если есть уведомления -->
+                                <div class="notice-header-link have-notice"></div>
+                                <div class="notice-block">
+                                    <div class="notice-block-header">
+                                        <div class="notice-block-header-title">Уведомления</div>
+                                        <!-- что должны делать настройки уведомлений? -->
+                                        <!-- <div class="notice-block-settings">Настройки</div> -->
+                                    </div>
+                                    <div class="notice-block-list">
+                                        <!-- максимум 20 -->
+                                        <div class="notice-block-element">
+                                            <div class="notice-block-element-text"><b>Серега Донатер</b> ответил в вашей ветке <a href="">комментариев</a> в статье <a href="">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                            <div class="notice-block-element-date">1 час назад</div>
+                                        </div>
+                                        <div class="notice-block-element">
+                                            <div class="notice-block-element-text">Серега Донатер ответил в вашей ветке комментариев в статье «[3.24] Плут Хексбласт мины. Билд на Бандита»</div>
+                                            <div class="notice-block-element-date">1 час назад</div>
+                                        </div>
+                                        <div class="notice-block-element">
+                                            <div class="notice-block-element-text">Ваше сообщение было удалено по причине <b>Разжигание ненависти</b></div>
+                                            <div class="notice-block-element-date">1 неделя назад</div>
+                                        </div>
+                                        <div class="notice-block-element">
+                                            <div class="notice-block-element-text">Вы не можете отправлять сообщения <b>2 часа</b> по причине <b>Разжигание ненависти</b></div>
+                                            <div class="notice-block-element-date">1 неделя назад</div>
+                                        </div>
+                                        <!-- после 4 элемента добавляем класс notice-hidden и style="display: none;" -->
+                                        <div class="notice-block-element notice-hidden" style="display: none;">
+                                            <div class="notice-block-element-text"><b>Серега Донатер</b> ответил в вашей ветке <a href="">комментариев</a> в статье <a href="">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                            <div class="notice-block-element-date">1 час назад</div>
+                                        </div>
+                                        <div class="notice-block-element notice-hidden" style="display: none;">
+                                            <div class="notice-block-element-text">Серега Донатер ответил в вашей ветке комментариев в статье «[3.24] Плут Хексбласт мины. Билд на Бандита»</div>
+                                            <div class="notice-block-element-date">1 час назад</div>
+                                        </div>
+                                        <div class="notice-block-element notice-hidden" style="display: none;">
+                                            <div class="notice-block-element-text">Ваше сообщение было удалено по причине <b>Разжигание ненависти</b></div>
+                                            <div class="notice-block-element-date">1 неделя назад</div>
+                                        </div>
+                                        <div class="notice-block-element notice-hidden" style="display: none;">
+                                            <div class="notice-block-element-text">Вы не можете отправлять сообщения <b>2 часа</b> по причине <b>Разжигание ненависти</b></div>
+                                            <div class="notice-block-element-date">1 неделя назад</div>
+                                        </div>
+                                    </div>
+                                    <div class="notice-block-more"></div>
+                                </div>
+                            </div>
                             <div class="profile-header-block">
-                                <a href="" class="profile-header-link">Войти</a>
+                                <div class="dropdown dropdown-mini">
+                                    <span class="profile-header-link">Серега Донатер</span>
+                                    <div class="dropdown-list">
+                                        <a href="" class="dropdown-list-link"><img src="img/icons/user-bold.svg" alt=""> Мой профиль</a>
+                                        <a href="" class="dropdown-list-link"><img src="img/icons/settings.svg" alt=""> Настройки</a>
+                                        <a href="" class="dropdown-list-link"><img src="img/icons/logout.svg" alt=""> Выход</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -171,21 +221,70 @@
                 <div class="container">
                     <div class="header-mob-wrapper">
                         <a href="" class="logo"></a>
-                        <!-- <a href="" class="notice-header-link"></a>
-                        <div class="notice-block">
-
-                        </div> -->
-                        <a href="" class="profile-header-link">Войти</a>
-                        <!-- <a href="" class="profile-header-link auth">lootkeeper.ru</a> -->
+                        <div class="notice-header-block">
+                            <!-- добавить класс have-notice если есть уведомления -->
+                            <div class="notice-header-link have-notice"></div>
+                            <div class="notice-block">
+                                <div class="notice-block-header">
+                                    <div class="notice-block-header-title">Уведомления</div>
+                                    <!-- что должны делать настройки уведомлений? -->
+                                    <!-- <div class="notice-block-settings">Настройки</div> -->
+                                </div>
+                                <div class="notice-block-list">
+                                    <!-- максимум 20 -->
+                                    <div class="notice-block-element">
+                                        <div class="notice-block-element-text"><b>Серега Донатер</b> ответил в вашей ветке <a href="">комментариев</a> в статье <a href="">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                        <div class="notice-block-element-date">1 час назад</div>
+                                    </div>
+                                    <div class="notice-block-element">
+                                        <div class="notice-block-element-text">Серега Донатер ответил в вашей ветке комментариев в статье «[3.24] Плут Хексбласт мины. Билд на Бандита»</div>
+                                        <div class="notice-block-element-date">1 час назад</div>
+                                    </div>
+                                    <div class="notice-block-element">
+                                        <div class="notice-block-element-text">Ваше сообщение было удалено по причине <b>Разжигание ненависти</b></div>
+                                        <div class="notice-block-element-date">1 неделя назад</div>
+                                    </div>
+                                    <div class="notice-block-element">
+                                        <div class="notice-block-element-text">Вы не можете отправлять сообщения <b>2 часа</b> по причине <b>Разжигание ненависти</b></div>
+                                        <div class="notice-block-element-date">1 неделя назад</div>
+                                    </div>
+                                    <!-- после 4 элемента добавляем класс notice-hidden и style="display: none;" -->
+                                    <div class="notice-block-element notice-hidden" style="display: none;">
+                                        <div class="notice-block-element-text"><b>Серега Донатер</b> ответил в вашей ветке <a href="">комментариев</a> в статье <a href="">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                        <div class="notice-block-element-date">1 час назад</div>
+                                    </div>
+                                    <div class="notice-block-element notice-hidden" style="display: none;">
+                                        <div class="notice-block-element-text">Серега Донатер ответил в вашей ветке комментариев в статье «[3.24] Плут Хексбласт мины. Билд на Бандита»</div>
+                                        <div class="notice-block-element-date">1 час назад</div>
+                                    </div>
+                                    <div class="notice-block-element notice-hidden" style="display: none;">
+                                        <div class="notice-block-element-text">Ваше сообщение было удалено по причине <b>Разжигание ненависти</b></div>
+                                        <div class="notice-block-element-date">1 неделя назад</div>
+                                    </div>
+                                    <div class="notice-block-element notice-hidden" style="display: none;">
+                                        <div class="notice-block-element-text">Вы не можете отправлять сообщения <b>2 часа</b> по причине <b>Разжигание ненависти</b></div>
+                                        <div class="notice-block-element-date">1 неделя назад</div>
+                                    </div>
+                                </div>
+                                <div class="notice-block-more"></div>
+                            </div>
+                        </div>
+                        <div class="profile-header-block">
+                            <div class="dropdown dropdown-mini">
+                                <span class="profile-header-link auth">Серега Донатер</span>
+                                <div class="dropdown-list">
+                                    <a href="" class="dropdown-list-link"><img src="img/icons/user-bold.svg" alt=""> Мой профиль</a>
+                                    <a href="" class="dropdown-list-link"><img src="img/icons/settings.svg" alt=""> Настройки</a>
+                                    <a href="" class="dropdown-list-link"><img src="img/icons/logout.svg" alt=""> Выход</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="menu"><span>Меню</span></div>
                         <div class="menu-links-wrapper">
                             <div class="search-header-block">
                                 <input type="text" class="input-search" placeholder="Поиск по сайту">
                                 <button class="button-search"></button>
                                 <div class="input-search-overlay"></div>
-                                <div class="search-header-result">
-
-                                </div>
                             </div>
                             <div class="dropdown-block">
                                 <div class="dropdown-block-title">Игра</div>

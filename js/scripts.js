@@ -85,6 +85,26 @@ $(document).ready(function() {
         });
     });
 
+    // уведомления
+    $('body').on('click', '.notice-header-link', function(){
+        let $this = $(this);
+        $('.notice-header-block').toggleClass('active');
+        $('body').on('click', function (e) {
+            let div = $('.notice-header-block, .notice-header-link');
+
+            if (!div.is(e.target) && div.has(e.target).length === 0) {
+                $this.removeClass('active');
+            }
+        });
+    });
+
+    // кнопка раскрытия/сворачивания уведомлений
+    $('.notice-block-more').on('click', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('active');
+        $('.notice-hidden').toggle();
+    });
+
     // якоря для ссылок
     $('body').on('click', '.anchor[href^="#"]', function () {
         $('.header-mob, .menu, .aside-navigation, .aside-navigation-menu').removeClass('active'); 
@@ -163,7 +183,7 @@ $(document).ready(function() {
     // навигационное меню
     $(window).on('scroll load', function () {
         let top = $(window).scrollTop();
-        $('.anchor-block').each(function() {
+        $('.anchor-block, .scrollspy').each(function() {
             let destination = $(this).offset().top - 250;
             if(top >= destination) {
                 let id = $(this).attr('id');
@@ -421,6 +441,82 @@ $(document).ready(function() {
 	// navigationHtml += "<li><a href='#comments-block'>Комментарии</a></li>"
 	$(navigationHtml).appendTo(".navigation-menu-list");
 	// Генерация навигации (боковое меню) на странице статьи END
+
+    // The autoComplete.js Engine instance creator
+    const search_form = document.querySelector('.search-header-block');
+    const search_form_action = search_form.action ? search_form.action : '/poe/search/';
+    const autoCompleteJS = new autoComplete({
+        selector: '#autoComplete',
+        placeHolder: "Поиск по сайту",
+        wrapper: false,
+        threshold: 3,
+        debounce: 600,
+        submit: true,
+        data: {
+            src: async () => {
+                try {
+                    // Fetch External Data Source
+                    const source = await fetch("./db/generic.json");
+                    // const source = await fetch(search_form_action+'?q='+autoCompleteJS.input.value+'&autocomplete=1');
+                    const data = await source.json();
+                    // Returns Fetched data
+                    return data;
+                } catch (error) {
+                    return error;
+                }
+            },
+            keys: ["target", "icon", "text", "tag", "color"],
+            // cache: true,
+
+        },
+        resultsList: {
+            class: "search-header-result",
+            destination: "#autoComplete",
+            // position: "afterend",
+            maxResults: 5,
+            noResults: true,
+            element: (list, data) => {
+                const info = document.createElement('p');
+                info.classList.add('search-header-result-not-found');
+                if (data.results.length == 0) {
+                    info.innerHTML = `Поиск не дал результатов`;
+                    list.prepend(info);
+                } else {
+                    if(document.querySelector('.search-header-result-not-found')) {
+                        document.querySelector('.search-header-result-not-found').remove();
+                    }
+                }
+            },
+        },
+        resultItem: {
+            class: "search-header-result-item",
+            highlight: true,
+            selected: "autoComplete_selected",
+            element: (item, data) => {
+                let match_text = data.key == 'text' ? data.match : data.value.text;
+                item.innerHTML = `
+                    <a href="${data.value.target}" class="search-header-result-item-link">
+                        <div class="search-header-result-item-icon">
+                            <img src="${data.value.icon}">
+                        </div>
+                        <div class="search-header-result-item-text" style="color: ${data.value.color}">
+                            ${match_text}
+                        </div>
+                        <div class="search-header-result-item-tag">
+                            ${data.value.tag}
+                        </div>
+                    </a>
+                `;
+            },
+        },
+        events: {
+            input: {
+                focus() {
+                    if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                },
+            },
+        },
+    });
     
     $.ajaxSetup({
 	    beforeSend: function(xhr, settings) {
@@ -436,6 +532,7 @@ $(document).ready(function() {
 
     // лайки/дизлайки
     $('body').on('click', '.js-like-click', function(){
+        let $this = $(this);
         let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
         let comment_data = '&comment_id=' + $(this).parents('.comment-item').data('id') + '&type=' + $(this).data('like');
         let comment_likes = $(this).siblings('.comment-likes-count');
@@ -455,14 +552,20 @@ $(document).ready(function() {
                     if(response.value == '+') {
                         if(response.type == 'l') {
                             result_likes = comment_likes_count+1;
+                            $this.addClass('comment-like');
+                            $this.parent().find('.js-like-click').removeClass('comment-dislike');
                         } else if (response.type == 'd') {
                             result_likes = comment_likes_count-1;
+                            $this.addClass('comment-dislike');
+                            $this.parent().find('.js-like-click').removeClass('comment-like');
                         }
                     } else if (response.value == '-') {
                         if(response.type == 'l') {
                             result_likes = comment_likes_count-1;
+                            $this.parent().find('.js-like-click').removeClass('comment-like');
                         } else if (response.type == 'd') {
                             result_likes = comment_likes_count+1;
+                            $this.parent().find('.js-like-click').removeClass('comment-dislike');
                         }
                     }
                     if (result_likes > 0) {
