@@ -16,30 +16,55 @@ $(document).ready(function() {
     let tippyinst=[];
     let league_list=[];
 	let i_lang='ru';
+    let theme;
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
-    // Check to see if Media-Queries are supported
+    const themeSwitches = document.querySelectorAll('.theme-switch');
     if (window.matchMedia) {
-        // Check if the dark-mode Media-Query matches
         if(window.matchMedia('(prefers-color-scheme: dark)').matches){
             document.body.classList.add('theme-dark');
             document.body.classList.remove('theme-default');
-            $('.theme-switch').prop('checked', true);
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = true;
+            });
+  	        $.cookie('theme','dark',{ expires: expire_date});
+            theme=$.cookie('theme');
+            console.log(theme)
         } else {
             document.body.classList.add('theme-light');
-            $('.theme-switch').prop('checked', false);
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = false;
+            });
+            $.cookie('theme','light',{ expires: expire_date});
+            theme=$.cookie('theme');
+            console.log(theme)
         }
     } else {
-        // Default (when Media-Queries are not supported)
         document.body.classList.remove('theme-dark');
         document.body.classList.remove('theme-light');
     }
 
-    $('body').on('click', '#theme-switch', function(e) {
-        console.log($(this).prop('checked'))
-        $(this).prop('checked') == true ? $('body').addClass('theme-dark').removeClass('theme-default theme-light') : $('body').addClass('theme-light').removeClass('theme-dark');
-    })
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('theme-switch')) {
+            const isChecked = e.target.checked;
+            console.log(isChecked);
+
+            if (isChecked) {
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = true;
+                });
+                document.body.classList.add('theme-dark');
+                document.body.classList.remove('theme-default', 'theme-light');
+            } else {
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = false;
+                });
+                document.body.classList.add('theme-light');
+                document.body.classList.remove('theme-dark');
+            }
+        }
+    });
 
     // анимация меню
 	$('.menu').click(function(e){
@@ -277,7 +302,10 @@ $(document).ready(function() {
 
     // fancybox
     Fancybox.bind("[data-fancybox]", {
-        // options
+        defaultType: "inline", 
+        // dragToClose: false,
+        // touchMove: false,
+        // backdropClick: false
     });
 
     // тултипы
@@ -423,10 +451,15 @@ $(document).ready(function() {
     $('body').on('click','.js-open-modal', function(e){
         e.preventDefault();
         let id = $(this).attr('href');
-        Fancybox.show({
-            src: id,
-            type: 'inline'
-        });
+        Fancybox.show(
+            [{src: id,}],
+            {
+                defaultType: "inline", 
+                // dragToClose: false,
+                // touchMove: false,
+                // backdropClick: false
+            }
+        );        
     });
 
     //Генерация навигации (боковое меню) на странице статьи

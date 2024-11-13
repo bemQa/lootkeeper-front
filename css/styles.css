@@ -259,10 +259,15 @@ body {
     --body-bg: var(--light, #F0F0F0) var(--dark, #101015);
     --heading-bg: var(--light, #08080B) var(--dark, #08080B);
     --main-bg: var(--light, #F7F7F7) var(--dark, #17171C);
+    --block-bg: var(--light, #F0F0F0) var(--dark, #0E0E12);
     --main-color: var(--light, #313131) var(--dark, #F4F4F4);
     --hlines-color: var(--light, #161616) var(--dark, #F9F9F9);
     --gray-color: var(--light, #79798B) var(--dark, #A6A6C1);
     --border-color: var(--light, #DEDEDE) var(--dark, #2F2F2F);
+    --logo: var(--light, url(../img/logo-white.svg)) var(--dark, url(../img/logo-dark.svg));
+    --menu-color: var(--light, #676767) var(--dark, #A3A4A5);
+    --block-bg-hover: var(--light, #C2D9EF) var(--dark, #282830);
+    --box-shadow: var(--light, 0rem 8rem 22rem 0rem rgba(0, 0, 0, 0.12)) var(--dark, 0rem 8rem 40rem 0rem #0A0A0D);
 
     --dark-body-bg: #101015;
     --dark-heading-bg: #08080B;
@@ -287,7 +292,7 @@ body {
     --dark-blue: #0D5EAA;
     --dark-red: #9F1A35;
     --dark-green: #0E5721;
-    --gray-btn: #24242B;
+    --gray-btn: var(--light, #D9D9D9) var(--dark, #24242B);
     --gray-btn-hover: #55555C;
     --white-gray-btn: #D9D9D9;
     --white-gray-btn-hover: #CDCDCD;
@@ -502,12 +507,12 @@ body {
     padding-right: 16rem;
     font-size: 18rem;
     line-height: 1.2;
-    color: #A3A4A5;
+    color: var(--menu-color);
     cursor: pointer;
 }
 
 .dropdown-current.menu-link.current {
-    color: var(--dark-main-color);
+    color: var(--main-color);
 }
 
 .dropdown-current::after {
@@ -524,11 +529,11 @@ body {
 }
 
 .dropdown-current.menu-link::after {
-    background-image: url(../img/icons/arrow-down-gray.svg);
+    background-image: var(--light, url(../img/icons/arrow-down-white.svg)) var(--dark, url(../img/icons/arrow-down-gray.svg));
 }
 
 .dropdown-current.menu-link.current::after {
-    background-image: url(../img/icons/arrow-down-hline.svg);
+    background-image: var(--light, url(../img/icons/arrow-down-white.svg)) var(--dark, url(../img/icons/arrow-down-hline.svg));
 }
 
 .dropdown.active .dropdown-current::after {
@@ -540,6 +545,7 @@ body {
     top: 30rem;
     left: 0;
     width: max-content;
+    box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
     overflow: hidden;
     opacity: 0;
@@ -567,7 +573,7 @@ body {
 .dropdown-builds .dropdown-list {
     width: 558rem;
     padding: 18rem 24rem;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
 }
 
 .footer-menu .dropdown-builds .dropdown-list {
@@ -604,7 +610,7 @@ a.dropdown-builds-list-title:hover {
     justify-content: flex-start;
     gap: 6rem;
     padding: 5rem;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
     font-size: 16rem;
     line-height: 1.2;
     color: #A3A4A5;
@@ -612,8 +618,8 @@ a.dropdown-builds-list-title:hover {
 
 .dropdown-builds-list-link:hover,
 .dropdown-builds-list-link.current {
-    background: #282830;
-    color: var(--dark-main-color);
+    background: var(--block-bg-hover);
+    color: var(--main-color);
 }
 
 .dropdown.active .dropdown-list {
@@ -627,7 +633,7 @@ a.dropdown-builds-list-title:hover {
     align-items: center;
     justify-content: flex-start;
     padding: 10rem 18rem;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
     font-size: 18rem;
     line-height: 1.2;
     color: #A3A4A5;
@@ -639,8 +645,8 @@ a.dropdown-builds-list-title:hover {
 }
 
 .dropdown-list-link:hover {
-    background: #282830;
-    color: var(--dark-main-color);
+    background: var(--block-bg-hover);
+    color: var(--main-color);
 }
 
 .search-header-block {
@@ -660,7 +666,7 @@ a.dropdown-builds-list-title:hover {
     font-weight: normal;
     font-size: 14rem;
     line-height: 1.2;
-    color: var(--dark-hlines-color);
+    color: var(--hlines-color);
     transition: all .3s ease;
     z-index: 1;
 }
@@ -709,67 +715,6 @@ a.dropdown-builds-list-title:hover {
     position: relative;
 }
 
-/* .autoComplete_wrapper>input {
-    height: 3rem;
-    width: 370rem;
-    margin: 0;
-    padding: 0 2rem 0 3.2rem;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    font-size: 1rem;
-    text-overflow: ellipsis;
-    color: rgba(255, 122, 122, 0.3);
-    outline: none;
-    border-radius: 10rem;
-    border: 0.05rem solid rgba(255, 122, 122, 0.5);
-    background-image: url(./images/search.svg);
-    background-size: 1.4rem;
-    background-position: left 1.05rem top 0.8rem;
-    background-repeat: no-repeat;
-    background-origin: border-box;
-    background-color: #fff;
-    transition: all 0.4s ease;
-    -webkit-transition: all -webkit-transform 0.4s ease;
-} */
-
-/* .autoComplete_wrapper>input::placeholder {
-    color: rgba(255, 122, 122, 0.5);
-    transition: all 0.3s ease;
-    -webkit-transition: all -webkit-transform 0.3s ease;
-} */
-
-/* .autoComplete_wrapper>input:hover::placeholder {
-    color: rgba(255, 122, 122, 0.6);
-    transition: all 0.3s ease;
-    -webkit-transition: all -webkit-transform 0.3s ease;
-} */
-
-/* .autoComplete_wrapper>input:focus::placeholder {
-    padding: 0.1rem 0.6rem;
-    font-size: 0.95rem;
-    color: rgba(255, 122, 122, 0.4);
-} */
-
-/* .autoComplete_wrapper>input:focus::selection {
-    background-color: rgba(255, 122, 122, 0.15);
-} */
-
-/* .autoComplete_wrapper>input::selection {
-    background-color: rgba(255, 122, 122, 0.15);
-} */
-
-/* .autoComplete_wrapper>input:hover {
-    color: rgba(255, 122, 122, 0.8);
-    transition: all 0.3s ease;
-    -webkit-transition: all -webkit-transform 0.3s ease;
-} */
-
-/* .autoComplete_wrapper>input:focus {
-    color: rgba(255, 122, 122, 1);
-    border: 0.06rem solid rgba(255, 122, 122, 0.8);
-} */
-
 .search-header-result {
     position: absolute;
     left: 0;
@@ -777,12 +722,12 @@ a.dropdown-builds-list-title:hover {
     display: flex;
     flex-direction: column;
     gap: 6rem 0;
-    margin: 8rem 0 0 0;
+    margin: 16rem 0 0 0;
     padding: 12rem;
     list-style: none;
-    background-color: var(--dark-block-bg);
+    background-color: var(--block-bg);
     border-radius: var(--border-radius);
-    box-shadow: 0rem 8rem 40rem 0rem #0A0A0D;
+    box-shadow: var(--box-shadow);
     outline: none;
     transition: opacity 0.15s ease-in-out;
     -moz-transition: opacity 0.15s ease-in-out;
@@ -801,7 +746,7 @@ a.dropdown-builds-list-title:hover {
     margin: 0;
     padding: 8rem;
     border-radius: var(--small-border-radius);
-    background: var(--dark-main-bg);
+    background: var(--main-bg);
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -817,7 +762,7 @@ a.dropdown-builds-list-title:hover {
     font-family: var(--second-font);
     font-size: 16rem;
     line-height: 1.2;
-    color: #F2C94C;
+    color: var(--light, #424242) var(--dark, #F2C94C);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -849,31 +794,31 @@ a.dropdown-builds-list-title:hover {
 .search-header-result-item-tag {
     margin-left: auto;
     padding: 5rem 12rem;
-    background: #424755;
-    border: 1rem solid transparent;
+    background: var(--light, #F2F2F2) var(--dark, #424755);
+    border: 1rem solid var(--light, #DEDEDE) var(--dark, transparent);
     border-radius: var(--border-radius);
     font-weight: 600;
     font-size: 12rem;
     line-height: 1.2;
-    color: #D0D0E9;
+    color: var(--light, #79798B) var(--dark, #D0D0E9);
 }
 
 .search-header-result-item mark {
     background-color: transparent;
     font-weight: bold;
-    color: var(--dark-main-color);
+    color: var(--main-color);
 }
 
 .search-header-result-item:hover,
 .search-header-result-item[aria-selected="true"] {
-    background: #282830;
+    background: var(--block-bg-hover);
 }
 
 .search-header-result-not-found {
     margin: 0;
     padding: 8rem;
     border-radius: var(--small-border-radius);
-    background: var(--dark-main-bg);
+    background: var(--main-bg);
     font-family: var(--second-font);
     font-size: 16rem;
     line-height: 1.2;
@@ -929,7 +874,7 @@ a.dropdown-builds-list-title:hover {
     width: 500rem;
     background: var(--dark-block-bg);
     border-radius: var(--border-radius);
-    box-shadow: 0rem 8rem 40rem 0rem #0A0A0D;
+    box-shadow: var(--box-shadow);
     overflow: hidden;
     opacity: 0;
     transform: scale(.8);
@@ -1035,7 +980,7 @@ a.dropdown-builds-list-title:hover {
 
 .header-main {
     height: 70rem;
-    background: var(--dark-main-bg);
+    background: var(--main-bg);
 }
 
 .header-main-wrapper {
@@ -1050,7 +995,7 @@ a.dropdown-builds-list-title:hover {
     display: block;
     width: 182rem;
     height: 19rem;
-    background: url(../img/logo-dark.svg) center/contain no-repeat;
+    background: var(--logo) center/contain no-repeat;
 }
 
 .menu-links {
@@ -1063,7 +1008,7 @@ a.dropdown-builds-list-title:hover {
     position: relative;
     font-size: 18rem;
     line-height: 1.2;
-    color: #A3A4A5;
+    color: var(--menu-color);
     transition: all .3s ease;
 }
 
@@ -1082,7 +1027,7 @@ a.dropdown-builds-list-title:hover {
 
 .menu-link:hover,
 .menu-link.current {
-    color: var(--dark-main-color);
+    color: var(--main-color);
 }
 
 .menu-link.current::before {
@@ -1103,6 +1048,7 @@ a.dropdown-builds-list-title:hover {
 
 .footer .logo {
     display: none;
+    background: url(../img/logo-dark.svg) center/contain no-repeat;
 }
 
 .footer-menu {
@@ -1408,7 +1354,7 @@ h5 {
     width: 40rem;
     min-width: 40rem;
     height: 40rem;
-    background: var(--dark-main-bg);
+    background: var(--main-bg);
     border-radius: var(--border-radius);
     overflow: hidden;
 }
@@ -2152,7 +2098,7 @@ blockquote * {
     width: 210rem;
     padding: 0;
     background: var(--dark-block-bg);
-    box-shadow: 0rem 8rem 40rem 0rem #0A0A0D;
+    box-shadow: var(--box-shadow);
     overflow: hidden;
 }
 
@@ -3002,7 +2948,7 @@ textarea.input-text {
     padding: 18rem 12rem;
     background: var(--dark-block-bg);
     border-radius: var(--border-radius);
-    box-shadow: 0rem 8rem 40rem 0rem #0A0A0D;
+    box-shadow: var(--box-shadow);
     opacity: 0;
     transform: scale(.8);
     pointer-events: none;
@@ -3233,7 +3179,7 @@ li a:hover,
 .separate {
     width: 100%;
     height: 1rem;
-    background: var(--dark-border-color);
+    background: var(--border-color);
 }
 
 .two-columns-block {
@@ -3489,12 +3435,12 @@ li a:hover,
     align-items: center;
     justify-content: center;
     padding: 6rem 14rem;
-    background: #000;
     border-radius: var(--border-radius);
     background: #424755;
     font-weight: 600;
     font-size: 12rem;
     line-height: 1;
+    color: var(--dark-hlines-color);
 }
 
 .card-date {
@@ -3637,7 +3583,8 @@ li a:hover,
     max-width: calc(50% - 12rem);
     width: 100%;
     height: 136rem;
-    border: 1rem solid var(--dark-border-color);
+    background: var(--main-bg);
+    border: 1rem solid var(--border-color);
     border-radius: var(--border-radius);
     overflow: hidden;
 }
@@ -3685,7 +3632,7 @@ li a:hover,
     font-weight: 600;
     font-size: 18rem;
     line-height: 1.2;
-    color: var(--dark-hlines-color);
+    color: var(--hlines-color);
     z-index: 1;
 }
 
@@ -3702,7 +3649,7 @@ li a:hover,
     text-overflow: ellipsis;
     font-size: 14rem;
     line-height: 1.5;
-    color: var(--dark-main-color);
+    color: var(--main-color);
     z-index: 1;
 }
 
@@ -4126,7 +4073,7 @@ li a:hover,
         width: 100%;
         height: 60rem;
         margin: auto;
-        background: var(--dark-main-bg);
+        background: var(--main-bg);
         font-family: var(--second-font);
         z-index: 10;
     }
@@ -4154,7 +4101,7 @@ li a:hover,
         display: block;
         width: 30rem;
         height: 30rem;
-        background: url(../img/icons/profile.svg) center/contain no-repeat;
+        background: url(../img/icons/profile.png) center/contain no-repeat;
         font-size: 0;
         line-height: 1;
     }
@@ -4211,7 +4158,7 @@ li a:hover,
         margin: auto;
         width: 100%;
         height: 3rem;
-        background: #787879;
+        background: var(--light, #787879) var(--dark, #787879);
         border-radius: 3rem;
         transition: background 0s .3s;
     }
@@ -4228,7 +4175,7 @@ li a:hover,
         margin: auto;
         width: 100%;
         height: 3rem;
-        background: #787879;
+        background: var(--light, #787879) var(--dark, #787879);
         border-radius: 3rem;
         transition-duration: 0.3s, 0.3s;
         transition-delay: 0.3s, 0s;
@@ -4256,7 +4203,7 @@ li a:hover,
     
     .menu.active::before,
     .menu.active::after {
-        background: #DADADA;
+        background: var(--light, #313131) var(--dark, #DADADA);
         transition-delay: 0s, 0.3s;
     }
     
@@ -4280,7 +4227,7 @@ li a:hover,
         height: fit-content;
         max-height: calc(100vh - 60rem);
         padding: 24rem 16rem;
-        background: var(--dark-block-bg);
+        background: var(--light, #fff) var(--dark, var(--block-bg));
         z-index: 10;
         opacity: 0;
         pointer-events: none;
@@ -4303,7 +4250,8 @@ li a:hover,
     .input-search {
         height: 40rem;
         padding: 10rem 12rem 10rem 40rem;
-        border: 1rem solid var(--dark-border-color);
+        background: var(--light, #EDEDED) var(--dark, transparent);
+        border: 1rem solid var(--border-color);
     }
 
     .button-search {
@@ -4327,6 +4275,7 @@ li a:hover,
         right: auto;
         width: 100%;
         height: 1rem;
+        background: var(--border-color);
     }
 
     .dropdown-block-title {
@@ -4341,12 +4290,12 @@ li a:hover,
         width: 100%;
         height: 40rem;
         padding: 10rem 32rem 10rem 12rem;
-        background: var(--dark-main-bg);
-        border: 1rem solid var(--dark-border-color);
+        background: var(--light, #EDEDED) var(--dark, var(--main-bg));
+        border: 1rem solid var(--border-color);
         border-radius: var(--small-border-radius);
         font-family: var(--second-font);
         font-size: 16rem;
-        color: var(--dark-hlines-color);
+        color: var(--hlines-color);
         transition: all .3s ease;
         z-index: 1;
     }
@@ -4399,7 +4348,7 @@ li a:hover,
 
     .menu-links .accordion-title.menu-link:hover, 
     .menu-links .accordion-title.menu-link.current {
-        color: var(--dark-main-color);
+        color: var(--main-color);
     }
 
     .menu-links .accordion-title::after {
@@ -4430,7 +4379,7 @@ li a:hover,
         margin: auto;
         width: calc(100% + 32rem);
         height: 100%;
-        background: var(--dark-main-bg);
+        background: var(--light, var(--block-bg)) var(--dark, var(--main-bg));
     }
 
     .dropdown-builds-list {
@@ -4478,7 +4427,9 @@ li a:hover,
     /* сначала контейнер, шапка и футер */
 
     /* buttons */
-
+    .button.gray {
+        color: var(--light, #838383) var(--dark, var(--dark-main-color));
+    }
     /* end buttons */
 
     /* tags */
@@ -4691,6 +4642,7 @@ li a:hover,
         bottom: auto;
         width: 100%;
         height: 1rem;
+        background: var(--border-color);
     }
 
     .theme-switch {
@@ -4704,13 +4656,14 @@ li a:hover,
         background-size: 24rem;
         font-size: 16rem;
         line-height: 1.2;
-        color: var(--dark-main-color);
+        color: var(--main-color);
     }
 
     .theme-switch label {
         width: 44rem;
         height: 24rem;
         margin-left: auto;
+        background-color: var(--light, #8B8E9B) var(--dark, #474747);
     }
     
     .theme-switch label::after {
@@ -4742,6 +4695,7 @@ li a:hover,
         bottom: auto;
         width: 100%;
         height: 1rem;
+        background: var(--border-color);
     }
 
     .socs {
@@ -5197,6 +5151,7 @@ li a:hover,
     .card-long-name {
         -webkit-line-clamp: 4;
         font-size: 16rem;
+        color: var(--light, var(--dark-hlines-color)) var(--dark, var(--hlines-color))
     }
 
     .card-long-date {
