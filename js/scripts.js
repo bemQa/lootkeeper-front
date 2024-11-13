@@ -52,7 +52,7 @@ $(document).ready(function() {
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = true;
             });
-        } else {
+        } else if (theme == 'light') {
             document.body.classList.add('theme-light');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = false;
