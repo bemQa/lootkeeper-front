@@ -13,57 +13,55 @@ const _unescape = str =>
 
 $(document).ready(function() {
     //init items
+    let locale = document.documentElement.lang;
     let tippyinst=[];
     let league_list=[];
 	let i_lang='ru';
-    let theme;
+    let theme = null;
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
     const themeSwitches = document.querySelectorAll('.theme-switch');
     if (window.matchMedia) {
         if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-            if(theme != 'dark') {
-                document.body.classList.add('theme-dark');
-                document.body.classList.remove('theme-default');
-                themeSwitches.forEach(function(switchElement) {
-                    switchElement.checked = true;
-                });
-                $.cookie('theme','dark',{ expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
-            }
-        } else {
-            if(theme != 'light') {
-                document.body.classList.add('theme-light');
-                themeSwitches.forEach(function(switchElement) {
-                    switchElement.checked = false;
-                });
-                $.cookie('theme','light',{ expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
-            }
-        }
-    } else {
-        document.body.classList.remove('theme-dark');
-        document.body.classList.remove('theme-light');
-    }
-
-    if (theme) {
-        if(theme == 'dark'){
             document.body.classList.add('theme-dark');
             document.body.classList.remove('theme-default');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = true;
             });
-        } else if (theme == 'light') {
+            if (!theme || theme != 'dark') {
+                $.cookie('theme', 'dark', {expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
+            }
+        } else {
             document.body.classList.add('theme-light');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = false;
             });
+            if (!theme || theme != 'light') {
+                $.cookie('theme', 'light',{expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
+            }
         }
     } else {
-        document.body.classList.remove('theme-dark', 'theme-light');
+        if (theme) {
+            if(theme == 'dark'){
+                document.body.classList.add('theme-dark');
+                document.body.classList.remove('theme-default');
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = true;
+                });
+            } else if (theme == 'light') {
+                document.body.classList.add('theme-light');
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = false;
+                });
+            }
+        } else {
+            document.body.classList.remove('theme-dark', 'theme-light');
+        }
     }
 
     document.body.addEventListener('click', function(e) {
@@ -77,7 +75,7 @@ $(document).ready(function() {
                 });
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-default', 'theme-light');
-                $.cookie('theme','dark',{ expires: expire_date});
+                $.cookie('theme', 'dark', {expires: expire_date});
                 theme=$.cookie('theme');
                 console.log(theme)
             } else {
@@ -86,7 +84,7 @@ $(document).ready(function() {
                 });
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark');
-                $.cookie('theme','light',{ expires: expire_date});
+                $.cookie('theme', 'light', {expires: expire_date});
                 theme=$.cookie('theme');
                 console.log(theme)
             }
