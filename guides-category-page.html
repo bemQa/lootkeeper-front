@@ -35,8 +35,12 @@
     <script src="libs/clipboard.min.js"></script>
     <!-- nice select -->
     <script src="libs/nice-select2/js/nice-select2.js"></script>
+    <!-- autocomplete -->
+    <script src="libs/autoComplete.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
+    
+    <script src="libs/jquery.cookie.js"></script>
 
 	<!--[if lte IE 9]>
     <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
@@ -62,17 +66,14 @@
                                 </div>
                             </div>
                             <div class="search-header-block">
-                                <input type="text" class="input-search" placeholder="Поиск по сайту">
+                                <input type="text" class="input-search" id="autoComplete" placeholder="Поиск по сайту" autocomplete="off">
                                 <button class="button-search"></button>
                                 <div class="input-search-overlay"></div>
-                                <div class="search-header-result">
-
-                                </div>
                             </div>
                             <div class="theme-switch-block">
                                 <div class="theme-switch">
                                     <div class="light-switch"></div>
-                                    <input id="theme-switch" class="theme-switch" type="checkbox" checked>
+                                    <input id="theme-switch" class="theme-switch" type="checkbox">
                                     <label for="theme-switch"></label>
                                     <div class="dark-switch"></div>
                                 </div> 
@@ -89,7 +90,7 @@
                                 
                             </div> -->
                             <div class="profile-header-block">
-                                <a href="" class="profile-header-link">Войти</a>
+                                <a href="#auth_modal" class="profile-header-link" data-fancybox="">Войти</a>
                             </div>
                         </div>
                     </div>
@@ -175,7 +176,9 @@
                         <div class="notice-block">
 
                         </div> -->
-                        <a href="" class="profile-header-link">Войти</a>
+                        <div class="profile-header-block">
+                            <a href="#auth_modal" class="profile-header-link" data-fancybox="">Войти</a>
+                        </div>
                         <!-- <a href="" class="profile-header-link auth">lootkeeper.ru</a> -->
                         <div class="menu"><span>Меню</span></div>
                         <div class="menu-links-wrapper">
@@ -183,9 +186,6 @@
                                 <input type="text" class="input-search" placeholder="Поиск по сайту">
                                 <button class="button-search"></button>
                                 <div class="input-search-overlay"></div>
-                                <div class="search-header-result">
-
-                                </div>
                             </div>
                             <div class="dropdown-block">
                                 <div class="dropdown-block-title">Игра</div>
@@ -272,7 +272,7 @@
                             <div class="theme-switch-block">
                                 <div class="theme-switch">
                                     <div class="dark-switch">Темное оформление</div>
-                                    <input id="theme-switch-mob" class="theme-switch" type="checkbox" checked>
+                                    <input id="theme-switch-mob" class="theme-switch" type="checkbox">
                                     <label for="theme-switch-mob"></label>
                                 </div> 
                             </div>
@@ -331,6 +331,28 @@
                     </div>
                 </div>
             </section>
+        </div>
+        <!-- модалки -->
+        <div id="auth_modal" class="modal">
+            <div class="modal-content">
+                <div class="form-wrapper">
+                    <h3 class="form-title">Авторизация</h3>
+                    <form class="form">
+                        <div class="ip-cell">
+                            <label class="input-label">Имя пользователя <span class="required-symbol">*</span></label>
+                            <input type="text" class="input-text" name="name" required="">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Пароль <span class="required-symbol">*</span></label>
+                            <input type="password" class="input-text" name="password" required="">
+                        </div>
+                        <button class="button">Зарегистрироваться</button>
+                    </form>
+                    <div class="form-text">
+                        Еще нет учетной записи? <a href="/registration-page.html" class="js-open-modal">Регистрация</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="footer">
             <div class="container">

@@ -17,76 +17,67 @@ $(document).ready(function() {
     let tippyinst=[];
     let league_list=[];
 	let i_lang='ru';
-    let theme = null;
+    let cookie_theme = $.cookie('theme') ? $.cookie('theme') : null;
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
     const themeSwitches = document.querySelectorAll('.theme-switch');
-    if (window.matchMedia) {
-        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+    
+    if (cookie_theme != null) {
+        if(cookie_theme == 'dark'){
             document.body.classList.add('theme-dark');
-            document.body.classList.remove('theme-default');
+            document.body.classList.remove('theme-default', 'theme-light');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = true;
             });
-            if (!theme || theme != 'dark') {
-                $.cookie('theme', 'dark', {expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
-            }
-        } else {
+        } else if (cookie_theme == 'light') {
             document.body.classList.add('theme-light');
+            document.body.classList.remove('theme-default', 'theme-dark');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = false;
             });
-            if (!theme || theme != 'light') {
-                $.cookie('theme', 'light',{expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
-            }
+        }
+    } else if (window.matchMedia) {
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+            document.body.classList.add('theme-dark');
+            document.body.classList.remove('theme-default', 'theme-light');
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = true;
+            });
+            cookie_theme = 'dark';
+            $.cookie('theme', cookie_theme, {expires: expire_date});
+        } else {
+            document.body.classList.add('theme-light');
+            document.body.classList.remove('theme-default', 'theme-dark');
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = false;
+            });
+            cookie_theme = 'light';
+            $.cookie('theme', cookie_theme, {expires: expire_date});
         }
     } else {
-        if (theme) {
-            if(theme == 'dark'){
-                document.body.classList.add('theme-dark');
-                document.body.classList.remove('theme-default');
-                themeSwitches.forEach(function(switchElement) {
-                    switchElement.checked = true;
-                });
-            } else if (theme == 'light') {
-                document.body.classList.add('theme-light');
-                themeSwitches.forEach(function(switchElement) {
-                    switchElement.checked = false;
-                });
-            }
-        } else {
-            document.body.classList.remove('theme-dark', 'theme-light');
-        }
+        document.body.classList.remove('theme-dark', 'theme-light');
     }
 
     document.body.addEventListener('click', function(e) {
         if (e.target.classList.contains('theme-switch')) {
             const isChecked = e.target.checked;
-            console.log(isChecked);
-
             if (isChecked) {
                 themeSwitches.forEach(function(switchElement) {
                     switchElement.checked = true;
                 });
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-default', 'theme-light');
-                $.cookie('theme', 'dark', {expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
+                cookie_theme = 'dark';
+                $.cookie('theme', cookie_theme, {expires: expire_date});
             } else {
                 themeSwitches.forEach(function(switchElement) {
                     switchElement.checked = false;
                 });
                 document.body.classList.add('theme-light');
-                document.body.classList.remove('theme-dark');
-                $.cookie('theme', 'light', {expires: expire_date});
-                theme=$.cookie('theme');
-                console.log(theme)
+                document.body.classList.remove('theme-default', 'theme-dark');
+                cookie_theme = 'light';
+                $.cookie('theme', cookie_theme, {expires: expire_date});
             }
         }
     });

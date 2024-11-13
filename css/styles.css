@@ -255,6 +255,13 @@ body {
     --dark: var(--ON_toggle)
 }
 
+@media (prefers-color-scheme: dark) {
+    .theme-default {
+        --light: var(--OFF_toggle);
+        --dark: var(--ON_toggle)
+    }
+}
+
 body {
     --body-bg: var(--light, #F0F0F0) var(--dark, #101015);
     --heading-bg: var(--light, #08080B) var(--dark, #08080B);
@@ -305,13 +312,6 @@ body {
 
     --border-radius: 12rem;
     --small-border-radius: 6rem;
-}
-
-@media (prefers-color-scheme: dark) {
-    .theme-default {
-        --light: var(--OFF_toggle);
-        --dark: var(--ON_toggle)
-    }
 }
 /* end for example */
 
@@ -3740,7 +3740,7 @@ li a:hover,
 
 .section-registration {
     position: relative;
-    background: url(../img/bg_registration-dark.png) center/cover no-repeat;
+    background: var(--light, url(../img/bg_registration-light.png)) var(--dark, url(../img/bg_registration-dark.png)) center/cover no-repeat;
 }
 
 .with-tooltip {
