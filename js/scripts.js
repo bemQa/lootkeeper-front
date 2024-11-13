@@ -45,6 +45,23 @@ $(document).ready(function() {
         document.body.classList.remove('theme-light');
     }
 
+    if (theme) {
+        if(theme == 'dark'){
+            document.body.classList.add('theme-dark');
+            document.body.classList.remove('theme-default');
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = true;
+            });
+        } else {
+            document.body.classList.add('theme-light');
+            themeSwitches.forEach(function(switchElement) {
+                switchElement.checked = false;
+            });
+        }
+    } else {
+        document.body.classList.remove('theme-dark', 'theme-light');
+    }
+
     document.body.addEventListener('click', function(e) {
         if (e.target.classList.contains('theme-switch')) {
             const isChecked = e.target.checked;
@@ -56,12 +73,18 @@ $(document).ready(function() {
                 });
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-default', 'theme-light');
+                $.cookie('theme','dark',{ expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
             } else {
                 themeSwitches.forEach(function(switchElement) {
                     switchElement.checked = false;
                 });
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark');
+                $.cookie('theme','light',{ expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
             }
         }
     });
