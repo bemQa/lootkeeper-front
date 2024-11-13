@@ -23,22 +23,26 @@ $(document).ready(function() {
     const themeSwitches = document.querySelectorAll('.theme-switch');
     if (window.matchMedia) {
         if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-            document.body.classList.add('theme-dark');
-            document.body.classList.remove('theme-default');
-            themeSwitches.forEach(function(switchElement) {
-                switchElement.checked = true;
-            });
-  	        $.cookie('theme','dark',{ expires: expire_date});
-            theme=$.cookie('theme');
-            console.log(theme)
+            if(theme != 'dark') {
+                document.body.classList.add('theme-dark');
+                document.body.classList.remove('theme-default');
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = true;
+                });
+                $.cookie('theme','dark',{ expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
+            }
         } else {
-            document.body.classList.add('theme-light');
-            themeSwitches.forEach(function(switchElement) {
-                switchElement.checked = false;
-            });
-            $.cookie('theme','light',{ expires: expire_date});
-            theme=$.cookie('theme');
-            console.log(theme)
+            if(theme != 'light') {
+                document.body.classList.add('theme-light');
+                themeSwitches.forEach(function(switchElement) {
+                    switchElement.checked = false;
+                });
+                $.cookie('theme','light',{ expires: expire_date});
+                theme=$.cookie('theme');
+                console.log(theme)
+            }
         }
     } else {
         document.body.classList.remove('theme-dark');
