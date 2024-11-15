@@ -1132,11 +1132,13 @@ a.dropdown-builds-list-title:hover {
     background: transparent;
     border-color: var(--accent-blue);
     font-weight: normal;
+    color: var(--main-color);
 }
 
 .button.invert:hover,
 .button.invert:active {
     background: var(--accent-blue);
+    color: var(--light, var(--dark-main-color)) var(--dark, var(--main-color));
 }
 
 .button.gray {
@@ -1389,36 +1391,36 @@ h5 {
 
 /* lists */
 .list-elements,
-.section-build-page ul,
-.section-build-page ol,
-.section-text-page ul,
-.section-text-page ol {
+.section-build-page ul:not([class]),
+.section-build-page ol:not([class]),
+.section-text-page ul:not([class]),
+.section-text-page ol:not([class]) {
     margin: 4rem 0 16rem;
 }
 
 .list-elements > *,
-.section-build-page ul > *,
-.section-build-page ol > *,
-.section-text-page ul > *,
-.section-text-page ol > * {
+.section-build-page ul:not([class]) > *,
+.section-build-page ol:not([class]) > *,
+.section-text-page ul:not([class]) > *,
+.section-text-page ol:not([class]) > * {
     position: relative;
     padding: 6rem 18rem;
 }
 
 .list-elements > li,
-.section-build-page ul > li,
-.section-build-page ol > li,
-.section-text-page ul > li,
-.section-text-page ol > li {
+.section-build-page ul:not([class]) > li:not([class]),
+.section-build-page ol:not([class]) > li:not([class]),
+.section-text-page ul:not([class]) > li:not([class]),
+.section-text-page ol:not([class]) > li:not([class]) {
     margin-left: 40rem;
     padding-left: 0;
 }
 
 .list-elements > *::before,
-.section-build-page ul > *::before,
-.section-build-page ol > *::before,
-.section-text-page ul > *::before,
-.section-text-page ol > * ::before {
+.section-build-page ul:not([class]) > *::before,
+.section-build-page ol:not([class]) > *::before,
+.section-text-page ul:not([class]) > *::before,
+.section-text-page ol:not([class]) > * ::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1430,35 +1432,35 @@ h5 {
 }
 
 .list-elements > li::before,
-.section-build-page ul > li::before,
-.section-build-page ol > li::before,
-.section-text-page ul > li::before,
-.section-text-page ol > li::before {
+.section-build-page ul:not([class]) > li:not([class])::before,
+.section-build-page ol:not([class]) > li:not([class])::before,
+.section-text-page ul:not([class]) > li:not([class])::before,
+.section-text-page ol:not([class]) > li:not([class])::before {
     left: -40rem;
     width: calc(100% + 40rem);
 }
 
 .list-elements > *:nth-child(odd)::before,
-.section-build-page ul > *:nth-child(odd)::before,
-.section-build-page ol > *:nth-child(odd)::before,
-.section-text-page ul > *:nth-child(odd)::before,
-.section-text-page ol > *:nth-child(odd)::before {
-    background: var(--light, #F3F3F3) var(--dark, var(--main-bg));
+.section-build-page ul:not([class]) > *:nth-child(odd)::before,
+.section-build-page ol:not([class]) > *:nth-child(odd)::before,
+.section-text-page ul:not([class]) > *:nth-child(odd)::before,
+.section-text-page ol:not([class]) > *:nth-child(odd)::before {
+    background: var(--light, var(--block-bg)) var(--dark, var(--main-bg));
 }
 
 .list-elements > *:nth-child(even)::before,
-.section-build-page ul > *:nth-child(even)::before,
-.section-build-page ol > *:nth-child(even)::before,
-.section-text-page ul > *:nth-child(even)::before,
-.section-text-page ol > *:nth-child(even)::before {
-    background: var(--body-bg);
+.section-build-page ul:not([class]) > *:nth-child(even)::before,
+.section-build-page ol:not([class]) > *:nth-child(even)::before,
+.section-text-page ul:not([class]) > *:nth-child(even)::before,
+.section-text-page ol:not([class]) > *:nth-child(even)::before {
+    background: var(--light, transparent) var(--dark, var(--body-bg));
 }
 
 .list-elements > *::marker,
-.section-build-page ul > *::marker,
-.section-build-page ol > *::marker,
-.section-text-page ul > *::marker,
-.section-text-page ol > *::marker {
+.section-build-page ul:not([class]) > *::marker,
+.section-build-page ol:not([class]) > *::marker,
+.section-text-page ul:not([class]) > *::marker,
+.section-text-page ol:not([class]) > *::marker {
     position: relative;
 }
 
@@ -1593,7 +1595,8 @@ h5 {
 
 .accordion-item {
     padding: 18rem 30rem;
-    border: 1rem solid var(--dark-border-color);
+    background: var(--block-bg);
+    border: 1rem solid var(--border-color);
     border-radius: var(--border-radius);
 }
 
@@ -1604,7 +1607,7 @@ h5 {
     gap: 0 12rem;
     padding-right: 20rem;
     font-weight: 500;
-    color: var(--dark-hlines-color);
+    color: var(--hlines-color);
     cursor: pointer;
 }
 
@@ -1615,12 +1618,16 @@ h5 {
     right: 0;
     width: 14rem;
     height: 8rem;
-    background: url(../img/icons/arrow-down-hline.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/arrow-down-white.svg)) var(--dark, url(../img/icons/arrow-down-hline.svg)) center/contain no-repeat;
     transition: all .3s ease;
 }
 
 .accordion-title.active::after {
     transform: rotate(-180deg);
+}
+
+.accordion-title .tag {
+    color: var(--light, var(--dark-hlines-color)) var(--dark, #D0D0E9);
 }
 
 .accordion-text {
@@ -1640,27 +1647,29 @@ h5 {
     align-items: center;
     justify-content: center;
     padding: 8rem 12rem;
-    background: var(--dark-main-bg);
-    border-radius: var(--small-border-radius) 6rem 0 0;
+    background: var(--light, var(--block-bg)) var(--dark, var(--main-bg));
+    border: 1rem solid var(--light, #D8D8D8) var(--dark, transparent);
+    border-bottom: 0;
+    border-radius: var(--small-border-radius) var(--small-border-radius) 0 0;
     font-family: var(--second-font);
     font-weight: bold;
-    color: #A3A4A5;
+    color: var(--light, #777777) var(--dark, #A3A4A5);
     cursor: pointer;
     transition: all .3s ease;
 }
 
 .tab:hover {
-    color: var(--dark-main-color);
+    color: var(--main-color);
 }
 
 .tab.active {
     background: var(--accent-blue);
-    color: var(--dark-main-color);
+    color: var(--light, var(--dark-hlines-color)) var(--dark, var(--main-color));
 }
 
 .tabs-content {
     padding: 24rem 30rem;
-    border: 1rem solid var(--dark-border-color);
+    border: 1rem solid var(--border-color);
     border-radius: 0 0 12rem 12rem;
 }
 
@@ -1684,8 +1693,8 @@ h5 {
 
 .copy-detail-element {
     padding: 18rem 30rem;
-    background: var(--dark-main-bg);
-    border: 1rem solid var(--dark-border-color);
+    background: var(--light, #EDEDED) var(--dark, var(--dark-main-bg));
+    border: 1rem solid var(--border-color);
     border-radius: var(--border-radius);
 }
 
@@ -1696,7 +1705,7 @@ h5 {
     gap: 0 12rem;
     padding-right: 20rem;
     font-weight: 500;
-    color: var(--dark-hlines-color);
+    color: var(--hlines-color);
     cursor: pointer;
 }
 
@@ -1742,11 +1751,11 @@ table {
     font-size: 18rem;
     line-height: 1.4;
     text-align: left;
-    color: var(--dark-hlines-color);
+    color: var(--hlines-color);
 }
 
 th {
-    background: var(--dark-gray-btn);
+    background: var(--gray-btn);
     font-weight: 600;
 }
 
@@ -1756,7 +1765,7 @@ td {
 }
 
 tr:nth-child(even) td {
-    background: var(--dark-main-bg);
+    background: var(--light, #EDEDED) var(--dark, var(--main-bg));
 }
 /* end table */
 
@@ -1777,7 +1786,7 @@ blockquote::before {
     bottom: 0;
     width: 60rem;
     height: 32rem;
-    background: url(../img/icons/quote.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/quote-white.svg)) var(--dark, url(../img/icons/quote.svg)) center/contain no-repeat;
 }
 
 blockquote * {
@@ -1941,7 +1950,7 @@ blockquote * {
 #user-comment-text {
     background-color: transparent;
     outline: none;
-    border: 1rem solid #686868;
+    border: 1rem solid var(--light, #B5B5B5) var(--dark, #686868);
     border-radius: var(--small-border-radius);
 }
 
@@ -2066,11 +2075,11 @@ blockquote * {
 }
 
 .comment-like-button:first-child {
-    background: url(../img/icons/comment-up.svg) center/13rem no-repeat var(--main-bg);
+    background: url(../img/icons/comment-up.svg) center/13rem no-repeat var(--light, var(--block-bg)) var(--dark, var(--main-bg));
 }
 
 .comment-like-button:last-child {
-    background: url(../img/icons/comment-down.svg) center/13rem no-repeat var(--main-bg);
+    background: url(../img/icons/comment-down.svg) center/13rem no-repeat var(--light, var(--block-bg)) var(--dark, var(--main-bg));
 }
 
 .comment-like-button.comment-like {
@@ -2129,7 +2138,7 @@ blockquote * {
 .tooltip.comment-more-info {
     width: 210rem;
     padding: 0;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
     box-shadow: var(--box-shadow);
     overflow: hidden;
 }
@@ -2141,15 +2150,15 @@ blockquote * {
     justify-content: flex-start;
     gap: 6rem;
     padding: 10rem 8rem 10rem 38rem;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
     font-size: 16rem;
     line-height: 1.2;
     color: #A3A4A5;
 }
 
 .comment-more-info-link:hover {
-    background: #282830;
-    color: var(--dark-main-color);
+    background: var(--block-bg-hover);
+    color: var(--main-color);
 }
 
 .comment-more-info-link::before {
@@ -2190,7 +2199,7 @@ blockquote * {
     left: 7rem;
     width: 1rem;
     height: calc(100% - 14rem);
-    background: #202025;
+    background: var(--light, #D0D0D0) var(--dark, #202025);
 }
 
 .comment-reply-self::after {
@@ -2205,7 +2214,7 @@ blockquote * {
     line-height: 12rem;
     text-align: center;
     color: #686870;
-    border: 1rem solid #202025;
+    border: 1rem solid var(--light, #D0D0D0) var(--dark, #202025);
 }
 
 .hide-re-tree {
@@ -2224,7 +2233,7 @@ blockquote * {
     left: 7rem;
     width: 1rem;
     height: calc(100% - 14rem);
-    background: #202025;
+    background: var(--light, #D0D0D0) var(--dark, #202025);
     transition: all .3s ease;
 }
 
@@ -2275,7 +2284,7 @@ blockquote * {
     gap: 8rem;
     height: 30rem;
     padding: 0 10rem;
-    background: var(--main-bg);
+    background: var(--light, var(--block-bg-hover)) var(--dark, var(--main-bg));
     border-radius: var(--border-radius);
     font-size: 14rem;
     line-height: 30rem;
@@ -2287,7 +2296,7 @@ blockquote * {
     display: inline-block;
     width: 10rem;
     height: 10rem;
-    background: url(../img/icons/close.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/close-white.svg)) var(--dark, url(../img/icons/close.svg)) center/contain no-repeat;
 }
 /* end comments */
 
@@ -2296,9 +2305,9 @@ blockquote * {
     height: 52rem;
     padding-left: 16rem;
     padding-right: 28rem;
-    background-color: var(--dark-main-bg);
+    background-color: var(--light, #EDEDED) var(--dark, var(--main-bg));
     border-radius: var(--small-border-radius);
-    border: 1rem solid var(--dark-border-color);
+    border: 1rem solid var(--border-color);
     font-weight: normal;
     font-size: 16rem;
     line-height: 50rem;
@@ -2318,7 +2327,7 @@ blockquote * {
 .nice-select:active, 
 .nice-select.open, 
 .nice-select:focus {
-    border: 1rem solid var(--dark-border-color);
+    border: 1rem solid var(--border-color);
 }
 
 .nice-select::after {
@@ -2329,7 +2338,7 @@ blockquote * {
     height: 8rem;
     margin: auto;
     border: 0;
-    background: url(../img/icons/arrow-down-hline.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/arrow-down-white.svg)) var(--dark, url(../img/icons/arrow-down-hline.svg)) center/contain no-repeat;
     transform-origin: initial;
     transform: rotate(0);
 }
@@ -2341,8 +2350,8 @@ blockquote * {
 .nice-select .nice-select-dropdown {
     width: 100%;
     margin-top: 8rem;
-    background-color: var(--dark-main-bg);
-    border: 1rem solid var(--dark-border-color);
+    background-color: var(--main-bg);
+    border: 1rem solid var(--border-color);
     border-radius: var(--small-border-radius);
     box-shadow: 0 0 0 1rem rgba(68, 68, 68, .11);
     transform: scale(0.75) translateY(19rem);
@@ -2358,19 +2367,19 @@ blockquote * {
     padding: 8rem;
     font-weight: normal;
     line-height: 1.2;
-    color: #A3A4A5;
+    color: var(--menu-color);
 }
 
 .nice-select .option:hover, 
 .nice-select .option.focus, 
 .nice-select .option.selected.focus {
-    background-color: #282830;
+    background-color: var(--block-bg-hover);
 }
 
 .nice-select .option.selected {
-    background-color: #282830;
+    background-color: var(--block-bg-hover);
     font-weight: normal;
-    color: var(--dark-main-color);
+    color: var(--main-color);
 }
 /* end select */
 
@@ -2886,16 +2895,28 @@ textarea.input-text {
 }
 
 .build-page-content-column {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 100rem 0;
     max-width: 830rem;
     width: 100%;
     padding: var(--light, 36rem) var(--dark, 0);
-    background: var(--light, var(--main-bg)) var(--dark, transparent);
     border-radius: var(--border-radius);
     font-size: 18rem;
     line-height: 1.6;
+}
+
+.build-page-content-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--light, var(--main-bg)) var(--dark, transparent);
+    border-radius: var(--border-radius);
+    z-index: -1;
 }
 
 .aside-navigation-menu {
@@ -2910,6 +2931,8 @@ textarea.input-text {
 .navigation-menu {
     position: sticky;
     top: 120rem;
+    background: var(--light, var(--main-bg)) var(--dark, transparent);
+    border-radius: var(--border-radius);
 }
 
 .navigation-menu::before {
@@ -2919,7 +2942,7 @@ textarea.input-text {
     left: 0;
     width: 1rem;
     height: 100%;
-    background: #19191E;
+    background: var(--light, transparent) var(--dark, #19191E);
 }
 
 .navigation-menu-list {
@@ -2928,7 +2951,7 @@ textarea.input-text {
 }
 
 .navigation-menu-title {
-    padding: 35rem 12rem 20rem 30rem;
+    padding: var(--light, 20rem) var(--dark, 35rem) 12rem 20rem 30rem;
     font-weight: 500;
 }
 
@@ -2939,14 +2962,14 @@ textarea.input-text {
     font-family: var(--second-font);
     font-size: 16rem;
     line-height: 1.5;
-    color: #A3A4A5;
+    color: var(--menu-color);
     transition: all .3s ease;
 }
 
 .navigation-menu-link:hover,
 .navigation-menu-link.active {
-    background: var(--dark-main-bg);
-    color: var(--dark-main-color);
+    background: var(--light, var(--block-bg-hover)) var(--dark, var(--main-bg));
+    color: var(--light, var(--hlines-color)) var(--dark, var(--main-color));
 }
 
 .navigation-menu-link::before {
@@ -2989,7 +3012,7 @@ textarea.input-text {
     top: 0;
     width: 100%;
     padding: 18rem 12rem;
-    background: var(--dark-block-bg);
+    background: var(--block-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     opacity: 0;
@@ -3011,7 +3034,7 @@ textarea.input-text {
     gap: 12rem;
     padding-top: 18rem;
     padding-bottom: 18rem;
-    border-bottom: 1rem solid var(--dark-border-color);
+    border-bottom: 1rem solid var(--border-color);
 }
 
 .aside-navigation-parameter-block:first-child {
@@ -3024,7 +3047,7 @@ textarea.input-text {
 }
 
 .aside-navigation-parameter-title {
-    color: var(--dark-hlines-color)
+    color: var(--hlines-color)
 }
 
 .aside-navigation-parameter-text {
@@ -3091,7 +3114,7 @@ li a:hover,
     font-family: var(--second-font);
     font-size: 18rem;
     line-height: 1.2;
-    color: #A3A4A5;
+    color: var(--menu-color);
     z-index: 2;
 }
 
@@ -3125,13 +3148,13 @@ li a:hover,
     gap: 20rem;
     margin-top: 30rem;
     padding: 36rem 30rem 24rem;
-    background: var(--gradient-red);
+    background: var(--light, #EEDFE2) var(--dark, var(--gradient-red));
     border: 1rem solid var(--dark-red);
     border-radius: var(--border-radius);
 }
 
 .attention-block.interesting {
-    background: var(--gradient-blue);
+    background: var(--light, #DFE9EE) var(--dark, var(--gradient-blue));
     border-color: var(--dark-blue);
 }
 
@@ -3168,7 +3191,7 @@ li a:hover,
     max-width: calc(50% - 6rem);
     width: 100%;
     padding: 24rem 18rem;
-    border: 1rem solid var(--dark-border-color);
+    border: 1rem solid var(--light, #B5B5B5) var(--dark, var(--dark-border-color));
 }
 
 .possibility:nth-child(odd) {
@@ -3180,11 +3203,11 @@ li a:hover,
 }
 
 .possibility-can {
-    background: linear-gradient(180deg, rgba(19, 77, 34, 0.75) -49.63%, #17171C 40.15%);
+    background: var(--light, #DFEEDF) var(--dark, linear-gradient(180deg, rgba(19, 77, 34, 0.75) -49.63%, #17171C 40.15%));
 }
 
 .possibility-cant {
-    background: linear-gradient(180deg, rgba(123, 18, 40, 0.75) -49.81%, #17171C 39.81%);
+    background: var(--light, #EEDFE2) var(--dark, linear-gradient(180deg, rgba(123, 18, 40, 0.75) -49.81%, #17171C 39.81%));
 }
 
 .possibility h3 {
@@ -3212,11 +3235,11 @@ li a:hover,
 }
 
 .possibility-element-can::before {
-    background: url(../img/icons/cross-yes.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/cross-yes-white.svg)) var(--dark, url(../img/icons/cross-yes.svg)) center/contain no-repeat;
 }
 
 .possibility-element-cant::before {
-    background: url(../img/icons/cross-no.svg) center/contain no-repeat;
+    background: var(--light, url(../img/icons/cross-no-white.svg)) var(--dark, url(../img/icons/cross-no.svg)) center/contain no-repeat;
 }
 
 .separate {
@@ -3245,7 +3268,7 @@ li a:hover,
     flex-direction: column;
     gap: 24rem 0;
     max-width: 830rem;
-    padding: var(--light, 36rem) var(--dark, 0);
+    padding: var(--light, 36rem) var(--dark, 0 16rem);
     background: var(--light, var(--main-bg)) var(--dark, transparent);
     border-radius: var(--border-radius);
     font-size: 18rem;
@@ -3311,7 +3334,7 @@ li a:hover,
     left: 0;
     width: 100%;
     height: 1rem;
-    background: var(--dark-border-color);
+    background: var(--border-color);
 }
 
 .tarif .possibility-list::after {
@@ -3321,7 +3344,7 @@ li a:hover,
     left: 0;
     width: 100%;
     height: 1rem;
-    background: var(--dark-border-color);
+    background: var(--border-color);
 }
 
 .tarif .possibility-element-cant {
@@ -3346,6 +3369,7 @@ li a:hover,
     background: var(--gray-btn);
     border-radius: var(--small-border-radius);
     font-weight: 600;
+    color: var(--light, var(--dark-hlines-color)) var(--dark, var(--main-color));
 }
 
 .premium-nickname-comments {
@@ -4513,6 +4537,16 @@ li a:hover,
     .section-mainpage-cards h2 {
         font-size: 24rem;
     }
+
+    .build-page-content-block h2, 
+    .section-text-page h2 {
+        background: var(--light, transparent) var(--dark, var(--body-bg));
+    }
+
+    .build-page-content-block h2 span,
+    .section-text-page h2 span {
+        background: var(--light, transparent) var(--dark, var(--body-bg));
+    }
     
     .build-page-content-column h3,
     .section-text-page h3,
@@ -4800,6 +4834,18 @@ li a:hover,
         margin-top: 60rem;
     }
 
+    .section-build-page::before,
+    .section-text-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--light, #fff) var(--dark, transparent);
+        z-index: -1;
+    }
+
     .aside-navigation-menu-button {
         position: fixed;
         right: 16rem;
@@ -4809,8 +4855,9 @@ li a:hover,
         justify-content: center;
         width: 40rem;
         height: 40rem;
-        background-color: #424755;
+        background-color: var(--light, #F7F7F7) var(--dark, #424755);
         border-radius: var(--small-border-radius);
+        box-shadow: var(--box-shadow);
         font-size: 0;
         text-indent: -999rem;
         z-index: 11;
@@ -4836,7 +4883,7 @@ li a:hover,
         margin: auto;
         width: 100%;
         height: 3rem;
-        background: #BFBFBF;
+        background: var(--light, #787879) var(--dark, #BFBFBF);
         border-radius: 3rem;
         transition: background 0s .3s;
     }
@@ -4853,7 +4900,7 @@ li a:hover,
         margin: auto;
         width: 100%;
         height: 3rem;
-        background: #BFBFBF;
+        background: var(--light, #787879) var(--dark, #BFBFBF);
         border-radius: 3rem;
         transition-duration: 0.3s, 0.3s;
         transition-delay: 0.3s, 0s;
@@ -4881,7 +4928,7 @@ li a:hover,
     
     .aside-navigation-menu.active::before,
     .aside-navigation-menu.active::after {
-        background: #DADADA;
+        background: var(--light, #787879) var(--dark, #DADADA);
         transition-delay: 0s, 0.3s;
     }
     
@@ -4905,8 +4952,8 @@ li a:hover,
         min-height: 100vh;
         height: fit-content;
         max-height: calc(100vh - 60rem);
-        padding: 24rem 16rem 24rem 0;
-        background: var(--dark-block-bg);
+        padding: 24rem 0 24rem 0;
+        background: var(--light, #fff) var(--dark, var(--block-bg));
         z-index: 10;
         opacity: 0;
         pointer-events: none;
@@ -4932,6 +4979,7 @@ li a:hover,
         display: flex;
         flex-direction: column;
         width: 100%;
+        background: transparent;
     }
 
     .navigation-menu::before {
@@ -4939,14 +4987,14 @@ li a:hover,
     }
 
     .navigation-menu > .buttons {
-        padding: 0 0 0 16rem;
+        padding: 0 16rem 0 16rem;
         order: -1;
     }
 
     .navigation-menu-title {
         position: relative;
         margin-top: 24rem;
-        padding: 24rem 0 20rem 16rem;
+        padding: 24rem 16rem 20rem 16rem;
     }
 
     .navigation-menu-title::before {
@@ -4954,15 +5002,34 @@ li a:hover,
         position: absolute;
         top: 0;
         left: 16rem;
-        width: calc(100% - 16rem);
+        width: calc(100% - 32rem);
         height: 1rem;
-        background: var(--dark-border-color);
+        background: var(--border-color);
+    }
+
+    .aside-navigation-parameters {
+        background: var(--light, #fff) var(--dark, var(--block-bg));
+    }
+
+    .build-page-main-info {
+        padding: 0;
+        background: transparent;
+    }
+
+    .section-text-page .container {
+        padding: 0 16rem;
+        background: transparent;
     }
 
     .build-page-content-column {
         gap: 60rem 0;
+        padding: 0;
         font-size: 16rem;
         line-height: 1.5;
+    }
+
+    .build-page-content-column::before {
+        display: none;
     }
 
     .update-build-block {
@@ -4976,7 +5043,7 @@ li a:hover,
         width: calc(100% - 32rem);
         height: 36rem;
         padding: 8rem 10rem;
-        background: var(--dark-main-bg);
+        background: var(--light, var(--white-gray-btn)) var(--dark, var(--main-bg));
     }
 
     .button-open::after {
@@ -5028,6 +5095,15 @@ li a:hover,
     .tarif-title,
     .tarif-price {
         font-size: 22rem;
+    }
+
+    .tarif .button.gray {
+        background: var(--light, #24242B) var(--dark, var(--gray-btn));
+        color: var(--dark-main-color);
+    }
+
+    .tarif .button.gray:hover {
+        background: var(--gray-btn-hover);
     }
 
     .tarif .possibility-list {
