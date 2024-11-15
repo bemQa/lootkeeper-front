@@ -2905,6 +2905,7 @@ textarea.input-text {
     border-radius: var(--border-radius);
     font-size: 18rem;
     line-height: 1.6;
+    overflow: hidden;
 }
 
 .build-page-content-column::before {
@@ -2919,6 +2920,7 @@ textarea.input-text {
     z-index: -1;
 }
 
+.aside-navigation-menu-button,
 .aside-navigation-menu {
     display: none;
 }
@@ -4411,6 +4413,7 @@ li a:hover,
 
     .menu-links .accordion-item {
         padding: 0;
+        background: transparent;
         border: 0;
     }
 

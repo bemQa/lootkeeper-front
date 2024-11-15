@@ -85,29 +85,35 @@ $(document).ready(function() {
     // анимация меню
 	$('.menu').click(function(e){
         e.preventDefault();
-        (this.classList.contains('active') === true) ? this.classList.remove('active') : this.classList.add('active');
+        $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active');
 
+        $('html').addClass('with-fancybox');
+        $('body').addClass('hide-scrollbar');
         $('.header-mob').toggleClass('active');
         $('body').on('click', function (e) {
-            let div = $('.menu-links-wrapper, .menu');
+            let div = $('.menu-links-wrapper, .menu, .aside-navigation-menu-button, .aside-navigation-menu');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
                 $('.header-mob, .menu').removeClass('active');
+                $('html, body').removeClass('with-fancybox hide-scrollbar');
             }
         });
     });
 
     // анимация навигационного меню на странице билда
-	$('.aside-navigation-menu').click(function(e){
+	$('.aside-navigation-menu-button').click(function(e){
         e.preventDefault();
-        (this.classList.contains('active') === true) ? this.classList.remove('active') : this.classList.add('active');
+        $(this).find('.aside-navigation-menu').hasClass('active') ? $(this).find('.aside-navigation-menu').removeClass('active') : $(this).find('.aside-navigation-menu').addClass('active');
 
+        $('html').addClass('with-fancybox');
+        $('body').addClass('hide-scrollbar');
         $('.aside-navigation').toggleClass('active');
         $('body').on('click', function (e) {
             let div = $('.aside-navigation, .navigation-menu, .aside-navigation-menu, .aside-navigation-parameters');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
                 $('.aside-navigation, .aside-navigation-menu').removeClass('active');
+                $('html, body').removeClass('with-fancybox hide-scrollbar');
             }
         });
     });
@@ -319,9 +325,9 @@ $(document).ready(function() {
     // fancybox
     Fancybox.bind("[data-fancybox]", {
         defaultType: "inline", 
-        // dragToClose: false,
-        // touchMove: false,
-        // backdropClick: false
+        dragToClose: false,
+        touchMove: false,
+        backdropClick: false
     });
 
     // тултипы
