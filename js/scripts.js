@@ -393,6 +393,10 @@ $(document).ready(function() {
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
                     $('.comments-ajax').html(response.data);
+                    $('#showmore-trigger').attr('data-page', response.page).attr('data-max', response.num_pages);
+                    if ($('#showmore-trigger').attr('data-page') == $('#showmore-trigger').attr('data-max')) {
+                        $('#showmore-trigger').children().hide();
+                    }
                 }
                 if (response.result == 'error') {
                     console.log('Ошибка получения комментариев');
@@ -403,6 +407,61 @@ $(document).ready(function() {
             }
         });
     }
+
+    // подгрузка комментов при скролле
+    let block_show = false;
+    function scrollMore(){
+        let $target = $('#showmore-trigger');
+        
+        if (block_show) {
+            return false;
+        }
+    
+        let wt = $(window).scrollTop();
+        let wh = $(window).height();
+        let et = $target.offset().top - 150;
+        let eh = $target.outerHeight();
+        let dh = $(document).height();   
+    
+        if (wt + wh >= et || wh + wt == dh || eh + et < wh){
+            let page = $target.attr('data-page');
+            let max = $target.attr('data-max');	
+            if (page == max) {
+                return false;
+            }
+            block_show = true;
+    
+            $.ajax({ 
+                url: '/lk/get_comments/?page=' + page,
+                type:   'GET',
+                dataType: 'html',
+                data: {'article_id': parseInt($('.section').data('article-id'))},
+                success: function(response){
+                    response = $.parseJSON(response);
+                    if (response.result == 'ok') {
+                        $('.comments-ajax').append(response.data);
+                        $target.attr('data-page', response.page).attr('data-max', response.num_pages);
+                    }
+                    if (response.result == 'error') {
+                        console.log('Ошибка получения комментариев');
+                    }
+                    
+                    if (page == max) {
+                        $target.children().hide();
+                        block_show = true;
+                    } else block_show = false;
+                },
+                error: function(response) {
+                    console.log('Ошибка отправки');
+                }
+            });
+        }
+    }
+    $(window).scroll(function(){
+        scrollMore();
+    });
+
+    scrollMore();
 
     $('body').on('click', '.comment-reply-btn', function() {
         let reply_id = $(this).attr('target');
@@ -511,8 +570,8 @@ $(document).ready(function() {
             src: async () => {
                 try {
                     // Fetch External Data Source
-                    const source = await fetch("./db/generic.json");
-                    // const source = await fetch(search_form_action+'?q='+autoCompleteJS.input.value+'&autocomplete=1');
+                    // const source = await fetch("./db/generic.json");
+                    const source = await fetch(search_form_action+'?q='+autoCompleteJS.input.value+'&autocomplete=1');
                     const data = await source.json();
                     // Returns Fetched data
                     return data;
