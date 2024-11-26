@@ -3170,7 +3170,7 @@ li a:hover,
     overflow: hidden;
 }
 
-.build-page-content-block#comments {
+.build-page-content-block#comments-block {
     overflow: visible;
 }
 

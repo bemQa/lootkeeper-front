@@ -499,7 +499,7 @@ $(document).ready(function() {
     });
     $('body').on('click', '.comments-refresh-btn', function(e){
         e.preventDefault();
-        $('div[data-comment-id="'+data.comment_id+'"] .comment-dynamic-hidden').addClass('comment-dynamic-new').removeClass('comment-dynamic-hidden');
+        $('.comment-item .comment-dynamic-hidden').addClass('comment-dynamic-new').removeClass('comment-dynamic-hidden');
         $(this).removeClass('scrolled');
     });
 
