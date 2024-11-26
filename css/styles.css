@@ -2097,7 +2097,8 @@ blockquote * {
     color: #B0B0B1;
 }
 
-.comment-reply-btn {
+.comment-reply-btn,
+.comment-refresh-btn {
     padding: 0;
     background-color: transparent;
     border: none;
@@ -2109,7 +2110,8 @@ blockquote * {
     transition: all .3s ease;
 }
 
-.comment-reply-btn:focus {
+.comment-reply-btn:focus,
+.comment-refresh-btn:focus {
     background-color: transparent
 }
 
@@ -2119,7 +2121,8 @@ blockquote * {
 }
 
 .comment-date:hover,
-.comment-reply-btn:hover {
+.comment-reply-btn:hover,
+.comment-refresh-btn:hover {
     color: var(--hlines-color);
 }
 
@@ -2297,6 +2300,29 @@ blockquote * {
     width: 10rem;
     height: 10rem;
     background: var(--light, url(../img/icons/close-white.svg)) var(--dark, url(../img/icons/close.svg)) center/contain no-repeat;
+}
+
+.comment-dynamic-hidden {
+    display: none;
+}
+
+.comment-dynamic-new {
+    background: var(--light, #DFE9EE) var(--dark, linear-gradient(180deg, #0D5EAA -114.05%, rgba(13, 94, 170, 0.03) 43.91%));
+}
+
+.comments-refresh-btn {
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -30rem auto 0;
+    opacity: 0;
+}
+
+.comments-refresh-btn.scrolled {
+    bottom: 30rem;
+    margin: 30rem auto 0;
+    opacity: 1;
 }
 /* end comments */
 
@@ -2905,7 +2931,7 @@ textarea.input-text {
     border-radius: var(--border-radius);
     font-size: 18rem;
     line-height: 1.6;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .build-page-content-column::before {
@@ -3141,6 +3167,11 @@ li a:hover,
     display: flex;
     flex-direction: column;
     gap: 20rem 0;
+    overflow: hidden;
+}
+
+.build-page-content-block#comments {
+    overflow: visible;
 }
 
 .attention-block {

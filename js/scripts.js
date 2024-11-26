@@ -345,23 +345,6 @@ $(document).ready(function() {
         });
     });
 
-    // медальки и всплывающие тултипы на новой странице эксперта
-    $('body').on('click', '.expert-page-medal-img', function(){
-        $this = $(this);
-        if(!$this.siblings('.expert-page-medal-tooltip').hasClass('active')) {
-            $('.expert-page-medal-tooltip').removeClass('active');
-            $this.siblings('.expert-page-medal-tooltip').addClass('active');
-        } else $this.siblings('.expert-page-medal-tooltip').removeClass('active')
-
-        $('body').on('click', function (e) {
-            let div = $('.expert-page-medal');
-
-            if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $this.siblings('.expert-page-medal-tooltip').removeClass('active');
-            }
-        });
-    });
-
     // комментарии
     if ($('.section').data('article-id')) {
         //избранное
@@ -453,6 +436,7 @@ $(document).ready(function() {
                 },
                 error: function(response) {
                     console.log('Ошибка отправки');
+                    block_show = false;
                 }
             });
         }
@@ -512,6 +496,11 @@ $(document).ready(function() {
     $('body').on('click', '.show-hidden-comment', function(){
         $(this).hide();
         $(this).parents('.comment-item').find('.comment-item-content').removeClass('hidden-comment');
+    });
+    $('body').on('click', '.comments-refresh-btn', function(e){
+        e.preventDefault();
+        $('div[data-comment-id="'+data.comment_id+'"] .comment-dynamic-hidden').addClass('comment-dynamic-new').removeClass('comment-dynamic-hidden');
+        $(this).removeClass('scrolled');
     });
 
     // выпадающие меню в комментариях
@@ -649,9 +638,6 @@ $(document).ready(function() {
         let $this = $(this);
         let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
         let comment_data = '&comment_id=' + $(this).parents('.comment-item').data('id') + '&type=' + $(this).data('like');
-        let comment_likes = $(this).siblings('.comment-likes-count');
-        let comment_likes_count = parseInt(comment_likes.text());
-        let result_likes = 0;
         $.ajax({
             url:    '/lk/like/',
             type:   "POST",
@@ -662,30 +648,22 @@ $(document).ready(function() {
                 if (response.result == 'ok') {
                     // response.value == '+' + -
                     // response.type == 'l' l d cl
-                    console.log('лайк/дизлайк поставлен');
+                    //console.log('лайк/дизлайк поставлен');
                     if(response.value == '+') {
                         if(response.type == 'l') {
-                            result_likes = comment_likes_count+1;
                             $this.addClass('comment-like');
                             $this.parent().find('.js-like-click').removeClass('comment-dislike');
                         } else if (response.type == 'd') {
-                            result_likes = comment_likes_count-1;
                             $this.addClass('comment-dislike');
                             $this.parent().find('.js-like-click').removeClass('comment-like');
                         }
                     } else if (response.value == '-') {
                         if(response.type == 'l') {
-                            result_likes = comment_likes_count-1;
                             $this.parent().find('.js-like-click').removeClass('comment-like');
                         } else if (response.type == 'd') {
-                            result_likes = comment_likes_count+1;
                             $this.parent().find('.js-like-click').removeClass('comment-dislike');
                         }
                     }
-                    if (result_likes > 0) {
-                        result_likes = '+' + result_likes.toString();
-                    }
-                    comment_likes.text(result_likes);
                 }
                 if (response.result == 'error') {
                     console.log('ошибка'); 
@@ -984,11 +962,11 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
         type:   "POST",
         dataType: "html",
         data: $("#" + ajax_form).serialize(), 
-        success: function(response) { 
+        success: function(response, status, xhr) { 
 			response = $.parseJSON(response);
 			if (response.result == 'ok') {
 
-				alert(successText);
+				// alert(successText);
 
 				if (reload){
 					// infoModal('Готово', 'Данные успешно отправлены.');
@@ -996,27 +974,27 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
 					// 	document.location.reload(true);
 					// });
 
-					setTimeout(function() {
-						document.location.reload(true);
-					}, 5000);
+					// setTimeout(function() {
+					// 	document.location.reload(true);
+					// }, 5000);
 				}
 			}
         	if (response.result == 'error') {
 				// infoModal('Ошибка', 'Данные не верны.');
 				// console.log('Ошибка. Данные не верны.');
 
-				alert(errorText);
+				// alert(errorText);
                 alert(response.text);
 			}
-            if (response.code != 200) {
+            if (xhr.status != 200) {
                 alert(response.text);
 			}
     	},
-    	error: function(response) {
+    	error: function() {
 			// infoModal('Ошибка', 'Данные не отправлены.');
 			// console.log('Ошибка. Данные не отправлены.');
 
-			alert(errorText);
+			// alert(errorText);
     	}
  	});
 }
