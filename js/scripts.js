@@ -450,10 +450,14 @@ $(document).ready(function() {
         }
     }
     $(window).scroll(function(){
-        scrollMore();
+        if($('#showmore-trigger').length) {
+            scrollMore();
+        }
     });
 
-    scrollMore();
+    if($('#showmore-trigger').length) {
+        scrollMore();
+    }
 
     $('body').on('click', '.comment-reply-btn', function() {
         let reply_id = $(this).attr('target');
