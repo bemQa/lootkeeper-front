@@ -284,13 +284,7 @@ $(document).ready(function() {
     });
 
     // кнопка копирования
-    new ClipboardJS('.copy-link');
-
-    // new ClipboardJS('.copy-link', {
-    //     text: function() {
-    //         return alert('Скопировано');
-    //     }
-    // });
+    // new ClipboardJS('.copy-link');
 
     // if ($('.copy-link').length) {
     //     $('.copy-link').click(function() {
@@ -309,6 +303,65 @@ $(document).ready(function() {
     //         }, 3000)
     //     });
     // }
+
+    if ($('.copy-link').length) {
+        $('.copy-link').click(function() {
+            let $this = $(this);
+            let data = $this.data('clipboard-text');
+
+            new ClipboardJS('.copy-link', {
+                text: function() {
+                    return data;
+                }
+            });
+
+            if($this.find('.tooltip').length == 0) {
+                $this.append(`
+                    <div class="tooltip tooltip-copy">Скопировано</div>
+                `);
+            }
+            setTimeout(function() {
+                $this.find('.tooltip').addClass('active');
+            }, 100);
+            setTimeout(function() {
+                $this.find('.tooltip').removeClass('active');
+                setTimeout(function() {
+                    $this.find('.tooltip').remove();
+                }, 500);
+            }, 3000)
+        });
+    }
+
+    if ($('.comment-copy').length) {
+        $('.comment-copy').click(function(e) {
+            e.preventDefault();
+            let $this = $(this);
+            let data = $this.data('clipboard-text');
+            let url = window.location.href.split(/[?#]/)[0];
+            url = url+'#'+data;
+
+            new ClipboardJS('.comment-copy', {
+                text: function() {
+                    return url;
+                }
+            });
+
+            if($this.find('.tooltip').length == 0) {
+                $this.append(`
+                    <div class="tooltip tooltip-copy">Скопировано</div>
+                `);
+            }
+            setTimeout(function() {
+                $this.find('.tooltip').addClass('active');
+            }, 100);
+            setTimeout(function() {
+                $this.find('.tooltip').removeClass('active');
+                setTimeout(function() {
+                    $this.find('.tooltip').remove();
+                }, 500);
+            }, 3000)
+        });
+    }
 
     // слайдер
     let swiper = new Swiper('.slider-images', {

@@ -872,7 +872,7 @@ a.dropdown-builds-list-title:hover {
     top: 30rem;
     right: 0;
     width: 500rem;
-    background: var(--dark-block-bg);
+    background: var(--light, #fff) var(--dark, var(--block-bg));
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     overflow: hidden;
@@ -917,6 +917,10 @@ a.dropdown-builds-list-title:hover {
     border-bottom: 1rem solid var(--border-color);
 }
 
+.notice-block-element:last-child {
+    border-bottom: 0;
+}
+
 .notice-block-element-text {
     font-size: 16rem;
     line-height: 1.2;
@@ -936,21 +940,37 @@ a.dropdown-builds-list-title:hover {
     color: var(--accent-blue-hover);
 }
 
-.notice-block-element-date {
+.notice-block-element-info {
+    display: flex;
+    justify-content: space-between;
     margin-top: 10rem;
+}
+
+.notice-block-element-date {
     font-size: 16rem;
     line-height: 1.5;
     color: #B0B0B1;
 }
 
+.notice-block-element-reading {
+    background: none;
+    color: var(--accent-blue);
+    transition: all .3s ease;
+}
+
+.notice-block-element-reading:hover {
+    color: var(--accent-blue-hover);
+}
+
 .notice-block-more {
     position: relative;
     padding: 12rem 18rem;
-    background: var(--dark-main-bg);
+    background: var(--main-bg);
+    border-top: 1rem solid var(--border-color);
     font-size: 16rem;
     line-height: 1.2;
     text-align: center;
-    color: #A3A4A5;
+    color: var(--light, #676767) var(--dark, #A3A4A5);
     cursor: pointer;
 }
 
@@ -967,7 +987,7 @@ a.dropdown-builds-list-title:hover {
     margin: auto;
     width: 12rem;
     height: 6rem;
-    background: url(../img/icons/arrow-down.svg) center right / 12rem no-repeat;
+    background: var(--light, url(../img/icons/arrow-down-white.svg)) var(--dark, url(../img/icons/arrow-down.svg)) center right / 12rem no-repeat;
 }
 
 .notice-block-more.active::before {
@@ -1556,7 +1576,7 @@ h5 {
     content: "";
     border-style: solid;
     border-width: 15rem 0 15rem 26rem;
-    border-color: transparent transparent transparent #fff
+    border-color: transparent transparent transparent #fff;
 }
 
 .youtube img,
@@ -3889,6 +3909,11 @@ li a:hover,
     opacity: 0;
     transform: scale(.8);
     pointer-events: none;
+}
+
+.tooltip-copy {
+    top: 66%;
+    width: 100rem;
 }
 
 .tooltip.active {
