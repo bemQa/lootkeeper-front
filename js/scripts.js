@@ -21,16 +21,16 @@ $(document).ready(function() {
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
-    const themeSwitches = document.querySelectorAll('.theme-switch');
+    const themeSwitches = document.querySelectorAll('.theme-switch-input');
     
     if (cookie_theme != null) {
-        if(cookie_theme == 'dark'){
+        if(cookie_theme == 'theme-dark'){
             document.body.classList.add('theme-dark');
             document.body.classList.remove('theme-default', 'theme-light');
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = true;
             });
-        } else if (cookie_theme == 'light') {
+        } else if (cookie_theme == 'theme-light') {
             document.body.classList.add('theme-light');
             document.body.classList.remove('theme-default', 'theme-dark');
             themeSwitches.forEach(function(switchElement) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = true;
             });
-            cookie_theme = 'dark';
+            cookie_theme = 'theme-dark';
             $.cookie('theme', cookie_theme, {expires: expire_date});
         } else {
             document.body.classList.add('theme-light');
@@ -52,7 +52,7 @@ $(document).ready(function() {
             themeSwitches.forEach(function(switchElement) {
                 switchElement.checked = false;
             });
-            cookie_theme = 'light';
+            cookie_theme = 'theme-light';
             $.cookie('theme', cookie_theme, {expires: expire_date});
         }
     } else {
@@ -60,7 +60,7 @@ $(document).ready(function() {
     }
 
     document.body.addEventListener('click', function(e) {
-        if (e.target.classList.contains('theme-switch')) {
+        if (e.target.classList.contains('theme-switch-input')) {
             const isChecked = e.target.checked;
             if (isChecked) {
                 themeSwitches.forEach(function(switchElement) {
@@ -68,7 +68,7 @@ $(document).ready(function() {
                 });
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-default', 'theme-light');
-                cookie_theme = 'dark';
+                cookie_theme = 'theme-dark';
                 $.cookie('theme', cookie_theme, {expires: expire_date});
             } else {
                 themeSwitches.forEach(function(switchElement) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
                 });
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-default', 'theme-dark');
-                cookie_theme = 'light';
+                cookie_theme = 'theme-light';
                 $.cookie('theme', cookie_theme, {expires: expire_date});
             }
         }
@@ -140,7 +140,7 @@ $(document).ready(function() {
             let div = $('.notice-header-block, .notice-header-link');
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $this.removeClass('active');
+                $('.notice-header-block').removeClass('active');
             }
         });
     });
@@ -413,6 +413,37 @@ $(document).ready(function() {
                 }
                 if (response.result == 'error') {
                     console.log('Ошибка получения комментариев');
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки');
+            }
+        });
+
+        // уведомления
+        $.ajax({
+            url:    '/lk/notification/get/',
+            type:   "GET",
+            dataType: "html",
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    $('.notice-block-list').append(response.data);
+                    if (response.has_notifications){
+                        $('.notice-header-link').addClass('have-notice');
+                    }
+                    else {
+                        $('.notice-header-link').removeClass('have-notice');
+                    }
+                    if (response.has_more){
+                        $('.notice-block-more').show();
+                    }
+                    else {
+                        $('.notice-block-more').hide();
+                    }
+                }
+                if (response.result == 'error') {
+                    console.log('Ошибка получения уведомлений');
                 }
             },
             error: function(response) {
@@ -742,6 +773,64 @@ $(document).ready(function() {
         return false; 
     });
 
+    // скрытие уведомлений
+    $('body').on('click', '.js-notice-read', function(){
+        let $this = $(this);
+        let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
+        let id = $this.parents('.notice-block-element').data('notice-id');
+        let notice_data = '&id=' + id;
+        $.ajax({
+            url:    '/lk/notification/read/',
+            type:   "POST",
+            dataType: "html",
+            data: form_data + notice_data,
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    $this.html('');
+                    if (!response.has_notice) {
+                        $('.notice-header-link').removeClass('have-notice');
+                    }
+                }
+                if (response.result == 'error') {
+                    console.log('ошибка'); 
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки'); 
+            }
+        });
+        return false; 
+    });
+
+    // скрытие всех уведомлений
+    $('body').on('click', '.js-notice-read-all', function(){
+        let $this = $(this);
+        let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
+        $.ajax({
+            url:    '/lk/notification/read_all/',
+            type:   "POST",
+            dataType: "html",
+            data: form_data,
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    $('.notice-block-list').html('');
+                    if (!response.has_notice) {
+                        $('.notice-header-link').removeClass('have-notice');
+                    }
+                }
+                if (response.result == 'error') {
+                    console.log('ошибка'); 
+                }
+            },
+            error: function(response) {
+                console.log('Ошибка отправки'); 
+            }
+        });
+        return false; 
+    });
+
     // пожаловаться на комментарий
     $('body').on('click', '.comment-report', function(e){
         e.preventDefault();
@@ -801,19 +890,32 @@ $(document).ready(function() {
 				'auth_form', 
 				'/lk/auth/',
 				true,
-				"Вы успешно вошли в аккаунт",
+				"Вы успешно вошли в аккаунт <br>Страница будет перезагружена",
 				"Ошибка"
 			);
 			return false; 
 		}
 	);
-	$("#btn_logout").click(
+	$(".btn_logout").click(
 		function(){
 			sendAjaxForm(
 				'logout_form', 
 				'/lk/logout/',
 				true,
-				"Вы вышли из аккаунта",
+				"Вы вышли из аккаунта <br>Страница будет перезагружена",
+				"Ошибка"
+			);
+			return false; 
+		}
+	);
+    // настройки пользователя
+    $("#btn_settings").click(
+		function(){
+			sendAjaxForm(
+				'settings_form', 
+				'/lk/settings/',
+				false,
+				"Настройки изменены",
 				"Ошибка"
 			);
 			return false; 
@@ -1058,37 +1160,43 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
 			response = $.parseJSON(response);
 			if (response.result == 'ok') {
 
-				// alert(successText);
-
 				if (reload){
-					// infoModal('Готово', 'Данные успешно отправлены.');
+					infoModal('Информация', successText);
 					// $('#infomodal .modal-close').click(function(){
 					// 	document.location.reload(true);
 					// });
 
-					// setTimeout(function() {
-					// 	document.location.reload(true);
-					// }, 5000);
+					setTimeout(function() {
+						document.location.reload(true);
+					}, 5000);
 				}
 			}
         	if (response.result == 'error') {
-				// infoModal('Ошибка', 'Данные не верны.');
-				// console.log('Ошибка. Данные не верны.');
+				infoModal('Ошибка', 'Данные не верны.');
 
-				// alert(errorText);
-                alert(response.text);
+                console.log(response.text);
 			}
             if (xhr.status != 200) {
-                alert(response.text);
+                console.log(response.text);
 			}
     	},
     	error: function() {
-			// infoModal('Ошибка', 'Данные не отправлены.');
-			// console.log('Ошибка. Данные не отправлены.');
-
-			// alert(errorText);
+			infoModal('Ошибка', 'Данные не отправлены.');
+			console.log('Ошибка. Данные не отправлены.');
     	}
  	});
+}
+
+function infoModal(title, text) {
+    $('#info_modal .form-title').html(title);
+    $('#info_modal .form-text').html(text);
+    Fancybox.close();
+    Fancybox.show(
+        [{src: '#info_modal',}],
+        {
+            defaultType: "inline"
+        }
+    );
 }
 
 // Element - textarea input

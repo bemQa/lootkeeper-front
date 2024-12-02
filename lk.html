@@ -73,7 +73,7 @@
                             <div class="theme-switch-block">
                                 <div class="theme-switch">
                                     <div class="light-switch"></div>
-                                    <input id="theme-switch" class="theme-switch" type="checkbox" checked>
+                                    <input id="theme-switch" class="theme-switch-input" type="checkbox" checked>
                                     <label for="theme-switch"></label>
                                     <div class="dark-switch"></div>
                                 </div> 
@@ -92,6 +92,7 @@
                                     <div class="notice-block-header">
                                         <div class="notice-block-header-title">Уведомления</div>
                                         <!-- что должны делать настройки уведомлений? -->
+                                        <button class="notice-block-element-reading">Прочитать все</button>
                                         <!-- <div class="notice-block-settings">Настройки</div> -->
                                     </div>
                                     <div class="notice-block-list">
@@ -162,7 +163,7 @@
                                     <span class="profile-header-link">Серега Донатер</span>
                                     <div class="dropdown-list">
                                         <a href="" class="dropdown-list-link"><img src="img/icons/user-bold.svg" alt=""> Мой профиль</a>
-                                        <a href="" class="dropdown-list-link"><img src="img/icons/settings.svg" alt=""> Настройки</a>
+                                        <a href="#settings_modal" class="dropdown-list-link js-open-modal"><img src="img/icons/settings.svg" alt=""> Настройки</a>
                                         <a href="" class="dropdown-list-link"><img src="img/icons/logout.svg" alt=""> Выход</a>
                                     </div>
                                 </div>
@@ -254,6 +255,7 @@
                                 <div class="notice-block-header">
                                     <div class="notice-block-header-title">Уведомления</div>
                                     <!-- что должны делать настройки уведомлений? -->
+                                    <button class="notice-block-element-reading">Прочитать все</button>
                                     <!-- <div class="notice-block-settings">Настройки</div> -->
                                 </div>
                                 <div class="notice-block-list">
@@ -324,7 +326,7 @@
                                 <span class="profile-header-link auth">Серега Донатер</span>
                                 <div class="dropdown-list">
                                     <a href="" class="dropdown-list-link"><img src="img/icons/user-bold.svg" alt=""> Мой профиль</a>
-                                    <a href="" class="dropdown-list-link"><img src="img/icons/settings.svg" alt=""> Настройки</a>
+                                    <a href="#settings_modal" class="dropdown-list-link js-open-modal"><img src="img/icons/settings.svg" alt=""> Настройки</a>
                                     <a href="" class="dropdown-list-link"><img src="img/icons/logout.svg" alt=""> Выход</a>
                                 </div>
                             </div>
@@ -421,7 +423,7 @@
                             <div class="theme-switch-block">
                                 <div class="theme-switch">
                                     <div class="dark-switch">Темное оформление</div>
-                                    <input id="theme-switch-mob" class="theme-switch" type="checkbox" checked>
+                                    <input id="theme-switch-mob" class="theme-switch-input" type="checkbox" checked>
                                     <label for="theme-switch-mob"></label>
                                 </div> 
                             </div>
@@ -538,6 +540,78 @@
                     </div>
                 </div>
             </section>
+        </div>
+        <!-- модалки -->
+        <div id="settings_modal" class="modal">
+            <div class="modal-content">
+                <div class="form-wrapper">
+                    <h3 class="form-title">Информация</h3>
+                    <form class="form">
+                        <div class="ip-cell">
+                            <label class="input-label">Discord</label>
+                            <input type="text" class="input-text" name="name">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Аккаунт PoE</label>
+                            <input type="text" class="input-text" name="name">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Платформа</label>
+                            <div class="ch-buttons">
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform1" class="ch-button-configuration" name="platform" value="PC">
+                                    <label for="ch-platform1">ПК</label>
+                                </div>
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform2" class="ch-button-configuration" name="platform" value="XBOX">
+                                    <label for="ch-platform2">XBOX</label>
+                                </div>
+                                <div class="ip-cell">
+                                    <input type="radio" id="ch-platform3" class="ch-button-configuration" name="platform" value="SONY">
+                                    <label for="ch-platform3">PlayStation</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label with-tooltip">Лига 
+                                <div class="tooltip-wrapper">
+                                    <div class="help-click tooltip-trigger"></div>
+                                    <div class="tooltip">
+                                        Текст подсказки
+                                    </div>
+                                </div>
+                            </label>
+                            <select id="select-league" class="aside-navigation-parameter-select">
+                                <option value="standart">Стандарт</option>
+                                <option value="standart_hardcore">Стандарт - Одна жизнь</option>
+                                <option value="necropole">Некрополь</option>
+                                <option value="necropole_hardcore">Некрополь - Одна жизнь</option>
+                            </select>
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Новый пароль</label>
+                            <input type="password" class="input-text" name="password">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Подтвердите новый пароль</label>
+                            <input type="password" class="input-text" name="password">
+                        </div>
+                        <div class="ip-cell">
+                            <label class="input-label">Старый пароль</label>
+                            <input type="password" class="input-text" name="old_password">
+                        </div>
+                        <div class="ip-cell">
+                            <input type="checkbox" id="setting_notify_msg" name="setting_notify_msg" class="ch" value="">
+                            <label for="setting_notify_msg">Уведомлять об ответах на сообщения</label>
+                        </div>
+                        <div class="ip-cell">
+                            <input type="checkbox" id="setting_notify_tree_msg" name="setting_notify_tree_msg" class="ch" value="">
+                            <label for="setting_notify_tree_msg">Уведомлять об ответах на сообщения в моих ветках</label>
+                        </div>
+                        <button class="button">Сохранить</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <footer class="footer">
             <div class="container">

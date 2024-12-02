@@ -893,11 +893,13 @@ a.dropdown-builds-list-title:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0 8rem;
     padding: 8rem 18rem;
     border-bottom: 1rem solid var(--border-color);
 }
 
 .notice-block-header-title {
+    margin-right: auto;
     font-weight: 600;
     font-size: 16rem;
     line-height: 1.5;
@@ -953,6 +955,7 @@ a.dropdown-builds-list-title:hover {
 }
 
 .notice-block-element-reading {
+    padding: 0;
     background: none;
     color: var(--accent-blue);
     transition: all .3s ease;
