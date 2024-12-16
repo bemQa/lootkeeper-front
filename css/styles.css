@@ -3007,6 +3007,15 @@ textarea.input-text {
 .navigation-menu-list {
     display: flex;
     flex-direction: column;
+    max-height: calc(100vh - 290rem);
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.navigation-menu-list::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .navigation-menu-title {
@@ -5176,14 +5185,6 @@ li a:hover,
 
     .navigation-menu-list {
         max-height: calc(100vh - 230rem);
-        overflow-y: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    .navigation-menu-list::-webkit-scrollbar {
-        width: 0;
-        height: 0;
     }
 
     .aside-navigation-parameters {
