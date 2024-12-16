@@ -1852,6 +1852,10 @@ blockquote * {
     bottom: 0 !important;
 }
 
+.slider-cards .swiper-pagination {
+    text-align: left;
+}
+
 .swiper-pagination-bullet {
     width: 15rem;
     height: 6rem;
@@ -2331,6 +2335,10 @@ blockquote * {
 
 .comment-dynamic-new {
     background: var(--light, #DFE9EE) var(--dark, linear-gradient(180deg, #0D5EAA -114.05%, rgba(13, 94, 170, 0.03) 43.91%));
+}
+
+.comment-dynamic-high {
+    background: var(--light, #DFE9EE) var(--dark, linear-gradient(180deg, #34aa0d -114.05%, rgba(13, 94, 170, 0.03) 43.91%));
 }
 
 .comments-refresh-btn {
@@ -3502,6 +3510,11 @@ li a:hover,
     gap: 24rem;
 }
 
+.slider-cards {
+    width: 100%;
+    padding-bottom: 24rem;
+}
+
 .card {
     position: relative;
     display: flex;
@@ -3515,6 +3528,20 @@ li a:hover,
     border: 1rem solid var(--dark-border-color);
     border-radius: var(--border-radius);
     overflow: hidden;
+}
+
+.slider-cards .swiper-wrapper {
+    gap: 0 16rem;
+}
+
+.slider-cards .swiper-slide {
+    width: 265rem !important;
+}
+
+.slider-cards .card {
+    max-width: 265rem;
+    height: 180rem;
+    padding: 12rem;
 }
 
 .card-bg-img {
@@ -3592,6 +3619,10 @@ li a:hover,
     line-height: 1.5;
     color: var(--dark-hlines-color);
     z-index: 1;
+}
+
+.slider-cards .card-name {
+    font-size: 14rem;
 }
 
 .cards + .buttons {
@@ -5143,6 +5174,18 @@ li a:hover,
         background: var(--border-color);
     }
 
+    .navigation-menu-list {
+        max-height: calc(100vh - 230rem);
+        overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .navigation-menu-list::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
     .aside-navigation-parameters {
         background: var(--light, #fff) var(--dark, var(--block-bg));
     }
@@ -5283,6 +5326,11 @@ li a:hover,
         max-width: 100%;
         height: 200rem;
         padding: 18rem;
+    }
+
+    .slider-cards .swiper-button-prev, 
+    .slider-cards .swiper-button-next {
+        display: none;
     }
 
     .card-tags {

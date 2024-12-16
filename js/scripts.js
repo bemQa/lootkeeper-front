@@ -364,7 +364,7 @@ $(document).ready(function() {
     }
 
     // слайдер
-    let swiper = new Swiper('.slider-images', {
+    let slider_images = new Swiper('.slider-images', {
         loop: true,
         pagination: {
             el: '.swiper-pagination',
@@ -373,6 +373,19 @@ $(document).ready(function() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+    });
+
+    let slider_cards = new Swiper('.slider-cards', {
+        slidesPerView: 'auto',
+        loop: true,
+        freeMode: true,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
     });
 
     // fancybox
@@ -556,7 +569,7 @@ $(document).ready(function() {
     });
     $('body').on('click', '#add-comment-btn', function(e) {
         e.preventDefault();
-        sendAjaxForm("user_comment_form", "/lk/comment/", true, "Комментарий добавлен<br>Страница будет перезагружена", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз");
+        sendAjaxForm("user_comment_form", "/lk/comment/", false, "Комментарий добавлен<br>Страница будет перезагружена", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true);
         return false;
     });
     $('body').on('click', '#comment .comment-reply-info', function() {
@@ -665,7 +678,8 @@ $(document).ready(function() {
                     return error;
                 }
             },
-            keys: ["target", "icon", "text", "tag", "color"],
+            //keys: ["target", "icon", "text", "tag", "color"],
+            keys: ["text"],
             // cache: true,
 
         },
@@ -844,7 +858,7 @@ $(document).ready(function() {
             success: function(response) { 
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
-                    alert('Ябеда');
+                    console.log('жалоба зарегистрирована'); 
                 }
                 if (response.result == 'error') {
                     console.log('ошибка'); 
@@ -863,9 +877,10 @@ $(document).ready(function() {
 			sendAjaxForm(
 				'reg_form', 
 				'/lk/register/',
-				false,
+				true,
 				"Вы успешно зарегистрированы",
-				"Ошибка"
+				"Ошибка",
+                true
 			);
 			return false; 
 		}
@@ -1150,7 +1165,7 @@ $(document).ready(function() {
 
 
 //ajax form
-function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
+function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clearForm=false) {
     $.ajax({
         url:    url,
         type:   "POST",
@@ -1159,7 +1174,9 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
         success: function(response, status, xhr) { 
 			response = $.parseJSON(response);
 			if (response.result == 'ok') {
-
+                if(clearForm) {
+                    $("#" + ajax_form).trigger('reset');
+                }
 				if (reload){
 					infoModal('Информация', successText);
 					// $('#infomodal .modal-close').click(function(){
@@ -1173,7 +1190,9 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText) {
 			}
         	if (response.result == 'error') {
 				infoModal('Ошибка', 'Данные не верны.');
-
+                if (response.text == 'recaptcha error') {
+                    infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
+                }
                 console.log(response.text);
 			}
             if (xhr.status != 200) {
