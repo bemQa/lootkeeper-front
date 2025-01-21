@@ -833,7 +833,7 @@ $(document).ready(function() {
             success: function(response) { 
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
-                    $this.html('');
+                    $this.closest('.notice-block-element').hide();
                     if (!response.has_notice) {
                         $('.notice-header-link').removeClass('have-notice');
                     }
