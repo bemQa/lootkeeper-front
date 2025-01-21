@@ -30,7 +30,7 @@
     <!-- inputmask -->
     <script src="libs/inputmask.min.js"></script>
     <!-- validate -->
-    <script src="libs/validate.min.js"></script>
+    <!-- <script src="libs/validate.min.js"></script> -->
     <!-- clipboard -->
     <script src="libs/clipboard.min.js"></script>
     <!-- nice select -->
@@ -39,8 +39,10 @@
     <script src="libs/autoComplete.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
-    
+    <!-- cookie -->
     <script src="libs/jquery.cookie.js"></script>
+    <!-- validate -->
+    <script src="libs/jquery.validate.min.js"></script>
 
 	<!--[if lte IE 9]>
     <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
@@ -303,11 +305,12 @@
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label">Пароль <span class="required-symbol">*</span></label>
-                                <input type="password" class="input-text" name="password" required="">
+                                <input type="password" id="password" class="input-text" name="password" required="">
+                                <span class="password-error" style="display: none;"></span>
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label">Подтвердите пароль <span class="required-symbol">*</span></label>
-                                <input type="password" class="input-text" name="password" required="">
+                                <input type="password" id="confirmPassword" class="input-text" name="confirmPassword" required="">
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label">Discord</label>
@@ -340,7 +343,7 @@
                                 </div>
                             </div>
                             <div class="ip-cell">
-                                <input type="checkbox" id="chk1" class="ch" value="">
+                                <input type="checkbox" id="chk1" name="personal-data" class="ch" value="1" required="">
                                 <label for="chk1">Я даю согласие на обработку моих <a href="">персональных данных</a></label>
                             </div>
                             <button class="button">Зарегистрироваться</button>

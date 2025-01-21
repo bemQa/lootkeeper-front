@@ -830,13 +830,18 @@ a.dropdown-builds-list-title:hover {
 /* end autocomplete */
 
 .profile-header-link {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120rem;
+    cursor: pointer;
     font-size: 14rem;
     line-height: 1.2;
     color: #C3C3C3;
 }
 
 .dropdown .profile-header-link {
-    white-space: nowrap;
     cursor: pointer;
 }
 
@@ -1079,6 +1084,10 @@ a.dropdown-builds-list-title:hover {
     align-items: center;
     justify-content: center;
     gap: 0 60rem;
+}
+
+.footer-menu .menu-link {
+    font-size: 16rem;
 }
 
 .copyright {
@@ -2009,7 +2018,7 @@ blockquote * {
 }
 
 .comment-item-self {
-    padding: 12rem 0;
+    padding: 18rem 0;
 }
 
 .comment-item-header {
@@ -2170,7 +2179,6 @@ blockquote * {
     padding: 0;
     background: var(--block-bg);
     box-shadow: var(--box-shadow);
-    overflow: hidden;
 }
 
 .comment-more-info-link {
@@ -2181,6 +2189,7 @@ blockquote * {
     gap: 6rem;
     padding: 10rem 8rem 10rem 38rem;
     background: var(--block-bg);
+    border-radius: var(--small-border-radius);
     font-size: 16rem;
     line-height: 1.2;
     color: #A3A4A5;
@@ -2714,16 +2723,24 @@ textarea.input-text {
     border-color: var(--accent-blue);
 }
 
-.input-text.error {
+.input-text.error,
+.input-text.input-error {
     border-color: #FF0000;
 }
 
-.input-text.accept {
+.input-text.accept,
+.input-text.success {
     border-color: #1AAA42;
 }
 
-.ip-cell span.error {
-    display: none !important;
+.input-text.input-error.success {
+    border-color: #FF0000;
+}
+
+.ip-cell span.error,
+.password-error {
+    display: block;
+    margin-top: 4rem;
     font-size: 12rem;
     line-height: 0.8;
     color: #F54336;
@@ -2780,7 +2797,7 @@ textarea.input-text {
     border-color: var(--accent-blue);
 }
 
-.ch input.error + label::before {
+input.error.ch + label::before {
     border-color: #FF0000;
 }
 
@@ -4294,6 +4311,11 @@ li a:hover,
     html {
         font-size: calc(100vw / 1280);
     }
+
+    .profile-header-block .dropdown-list {
+        left: auto;
+        right: 0;
+    }
 }
 /*end adaptive styles*/
 
@@ -5589,3 +5611,8 @@ li a:hover,
     margin-bottom: 0;
 }
 /* end indentation */
+
+.grecaptcha-badge {
+    opacity: 0;
+    pointer-events: none;
+}

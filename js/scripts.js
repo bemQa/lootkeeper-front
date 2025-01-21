@@ -95,7 +95,8 @@ $(document).ready(function() {
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
                 $('.header-mob, .menu').removeClass('active');
-                $('html, body').removeClass('with-fancybox hide-scrollbar');
+                $('html').removeClass('with-fancybox');
+                $('body').removeClass('hide-scrollbar');
             }
         });
     });
@@ -113,7 +114,8 @@ $(document).ready(function() {
 
             if (!div.is(e.target) && div.has(e.target).length === 0) {
                 $('.aside-navigation, .aside-navigation-menu').removeClass('active');
-                $('html, body').removeClass('with-fancybox hide-scrollbar');
+                $('html').removeClass('with-fancybox');
+                $('body').removeClass('hide-scrollbar');
             }
         });
     });
@@ -154,7 +156,9 @@ $(document).ready(function() {
 
     // якоря для ссылок
     $('body').on('click', '.anchor[href^="#"]', function () {
-        $('.header-mob, .menu, .aside-navigation, .aside-navigation-menu').removeClass('active'); 
+        $('.header-mob, .menu, .aside-navigation, .aside-navigation-menu').removeClass('active');
+        $('html').removeClass('with-fancybox');
+        $('body').removeClass('hide-scrollbar');
 
         elementClick = $(this).attr("href");
         destination = $(elementClick).offset().top-150;
@@ -304,64 +308,60 @@ $(document).ready(function() {
     //     });
     // }
 
-    if ($('.copy-link').length) {
-        $('.copy-link').click(function() {
-            let $this = $(this);
-            let data = $this.data('clipboard-text');
+    $('body').on('click', '.copy-link', function(e) {
+        let $this = $(this);
+        let data = $this.data('clipboard-text');
 
-            new ClipboardJS('.copy-link', {
-                text: function() {
-                    return data;
-                }
-            });
-
-            if($this.find('.tooltip').length == 0) {
-                $this.append(`
-                    <div class="tooltip tooltip-copy">Скопировано</div>
-                `);
+        new ClipboardJS('.copy-link', {
+            text: function() {
+                return data;
             }
-            setTimeout(function() {
-                $this.find('.tooltip').addClass('active');
-            }, 100);
-            setTimeout(function() {
-                $this.find('.tooltip').removeClass('active');
-                setTimeout(function() {
-                    $this.find('.tooltip').remove();
-                }, 500);
-            }, 3000)
         });
-    }
 
-    if ($('.comment-copy').length) {
-        $('.comment-copy').click(function(e) {
-            e.preventDefault();
-            let $this = $(this);
-            let data = $this.data('clipboard-text');
-            let url = window.location.href.split(/[?#]/)[0];
-            url = url+'#'+data;
+        if($this.find('.tooltip').length == 0) {
+            $this.append(`
+                <div class="tooltip tooltip-copy">Скопировано</div>
+            `);
+        }
+        setTimeout(function() {
+            $this.find('.tooltip').addClass('active');
+        }, 100);
+        setTimeout(function() {
+            $this.find('.tooltip').removeClass('active');
+            setTimeout(function() {
+                $this.find('.tooltip').remove();
+            }, 500);
+        }, 3000)
+    });
 
-            new ClipboardJS('.comment-copy', {
-                text: function() {
-                    return url;
-                }
-            });
+    $('body').on('click', '.comment-copy', function(e) {
+        e.preventDefault();
+        let $this = $(this);
+        let data = $this.data('clipboard-text');
+        let url = window.location.href.split(/[?#&]/)[0];
+        url = url+'?comment_id='+data;
 
-            if($this.find('.tooltip').length == 0) {
-                $this.append(`
-                    <div class="tooltip tooltip-copy">Скопировано</div>
-                `);
+        new ClipboardJS('.comment-copy', {
+            text: function() {
+                return url;
             }
-            setTimeout(function() {
-                $this.find('.tooltip').addClass('active');
-            }, 100);
-            setTimeout(function() {
-                $this.find('.tooltip').removeClass('active');
-                setTimeout(function() {
-                    $this.find('.tooltip').remove();
-                }, 500);
-            }, 3000)
         });
-    }
+
+        if($this.find('.tooltip').length == 0) {
+            $this.append(`
+                <div class="tooltip tooltip-copy">Скопировано</div>
+            `);
+        }
+        setTimeout(function() {
+            $this.find('.tooltip').addClass('active');
+        }, 100);
+        setTimeout(function() {
+            $this.find('.tooltip').removeClass('active');
+            setTimeout(function() {
+                $this.find('.tooltip').remove();
+            }, 500);
+        }, 3000)
+    });
 
     // слайдер
     let slider_images = new Swiper('.slider-images', {
@@ -411,7 +411,40 @@ $(document).ready(function() {
         });
     });
 
+    // уведомления
+    $.ajax({
+        url:    '/lk/notification/get/',
+        type:   "GET",
+        dataType: "html",
+        success: function(response) { 
+            response = $.parseJSON(response);
+            if (response.result == 'ok') {
+                $('.notice-block-list').append(response.data);
+                if (response.has_notifications){
+                    $('.notice-header-link').addClass('have-notice');
+                }
+                else {
+                    $('.notice-header-link').removeClass('have-notice');
+                }
+                if (response.has_more){
+                    $('.notice-block-more').show();
+                }
+                else {
+                    $('.notice-block-more').hide();
+                }
+            }
+            if (response.result == 'error') {
+                console.log('Ошибка получения уведомлений');
+            }
+        },
+        error: function(response) {
+            console.log('Ошибка отправки');
+        }
+    });
+
     // комментарии
+    let url_params = new URLSearchParams(document.location.search);
+    let comment_id = parseInt(url_params.get('comment_id'));
     if ($('.section').data('article-id')) {
         //избранное
         $.ajax({
@@ -433,36 +466,35 @@ $(document).ready(function() {
             }
         });
 
-        // уведомления
-        $.ajax({
-            url:    '/lk/notification/get/',
-            type:   "GET",
-            dataType: "html",
-            success: function(response) { 
-                response = $.parseJSON(response);
-                if (response.result == 'ok') {
-                    $('.notice-block-list').append(response.data);
-                    if (response.has_notifications){
-                        $('.notice-header-link').addClass('have-notice');
+        // ветка
+        if(comment_id) {
+            $('.lds-ellipsis').hide();
+            $.ajax({ 
+                url: '/lk/get_comments/',
+                type:   'GET',
+                dataType: 'html',
+                data: {
+                    'article_id': parseInt($('.section').data('article-id')),
+                    'comment_id': comment_id
+                },
+                success: function(response){
+                    response = $.parseJSON(response);
+                    if (response.result == 'ok') {
+                        $('.comments-ajax').append(response.data);
+                        let goto = $('.comment-item[data-comment-id="'+comment_id+'"]').offset().top;
+                        setTimeout(function() {
+                            $('html, body').animate({ scrollTop: goto }, 0, 'swing');
+                        }, 1000);
                     }
-                    else {
-                        $('.notice-header-link').removeClass('have-notice');
+                    if (response.result == 'error') {
+                        console.log('Ошибка получения комментариев');
                     }
-                    if (response.has_more){
-                        $('.notice-block-more').show();
-                    }
-                    else {
-                        $('.notice-block-more').hide();
-                    }
+                },
+                error: function(response) {
+                    console.log('Ошибка отправки');
                 }
-                if (response.result == 'error') {
-                    console.log('Ошибка получения уведомлений');
-                }
-            },
-            error: function(response) {
-                console.log('Ошибка отправки');
-            }
-        });
+            });
+        }
         
         // $.ajax({
         //     url:    '/lk/get_comments/',
@@ -547,12 +579,12 @@ $(document).ready(function() {
         }
     }
     $(window).scroll(function(){
-        if($('#showmore-trigger').length) {
+        if($('#showmore-trigger').length && !comment_id) {
             scrollMore();
         }
     });
 
-    if($('#showmore-trigger').length) {
+    if($('#showmore-trigger').length && !comment_id) {
         scrollMore();
     }
 
@@ -569,7 +601,7 @@ $(document).ready(function() {
     });
     $('body').on('click', '#add-comment-btn', function(e) {
         e.preventDefault();
-        sendAjaxForm("user_comment_form", "/lk/comment/", false, "Комментарий добавлен<br>Страница будет перезагружена", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true);
+        sendAjaxForm("user_comment_form", "/lk/comment/", false, "", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true, false);
         return false;
     });
     $('body').on('click', '#comment .comment-reply-info', function() {
@@ -711,7 +743,7 @@ $(document).ready(function() {
                 item.innerHTML = `
                     <a href="${data.value.target}" class="search-header-result-item-link">
                         <div class="search-header-result-item-icon">
-                            <img src="${data.value.icon}">
+                            <img src="${data.value.icon ? data.value.icon : '/static/img/icons/search.svg'}">
                         </div>
                         <div class="search-header-result-item-text" style="color: ${data.value.color}">
                             ${match_text}
@@ -858,17 +890,103 @@ $(document).ready(function() {
             success: function(response) { 
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
-                    console.log('жалоба зарегистрирована'); 
+                    infoModal('Информация', 'Жалоба зарегистрирована');
                 }
                 if (response.result == 'error') {
-                    console.log('ошибка'); 
+                    infoModal('Ошибка', 'Жалоба не зарегистрирована');
                 }
             },
             error: function(response) {
-                console.log('Ошибка отправки'); 
+                infoModal('Ошибка', 'Ошибка отправки, попробуйте ещё раз');
             }
         });
         return false; 
+    });
+
+    function checkValidate() {
+        let form = $('.form');
+    
+        $.each(form, function () {
+            $(this).validate({
+                ignore: [],
+                errorClass: 'error',
+                validClass: 'success',
+                errorElement : 'span',
+                rules: {
+                    name: {
+                        required: true 
+                    },
+                    email: {
+                        required: true,
+                        email: true 
+                    },
+                    phone: {
+                        required: true,
+                        phone: true 
+                    },
+                    message: {
+                        required: true 
+                    },
+                    password: {
+                        required: true,
+                        normalizer: function normalizer(value) {
+                            return $.trim(value);
+                        }
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    let parent = $(element).parent();
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error);
+                    } else {
+                        error.appendTo(parent);
+                    }
+                },
+                messages: {
+                    required: "Заполните обязательное поле",
+                    phone: 'Некорректный номер',
+                    email: 'Некорректный e-mail'
+                } 
+            });
+        });
+        jQuery.validator.addMethod('email', function (value, element) {
+            return this.optional(element) || /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value);
+        });
+        jQuery.validator.addMethod('phone', function (value, element) {
+            return this.optional(element) || /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/.test(value);
+        });
+    }
+    if($('.form').length) {
+        checkValidate();
+    }
+
+    // проверка совпадения паролей
+    $('.form').on('submit', function (e) {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirmPassword').val();
+    
+        if (password !== confirmPassword) {
+            $('#password, #confirmPassword').addClass('input-error');
+            $('#password').siblings('.password-error').show().text('Пароли не совпадают');
+            e.preventDefault();
+        } else {
+            $('#password, #confirmPassword').removeClass('input-error');
+            $('#password').siblings('.password-error').hide().text('');
+        }
+    });
+    
+    $('#password, #confirmPassword').on('input', function () {
+        var password = $('#password').val();
+        var confirmPassword = $('#confirmPassword').val();
+    
+        if (password !== confirmPassword) {
+            $('#password, #confirmPassword').addClass('input-error');
+            $('#password').siblings('.password-error').show().text('Пароли не совпадают');
+        } else {
+            $('#password, #confirmPassword').removeClass('input-error');
+            $('#password').siblings('.password-error').hide().text('');
+        }
     });
 
     // reg
@@ -880,6 +998,7 @@ $(document).ready(function() {
 				true,
 				"Вы успешно зарегистрированы",
 				"Ошибка",
+                true,
                 true
 			);
 			return false; 
@@ -893,7 +1012,9 @@ $(document).ready(function() {
 				'/lk/reset_password/',
 				false,
 				"Пароль сброшен",
-				"Ошибка"
+				"Ошибка",
+                '',
+                true
 			);
 			return false; 
 		}
@@ -905,8 +1026,10 @@ $(document).ready(function() {
 				'auth_form', 
 				'/lk/auth/',
 				true,
-				"Вы успешно вошли в аккаунт <br>Страница будет перезагружена",
-				"Ошибка"
+				"",
+				"Ошибка",
+                '',
+                true
 			);
 			return false; 
 		}
@@ -917,7 +1040,7 @@ $(document).ready(function() {
 				'logout_form', 
 				'/lk/logout/',
 				true,
-				"Вы вышли из аккаунта <br>Страница будет перезагружена",
+				"",
 				"Ошибка"
 			);
 			return false; 
@@ -931,7 +1054,9 @@ $(document).ready(function() {
 				'/lk/settings/',
 				false,
 				"Настройки изменены",
-				"Ошибка"
+				"Ошибка",
+                '',
+                true
 			);
 			return false; 
 		}
@@ -1075,7 +1200,8 @@ $(document).ready(function() {
 		}
 
 		let isBulk = $(e.target).attr('data-bulk'),
-			linkType = ''; // if bulk = exchange, else = search
+			linkType = '', // if bulk = exchange, else = search
+			game = $(e.target).attr('data-game'); 
 
 		if (isBulk == 'true'){
 			linkType = 'exchange';
@@ -1083,14 +1209,20 @@ $(document).ready(function() {
 			linkType = 'search';
 		}
 
-		if(i_lang=='ru'){
-			window.open("https://ru.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_ru'), '_blank');
-		} else{
-			window.open("https://www.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_en'), '_blank');
+		if (game == 'poe2'){
+			if (i_lang == 'ru'){
+				window.open("https://ru.pathofexile.com/trade2/" + linkType + "/poe2/" + platform_url + i_league + "/" + $(e.target).attr('data-target_ru'), '_blank');
+			} else {
+				window.open("https://www.pathofexile.com/trade2/" + linkType + "/poe2/" + platform_url + i_league + "/" + $(e.target).attr('data-target_en'), '_blank');
+			}
+		} else {
+			if (i_lang == 'ru'){
+				window.open("https://ru.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_ru'), '_blank');
+			} else {
+				window.open("https://www.pathofexile.com/trade/" + linkType + "/" + platform_url + i_league + "/" + $(e.target).attr('data-target_en'), '_blank');
+			}
 		}
 	});
-
-
 
     function remakeItems(){
         //item colors and names
@@ -1165,45 +1297,50 @@ $(document).ready(function() {
 
 
 //ajax form
-function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clearForm=false) {
+function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clearForm=false, validatedForm=true) {
+    if(validatedForm) {
+        $("#" + ajax_form).valid();
+        if(!$("#" + ajax_form).valid()) {
+            return false;
+        }
+    }
     $.ajax({
         url:    url,
         type:   "POST",
         dataType: "html",
         data: $("#" + ajax_form).serialize(), 
         success: function(response, status, xhr) { 
-			response = $.parseJSON(response);
-			if (response.result == 'ok') {
+            response = $.parseJSON(response);
+            if (response.result == 'ok') {
+                if(successText != '') {
+                    infoModal('Информация', successText);
+                }
                 if(clearForm) {
                     $("#" + ajax_form).trigger('reset');
                 }
-				if (reload){
-					infoModal('Информация', successText);
-					// $('#infomodal .modal-close').click(function(){
-					// 	document.location.reload(true);
-					// });
+                if (reload){
 
-					setTimeout(function() {
-						document.location.reload(true);
-					}, 5000);
-				}
-			}
-        	if (response.result == 'error') {
-				infoModal('Ошибка', 'Данные не верны.');
+                    setTimeout(function() {
+                        document.location.reload(true);
+                    }, 2000);
+                }
+            }
+            if (response.result == 'error') {
+                infoModal('Ошибка', 'Данные не верны.');
                 if (response.text == 'recaptcha error') {
                     infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
                 }
                 console.log(response.text);
-			}
+            }
             if (xhr.status != 200) {
                 console.log(response.text);
-			}
-    	},
-    	error: function() {
-			infoModal('Ошибка', 'Данные не отправлены.');
-			console.log('Ошибка. Данные не отправлены.');
-    	}
- 	});
+            }
+        },
+        error: function() {
+            infoModal('Ошибка', 'Данные не отправлены.');
+            console.log('Ошибка. Данные не отправлены.');
+        }
+    });
 }
 
 function infoModal(title, text) {
