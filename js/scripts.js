@@ -1330,6 +1330,9 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clea
                 if (response.text == 'recaptcha error') {
                     infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
                 }
+                if (response.text.indexOf('Этот email уже занят') !== -1) {
+                    infoModal('Ошибка', 'Этот email уже занят.');
+                }
                 console.log(response.text);
             }
             if (xhr.status != 200) {
