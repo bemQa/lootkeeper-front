@@ -845,6 +845,11 @@ a.dropdown-builds-list-title:hover {
     cursor: pointer;
 }
 
+.profile-header-block .dropdown-list {
+    left: auto;
+    right: 0;
+}
+
 .profile-header-block .dropdown-list-link {
     gap: 0 8rem;
 }
@@ -4310,11 +4315,6 @@ li a:hover,
 @media (max-width: 1280px) {
     html {
         font-size: calc(100vw / 1280);
-    }
-
-    .profile-header-block .dropdown-list {
-        left: auto;
-        right: 0;
     }
 }
 /*end adaptive styles*/
