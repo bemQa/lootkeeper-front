@@ -1375,6 +1375,7 @@ function infoModal(title, text) {
     $('#info_modal .form-title').html(title);
     $('#info_modal .form-text').html(text);
     // Fancybox.close();
+    // Fancybox.close('#info_modal');
     Fancybox.show(
         [{src: '#info_modal',}],
         {
