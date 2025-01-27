@@ -1040,7 +1040,7 @@ $(document).ready(function() {
 	$(".btn_logout").click(function(e){
         e.preventDefault();
         $.ajax({
-            url:    url,
+            url:    '/lk/logout/',
             type:   "POST",
             dataType: "html",
             data: $(this).parents('.logout_form').serialize(), 
@@ -1372,7 +1372,7 @@ function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clea
 function infoModal(title, text) {
     $('#info_modal .form-title').html(title);
     $('#info_modal .form-text').html(text);
-    Fancybox.close();
+    // Fancybox.close();
     Fancybox.show(
         [{src: '#info_modal',}],
         {

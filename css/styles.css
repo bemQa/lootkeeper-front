@@ -2138,9 +2138,11 @@ blockquote * {
 }
 
 .comment-likes-count {
+    width: 28rem;
     font-weight: bold;
     font-size: 16rem;
     line-height: 1.2;
+    text-align: center;
     color: #B0B0B1;
 }
 
@@ -3921,14 +3923,14 @@ li a:hover,
 .poe-items-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 24rem;
+    gap: 12rem;
 }
 
 .poe-item-element {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: calc(50% - 12rem);
+    max-width: calc(50% - 6rem);
     width: 100%;
     gap: 12rem;
     padding: 24rem;
@@ -5569,10 +5571,6 @@ li a:hover,
 
     .search-page-result-block {
         margin-top: 36rem;
-    }
-
-    .poe-items-list {
-        gap: 12rem;
     }
 
     .poe-item-element {
