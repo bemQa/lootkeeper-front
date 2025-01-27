@@ -1190,6 +1190,12 @@ a.dropdown-builds-list-title:hover {
     background: var(--accent-blue-hover);
     box-shadow: 0rem 4rem 4rem 0rem rgb(0 0 0 25%) inset;
 }
+
+.button[disabled],
+.button.disabled {
+    background: var(--gray-btn);
+    pointer-events: none;
+}
 /* end buttons */
 
 /* tags */
@@ -2586,9 +2592,9 @@ blockquote * {
     background-repeat: no-repeat;
 }
 
-.soc:hover {
+/* .soc:hover {
     opacity: 0.8;
-}
+} */
 
 .sharing-block {
     display: flex;
@@ -2629,8 +2635,16 @@ blockquote * {
     background-image: url(../img/socs/telegram.svg);
 }
 
+.soc.soc-tg:hover {
+    background-image: url(../img/socs/telegram-blue.svg);
+}
+
 .soc-vk {
     background-image: url(../img/socs/vk.svg);
+}
+
+.soc.soc-vk:hover {
+    background-image: url(../img/socs/vk-blue.svg);
 }
 
 .soc.soc-vk {
@@ -2641,16 +2655,32 @@ blockquote * {
     background-image: url(../img/socs/facebook.svg);
 }
 
+.soc.soc-fb:hover {
+    background-image: url(../img/socs/facebook-blue.svg);
+}
+
 .soc-wa {
     background-image: url(../img/socs/whatsapp.svg);
+}
+
+.soc.soc-wa:hover {
+    background-image: url(../img/socs/whatsapp-blue.svg);
 }
 
 .soc-tw {
     background-image: url(../img/socs/twitter.svg);
 }
 
+.soc.soc-tw:hover {
+    background-image: url(../img/socs/twitter-blue.svg);
+}
+
 .soc-yt {
     background-image: url(../img/socs/youtube.svg);
+}
+
+.soc.soc-yt:hover {
+    background-image: url(../img/socs/youtube-blue.svg);
 }
 /* end socs */
 
@@ -3966,7 +3996,7 @@ li a:hover,
     padding: 6rem 8rem;
     background: var(--light, #17171C) var(--dark, #C2C2C2);
     border-radius: var(--small-border-radius);
-    font-size: 12rem;
+    font-size: 14rem;
     line-height: 1.5;
     color: var(--light, #F9F9F9) var(--dark, #0A0A0A);
     z-index: 1;

@@ -962,30 +962,33 @@ $(document).ready(function() {
     }
 
     // проверка совпадения паролей
-    $('.form').on('submit', function (e) {
-        var password = $('#password').val();
-        var confirmPassword = $('#confirmPassword').val();
+    // $('.form').on('submit', function (e) {
+    //     var password = $('#password').val();
+    //     var confirmPassword = $('#confirmPassword').val();
     
-        if (password !== confirmPassword) {
-            $('#password, #confirmPassword').addClass('input-error');
-            $('#password').siblings('.password-error').show().text('Пароли не совпадают');
-            e.preventDefault();
-        } else {
-            $('#password, #confirmPassword').removeClass('input-error');
-            $('#password').siblings('.password-error').hide().text('');
-        }
-    });
+    //     if (password !== confirmPassword) {
+    //         $('#password, #confirmPassword').addClass('input-error');
+    //         $('#password').siblings('.password-error').show().text('Пароли не совпадают');
+    //         e.preventDefault();
+    //     } else {
+    //         $('#password, #confirmPassword').removeClass('input-error');
+    //         $('#password').siblings('.password-error').hide().text('');
+    //     }
+    // });
     
     $('#password, #confirmPassword').on('input', function () {
-        var password = $('#password').val();
-        var confirmPassword = $('#confirmPassword').val();
+        let password = $('#password').val();
+        let confirmPassword = $('#confirmPassword').val();
+        let btn = $('#password').closest('.form').find('.button');
     
         if (password !== confirmPassword) {
             $('#password, #confirmPassword').addClass('input-error');
             $('#password').siblings('.password-error').show().text('Пароли не совпадают');
+            btn.addClass('disabled').prop('disabled', true);
         } else {
             $('#password, #confirmPassword').removeClass('input-error');
             $('#password').siblings('.password-error').hide().text('');
+            btn.removeClass('disabled').prop('disabled', false);
         }
     });
 
@@ -1034,18 +1037,38 @@ $(document).ready(function() {
 			return false; 
 		}
 	);
-	$(".btn_logout").click(
-		function(){
-			sendAjaxForm(
-				'logout_form', 
-				'/lk/logout/',
-				true,
-				"",
-				"Ошибка"
-			);
-			return false; 
-		}
-	);
+	$(".btn_logout").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url:    url,
+            type:   "POST",
+            dataType: "html",
+            data: $(this).parents('.logout_form').serialize(), 
+            success: function(response, status, xhr) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    setTimeout(function() {
+                        document.location.reload(true);
+                    }, 2000);
+                }
+                if (response.result == 'error') {
+                    infoModal('Ошибка', 'Данные не верны.');
+                    if (response.text == 'recaptcha error') {
+                        infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
+                    }
+                    console.log(response.text);
+                }
+                if (xhr.status != 200) {
+                    console.log(response.text);
+                }
+            },
+            error: function() {
+                infoModal('Ошибка', 'Данные не отправлены.');
+                console.log('Ошибка. Данные не отправлены.');
+            }
+        });
+        return false; 
+    });
     // настройки пользователя
     $("#btn_settings").click(
 		function(){
