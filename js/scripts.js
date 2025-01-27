@@ -85,39 +85,29 @@ $(document).ready(function() {
     // анимация меню
 	$('.menu').click(function(e){
         e.preventDefault();
-        $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active');
-
-        $('html').addClass('with-fancybox');
-        $('body').addClass('hide-scrollbar');
+        $(this).toggleClass('active');
         $('.header-mob').toggleClass('active');
-        $('body').on('click', function (e) {
-            let div = $('.menu-links-wrapper, .menu, .aside-navigation-menu-button, .aside-navigation-menu');
-
-            if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $('.header-mob, .menu').removeClass('active');
-                $('html').removeClass('with-fancybox');
-                $('body').removeClass('hide-scrollbar');
-            }
-        });
+        if($('.header-mob').hasClass('active') || $('.aside-navigation-menu').hasClass('active')) {
+            $('html').addClass('with-fancybox');
+            $('body').addClass('hide-scrollbar');
+        } else {
+            $('html').removeClass('with-fancybox');
+            $('body').removeClass('hide-scrollbar');
+        }
     });
 
     // анимация навигационного меню на странице билда
 	$('.aside-navigation-menu-button').click(function(e){
         e.preventDefault();
-        $(this).find('.aside-navigation-menu').hasClass('active') ? $(this).find('.aside-navigation-menu').removeClass('active') : $(this).find('.aside-navigation-menu').addClass('active');
-
-        $('html').addClass('with-fancybox');
-        $('body').addClass('hide-scrollbar');
+        $(this).find('.aside-navigation-menu').toggleClass('active');
         $('.aside-navigation').toggleClass('active');
-        $('body').on('click', function (e) {
-            let div = $('.aside-navigation, .navigation-menu, .aside-navigation-menu, .aside-navigation-parameters');
-
-            if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $('.aside-navigation, .aside-navigation-menu').removeClass('active');
-                $('html').removeClass('with-fancybox');
-                $('body').removeClass('hide-scrollbar');
-            }
-        });
+        if($('.aside-navigation-menu').hasClass('active') || $('.header-mob').hasClass('active')) {
+            $('html').addClass('with-fancybox');
+            $('body').addClass('hide-scrollbar');
+        } else {
+            $('html').removeClass('with-fancybox');
+            $('body').removeClass('hide-scrollbar');
+        }
     });
 
     // выпадающие меню
@@ -601,7 +591,7 @@ $(document).ready(function() {
     });
     $('body').on('click', '#add-comment-btn', function(e) {
         e.preventDefault();
-        sendAjaxForm("user_comment_form", "/lk/comment/", false, "", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true, false);
+        sendAjaxForm("user_comment_form", "/lk/comment/", false, false, "", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true, false);
         return false;
     });
     $('body').on('click', '#comment .comment-reply-info', function() {
@@ -779,7 +769,7 @@ $(document).ready(function() {
     // лайки/дизлайки
     $('body').on('click', '.js-like-click', function(){
         let $this = $(this);
-        let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
+        let form_data = $('[name="csrfmiddlewaretoken"]:eq(0), #id_captcha').serialize();
         let comment_data = '&comment_id=' + $this.parents('.comment-item').data('id') + '&type=' + $this.data('like');
         $.ajax({
             url:    '/lk/like/',
@@ -998,6 +988,7 @@ $(document).ready(function() {
 			sendAjaxForm(
 				'reg_form', 
 				'/lk/register/',
+                true,
 				true,
 				"Вы успешно зарегистрированы",
 				"Ошибка",
@@ -1013,6 +1004,7 @@ $(document).ready(function() {
 			sendAjaxForm(
 				'reset_password_form', 
 				'/lk/reset_password/',
+                true,
 				false,
 				"Пароль сброшен",
 				"Ошибка",
@@ -1022,12 +1014,13 @@ $(document).ready(function() {
 			return false; 
 		}
 	);
-    //login-logout
+    //login
 	$("#btn_auth").click(
 		function(){
 			sendAjaxForm(
 				'auth_form', 
 				'/lk/auth/',
+                true,
 				true,
 				"",
 				"Ошибка",
@@ -1037,6 +1030,7 @@ $(document).ready(function() {
 			return false; 
 		}
 	);
+    //logout
 	$(".btn_logout").click(function(e){
         e.preventDefault();
         $.ajax({
@@ -1075,6 +1069,7 @@ $(document).ready(function() {
 			sendAjaxForm(
 				'settings_form', 
 				'/lk/settings/',
+                false,
 				false,
 				"Настройки изменены",
 				"Ошибка",
@@ -1320,18 +1315,25 @@ $(document).ready(function() {
 
 
 //ajax form
-function sendAjaxForm(ajax_form, url, reload=false, successText, errorText, clearForm=false, validatedForm=true) {
+function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successText, errorText, clearForm=false, validatedForm=true) {
     if(validatedForm) {
         $("#" + ajax_form).valid();
         if(!$("#" + ajax_form).valid()) {
             return false;
         }
     }
+    let form_data;
+    if(needCaptcha) {
+        let captcha_data = $('#id_captcha').serialize();
+        form_data = $("#" + ajax_form).serialize() + '&' + captcha_data;
+    } else {
+        form_data = $("#" + ajax_form).serialize();
+    }
     $.ajax({
         url:    url,
         type:   "POST",
         dataType: "html",
-        data: $("#" + ajax_form).serialize(), 
+        data: form_data, 
         success: function(response, status, xhr) { 
             response = $.parseJSON(response);
             if (response.result == 'ok') {

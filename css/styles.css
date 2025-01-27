@@ -1152,6 +1152,10 @@ a.dropdown-builds-list-title:hover {
     padding: 8rem 22rem;
 }
 
+.button.button-icon img {
+    width: 30rem;
+}
+
 .button:hover {
     background: var(--accent-blue-hover);
 }
@@ -5090,7 +5094,7 @@ li a:hover,
         box-shadow: var(--box-shadow);
         font-size: 0;
         text-indent: -999rem;
-        z-index: 11;
+        z-index: 9;
     }
 
     .aside-navigation-menu {
@@ -5101,7 +5105,7 @@ li a:hover,
         background-color: transparent;
         font-size: 0;
         text-indent: -999rem;
-        z-index: 11;
+        z-index: 9;
     }
     
     .aside-navigation-menu span {
@@ -5184,7 +5188,7 @@ li a:hover,
         max-height: calc(100vh - 60rem);
         padding: 24rem 0 24rem 0;
         background: var(--light, #fff) var(--dark, var(--block-bg));
-        z-index: 10;
+        z-index: 8;
         opacity: 0;
         pointer-events: none;
         transition: all .3s ease;
