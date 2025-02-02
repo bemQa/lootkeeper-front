@@ -2123,6 +2123,7 @@ blockquote * {
     padding: 0;
     background: var(--main-bg);
     border-radius: 3rem;
+    transition: all .3s ease;
 }
 
 .comment-like-button:first-child {
@@ -2133,12 +2134,16 @@ blockquote * {
     background: url(../img/icons/comment-down.svg) center/13rem no-repeat var(--light, var(--block-bg)) var(--dark, var(--main-bg));
 }
 
+.comment-like-button:hover {
+    background-color: var(--light, #D6D6D6) var(--dark, var(--gray-btn));
+}
+
 .comment-like-button.comment-like {
-    background-color: #1AAA42;
+    background-image: url(../img/icons/comment-up-green.svg);
 }
 
 .comment-like-button.comment-dislike {
-    background-color: #9F1A35;
+    background-image: url(../img/icons/comment-down-red.svg);
 }
 
 .comment-likes-count {
@@ -2148,6 +2153,14 @@ blockquote * {
     line-height: 1.2;
     text-align: center;
     color: #B0B0B1;
+}
+
+.comment-likes-count.like {
+    color: #1AAA42;
+}
+
+.comment-likes-count.dislike {
+    color: #E51039;
 }
 
 .comment-reply-btn,
@@ -3924,13 +3937,15 @@ li a:hover,
     margin-top: 48rem;
 }
 
-.poe-items-list {
+.poe-items-list,
+.tags-items-list {
     display: flex;
     flex-wrap: wrap;
     gap: 12rem;
 }
 
-.poe-item-element {
+.poe-item-element,
+.tag-item-element {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3941,6 +3956,22 @@ li a:hover,
     background: var(--light, var(--main-bg)) var(--dark, transparent);
     border: 1rem solid var(--border-color);
     border-radius: var(--border-radius);
+}
+
+.tag-item-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tag-item-text img {
+    max-width: 60rem;
+    max-height: 30rem;
+    height: auto;
+    margin-right: 5rem;
+    vertical-align: middle;
+    pointer-events: none;
 }
 
 .poe-item-type {
@@ -5577,7 +5608,8 @@ li a:hover,
         margin-top: 36rem;
     }
 
-    .poe-item-element {
+    .poe-item-element,
+    .tag-item-element {
         max-width: 100%;
         padding: 12rem;
     }
