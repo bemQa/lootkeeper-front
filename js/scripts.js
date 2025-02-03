@@ -771,7 +771,7 @@ $(document).ready(function() {
         let $this = $(this);
         let form_data = $('[name="csrfmiddlewaretoken"]:eq(0), #id_captcha').serialize();
         let comment_data = '&comment_id=' + $this.parents('.comment-item').data('id') + '&type=' + $this.data('like');
-        $this.prop('disabled', true);
+        $this.prop('inert', true);
         $.ajax({
             url:    '/lk/like/',
             type:   "POST",
@@ -802,11 +802,11 @@ $(document).ready(function() {
                 if (response.result == 'error') {
                     console.log('ошибка'); 
                 }
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             },
             error: function(response) {
                 console.log('Ошибка отправки'); 
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             }
         });
         return false; 
@@ -818,7 +818,7 @@ $(document).ready(function() {
         let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
         let id = $this.parents('.notice-block-element').data('notice-id');
         let notice_data = '&id=' + id;
-        $this.prop('disabled', true);
+        $this.prop('inert', true);
         $.ajax({
             url:    '/lk/notification/read/',
             type:   "POST",
@@ -835,11 +835,11 @@ $(document).ready(function() {
                 if (response.result == 'error') {
                     console.log('ошибка'); 
                 }
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             },
             error: function(response) {
                 console.log('Ошибка отправки');
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             }
         });
         return false; 
@@ -849,7 +849,7 @@ $(document).ready(function() {
     $('body').on('click', '.js-notice-read-all', function(){
         let $this = $(this);
         let form_data = $('[name="csrfmiddlewaretoken"], #id_captcha').serialize();
-        $this.prop('disabled', true);
+        $this.prop('inert', true);
         $.ajax({
             url:    '/lk/notification/read_all/',
             type:   "POST",
@@ -866,11 +866,11 @@ $(document).ready(function() {
                 if (response.result == 'error') {
                     console.log('ошибка'); 
                 }
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             },
             error: function(response) {
                 console.log('Ошибка отправки');
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             }
         });
         return false; 
@@ -881,7 +881,7 @@ $(document).ready(function() {
         e.preventDefault();
         let $this = $(this);
         let comment_data = 'comment_id=' + $this.parents('.comment-item').data('id');
-        $this.prop('disabled', true);
+        $this.prop('inert', true);
         $.ajax({
             url:    '/lk/blame/',
             type:   "POST",
@@ -895,11 +895,11 @@ $(document).ready(function() {
                 if (response.result == 'error') {
                     infoModal('Ошибка', 'Жалоба не зарегистрирована');
                 }
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             },
             error: function(response) {
                 infoModal('Ошибка', 'Ошибка отправки, попробуйте ещё раз');
-                $this.prop('disabled', false);
+                $this.prop('inert', false);
             }
         });
         return false; 
@@ -1045,7 +1045,7 @@ $(document).ready(function() {
     //logout
 	$(".btn_logout").click(function(e){
         e.preventDefault();
-        $(this).prop('disabled', true);
+        $(this).prop('inert', true);
         $.ajax({
             url:    '/lk/logout/',
             type:   "POST",
@@ -1068,12 +1068,12 @@ $(document).ready(function() {
                 if (xhr.status != 200) {
                     console.log(response.text);
                 }
-                $(this).prop('disabled', false);
+                $(this).prop('inert', false);
             },
             error: function() {
                 infoModal('Ошибка', 'Данные не отправлены.');
                 console.log('Ошибка. Данные не отправлены.');
-                $(this).prop('disabled', false);
+                $(this).prop('inert', false);
             }
         });
         return false; 
@@ -1379,7 +1379,7 @@ function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successTe
             if (xhr.status != 200) {
                 console.log(response.text);
             }
-            
+
             setTimeout(function() {
                 $("#" + ajax_form).prop('inert', false);
             }, 2000);
