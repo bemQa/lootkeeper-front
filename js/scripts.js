@@ -1382,12 +1382,14 @@ function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successTe
 
             setTimeout(function() {
                 $("#" + ajax_form).prop('inert', false);
-            }, 2000);
+            }, 3000);
+            window.createNewToken();
         },
         error: function() {
             infoModal('Ошибка', 'Данные не отправлены.');
             console.log('Ошибка. Данные не отправлены.');
             $("#" + ajax_form).prop('inert', false);
+            window.createNewToken();
         }
     });
 }
