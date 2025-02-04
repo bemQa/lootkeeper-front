@@ -2040,7 +2040,7 @@ blockquote * {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: 18rem;
+    gap: 6rem 18rem;
     font-size: 16rem;
     line-height: 1.5;
 }
@@ -2053,7 +2053,7 @@ blockquote * {
 .comment-author-info {
     display: flex;
     flex-wrap: wrap;
-    gap: 18rem 8rem;
+    gap: 8rem;
     color: #B0B0B1;
 }
 
@@ -2085,6 +2085,8 @@ blockquote * {
 .comment-item-content {
     position: relative;
     margin: 12rem 0;
+    font-size: 18rem;
+    line-height: 1.5;
 }
 
 .comment-item-content.hidden-comment {
@@ -4302,6 +4304,80 @@ li a:hover,
     font-size: 14rem;
 }
 
+.profile-comments-block,
+.profile-comments-block .tabs-block {
+    display: flex;
+    flex-direction: column;
+    gap: 18rem 0;
+}
+
+.profile-comments-block .tab {
+    background: var(--light, #FAFAFA) var(--dark, var(--main-bg));
+    border-radius: var(--small-border-radius);
+    border-bottom: 1rem solid var(--light, #D8D8D8) var(--dark, transparent);
+}
+
+.profile-comments-block .tab.active {
+    background: var(--accent-blue);
+}
+
+.profile-comments-block .tabs-content {
+    padding: 0;
+    border: 0;
+}
+
+.profile-comments-block .comments-block {
+    gap: 18rem 0;
+    margin-top: 0;
+}
+
+.profile-comments-block .comments-ajax {
+    display: flex;
+    flex-direction: column;
+    gap: 18rem 0;
+}
+
+.profile-comments-block .comment-item-self {
+    padding: 24rem;
+    background: var(--main-bg);
+    border: 1rem solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.comment-post-info {
+    display: flex;
+    gap: 0 6rem;
+    width: 100%;
+    color: #B0B0B1;
+}
+
+.comment-post-link {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 77%;
+    color: var(--hlines-color);
+}
+
+.comment-post-link:hover {
+    text-decoration: underline;
+}
+
+.profile-comments-block .comment-item-content {
+    margin: 18rem 0;
+}
+
+.profile-comments-block .comment-like-button:first-child,
+.profile-comments-block .comment-like-button:last-child {
+    background-color: var(--light, #E9E9E9) var(--dark, var(--dark-block-bg));
+}
+
+.profile-comments-block .comment-like-button:hover {
+    background-color: var(--light, #D6D6D6) var(--dark, var(--gray-btn));
+}
+
 /* preloader */
 .lds-ellipsis,
 .lds-ellipsis div {
@@ -5636,6 +5712,14 @@ li a:hover,
 
     .tippy-box {
         font-size: 12rem;
+    }
+
+    .profile-comments-block .comment-item-self {
+        padding: 18rem 16rem;
+    }
+
+    .comment-item-content {
+        font-size: 16rem;
     }
 }
 

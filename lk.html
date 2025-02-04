@@ -30,7 +30,7 @@
     <!-- inputmask -->
     <script src="libs/inputmask.min.js"></script>
     <!-- validate -->
-    <script src="libs/validate.min.js"></script>
+    <!-- <script src="libs/validate.min.js"></script> -->
     <!-- clipboard -->
     <script src="libs/clipboard.min.js"></script>
     <!-- nice select -->
@@ -39,8 +39,10 @@
     <script src="libs/autoComplete.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="libs/jquery-3.7.1.min.js"></script>
-    
+    <!-- cookie -->
     <script src="libs/jquery.cookie.js"></script>
+    <!-- validate -->
+    <script src="libs/jquery.validate.min.js"></script>
 
 	<!--[if lte IE 9]>
     <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
@@ -528,7 +530,99 @@
                                     </div>
                                     <div class="tabs-content">
                                         <div class="tab-item active" data-tab="Комментарии">
-                                            Вкладка Комментарии
+                                            <div class="init-comment-form-here" style="display: none;">
+                                                <div id="comment">
+                                                    <form id="user_comment_form">
+                                                        <input type="hidden" name="article_id" value="112">
+                                                        <input type="hidden" name="reply_id" value="">
+                                                        <header>
+                                                            <!-- <input type="text" name="name" placeholder="Ваше имя" id="user-comment-name" class="browser-default"> -->
+                                                        </header>    
+                                                        <div class="user-comment">
+                                                            <textarea name="comment" id="user-comment-text" rows="6" placeholder="Напишите текст комментария и нажмите Ctrl+Enter"></textarea>
+                                                            <button type="submit" article="112" id="add-comment-btn" class="button small">Отправить</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="comments-block">
+                                                <div class="comments-ajax">
+                                                    <div class="comment-item">
+                                                        <div class="comment-item-self">
+                                                            <header class="comment-item-header">
+                                                                <span class="comment-author">Mih</span>
+                                                                <div class="comment-author-info">
+                                                                    <a href="#74191" name="74191" class="comment-date-anchor">
+                                                                        <time class="comment-date" datetime="17 августа 2024 г. 15:09">7&nbsp;часов, 23&nbsp;минут назад</time> 
+                                                                    </a>
+                                                                    <span class="comment-author-league">Некрополь [3.24]</span>
+                                                                </div>
+                                                                <div class="comment-post-info">в посте <a href="" class="comment-post-link">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                                            </header>
+                                                            <div class="comment-item-content">
+                                                                <p>
+                                                                    почему до сих пор нету ссылки на покупку  самоцветов смертельной гордости
+                                                                </p>                                  
+                                                            </div>
+                                                            <footer class="comment-item-footer">
+                                                                <div class="comment-likes">
+                                                                    <button class="comment-like-button comment-like"></button>
+                                                                    <div class="comment-likes-count like">0</div>
+                                                                    <button class="comment-like-button comment-dislike"></button>
+                                                                </div>
+                                                                <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                                <div class="tooltip-wrapper">
+                                                                    <button class="button-comment-more-info"></button>
+                                                                    <div class="tooltip comment-more-info">
+                                                                        <a href="#!" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                                        <a href="#!" class="comment-more-info-link comment-copy" data-clipboard-action data-clipboard-text="123456">Скопировать ссылку</a>
+                                                                        <a href="#!" class="comment-more-info-link comment-delete">Удалить</a>
+                                                                    </div>
+                                                                </div>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-item">
+                                                        <div class="comment-item-self">
+                                                            <header class="comment-item-header">
+                                                                <span class="comment-author">Mih</span>
+                                                                <div class="comment-author-info">
+                                                                    <a href="#74191" name="74191" class="comment-date-anchor">
+                                                                        <time class="comment-date" datetime="17 августа 2024 г. 15:09">7&nbsp;часов, 23&nbsp;минут назад</time> 
+                                                                    </a>
+                                                                    <span class="comment-author-league">Некрополь [3.24]</span>
+                                                                </div>
+                                                                <div class="comment-post-info">в посте <a href="" class="comment-post-link">«[3.24] Плут Хексбласт мины. Билд на Бандита»</a></div>
+                                                            </header>
+                                                            <div class="comment-item-content">
+                                                                <p>
+                                                                    почему до сих пор нету ссылки на покупку  самоцветов смертельной гордости
+                                                                </p>                                  
+                                                            </div>
+                                                            <footer class="comment-item-footer">
+                                                                <div class="comment-likes">
+                                                                    <button class="comment-like-button comment-like"></button>
+                                                                    <div class="comment-likes-count like">0</div>
+                                                                    <button class="comment-like-button comment-dislike"></button>
+                                                                </div>
+                                                                <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                                <div class="tooltip-wrapper">
+                                                                    <button class="button-comment-more-info"></button>
+                                                                    <div class="tooltip comment-more-info">
+                                                                        <a href="#!" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                                        <a href="#!" class="comment-more-info-link comment-copy" data-clipboard-action data-clipboard-text="123456">Скопировать ссылку</a>
+                                                                        <a href="#!" class="comment-more-info-link comment-delete">Удалить</a>
+                                                                    </div>
+                                                                </div>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="button comments-refresh-btn">Обновить комментарии</button>
+                                                <div id="showmore-trigger" data-page="" data-max="">
+                                                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="tab-item" data-tab="Ответы на комментарии">
                                             Вкладка Ответы на комментарии
