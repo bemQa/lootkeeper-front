@@ -278,80 +278,55 @@ $(document).ready(function() {
     });
 
     // кнопка копирования
-    // new ClipboardJS('.copy-link');
-
-    // if ($('.copy-link').length) {
-    //     $('.copy-link').click(function() {
-    //         let $this = $(this);
-    //         let code = $(this).siblings('.copied-code').text().trim();
-
-    //         new ClipboardJS('.copy-link', {
-    //             text: function() {
-    //                 return alert('Скопировано');
-    //             }
-    //         });
-
-    //         $this.addClass('copied');
-    //         setTimeout(function() {
-    //             $this.removeClass('copied')
-    //         }, 3000)
-    //     });
-    // }
-
-    $('body').on('click', '.copy-link', function(e) {
-        let $this = $(this);
-        let data = $this.data('clipboard-text');
-
-        new ClipboardJS('.copy-link', {
-            text: function() {
-                return data;
-            }
-        });
-
-        if($this.find('.tooltip').length == 0) {
-            $this.append(`
-                <div class="tooltip tooltip-copy">Скопировано</div>
-            `);
+    let clipboard_copy_link = new ClipboardJS('.copy-link', {
+        text: function(trigger) {
+            return trigger.nextElementSibling.getAttribute('href');
         }
-        setTimeout(function() {
-            $this.find('.tooltip').addClass('active');
-        }, 100);
-        setTimeout(function() {
-            $this.find('.tooltip').removeClass('active');
-            setTimeout(function() {
-                $this.find('.tooltip').remove();
-            }, 500);
-        }, 3000)
+    });
+    clipboard_copy_link.on('success', function(e){
+        tooltipCopy(e.trigger)
+    });
+    clipboard_copy_link.on('error', function(e){
+        alert('Ошибка копирования');
     });
 
-    $('body').on('click', '.comment-copy', function(e) {
-        e.preventDefault();
-        let $this = $(this);
-        let data = $this.data('clipboard-text');
-        let url = window.location.href.split(/[?#&]/)[0];
-        url = url+'?comment_id='+data;
-
-        new ClipboardJS('.comment-copy', {
-            text: function() {
-                return url;
-            }
-        });
-
-        if($this.find('.tooltip').length == 0) {
-            $this.append(`
-                <div class="tooltip tooltip-copy">Скопировано</div>
-            `);
+    let clipboard_comment_link = new ClipboardJS('.comment-copy', {
+        text: function(trigger) {
+            let data = trigger.dataset.clipboardText;
+            let url = window.location.href.split(/[?#&]/)[0];
+            url = url+'?comment_id='+data;
+            return url;
         }
+    });
+    clipboard_comment_link.on('success', function(e){
+        tooltipCopy(e.trigger)
+    });
+    clipboard_comment_link.on('error', function(e){
+        alert('Ошибка копирования');
+    });
+
+    function tooltipCopy(element) {
+        if (!element.querySelector('.tooltip')) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip tooltip-copy';
+            tooltip.textContent = 'Скопировано';
+            
+            element.appendChild(tooltip);
+        }
+
         setTimeout(function() {
-            $this.find('.tooltip').addClass('active');
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.classList.add('active');
         }, 100);
         setTimeout(function() {
-            $this.find('.tooltip').removeClass('active');
+            const tooltip = element.querySelector('.tooltip');
+            tooltip.classList.remove('active');
+    
             setTimeout(function() {
-                $this.find('.tooltip').remove();
+                tooltip.remove();
             }, 500);
-        }, 3000)
-    });
+        }, 3000);
+    }
 
     // слайдер
     let slider_images = new Swiper('.slider-images', {
