@@ -2379,9 +2379,9 @@ blockquote * {
     background: var(--light, #DFE9EE) var(--dark, linear-gradient(180deg, #0D5EAA -114.05%, rgba(13, 94, 170, 0.03) 43.91%));
 }
 
-.comment-dynamic-high {
+/* .comment-dynamic-high {
     background: var(--light, #DFE9EE) var(--dark, linear-gradient(180deg, #34aa0d -114.05%, rgba(13, 94, 170, 0.03) 43.91%));
-}
+} */
 
 .comments-refresh-btn {
     position: sticky;
