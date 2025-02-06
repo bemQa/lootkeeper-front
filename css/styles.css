@@ -2033,6 +2033,7 @@ blockquote * {
 }
 
 .comment-item-self {
+    position: relative;
     padding: 18rem 0;
 }
 
@@ -4378,6 +4379,45 @@ li a:hover,
     background-color: var(--light, #D6D6D6) var(--dark, var(--gray-btn));
 }
 
+.comments-high {
+    display: flex;
+    flex-direction: column;
+    gap: 54rem 0;
+}
+
+.comments-high .comment-item {
+    position: relative;
+}
+
+.comments-high > .comment-item .comment-item-self {
+    padding-top: 0;
+}
+
+.comments-high .comment-item::before {
+    content: '';
+    position: absolute;
+    inset: -18rem;
+    width: calc(100% + 36rem);
+    height: calc(100% + 36rem);
+    margin: auto;
+    background: var(--light, #F3F3F3) var(--dark, #121218);
+    border-radius: var(--small-border-radius);
+}
+
+.comments-high > .comment-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15rem;
+    height: 15rem;
+    background: var(--light, url(../img/icons/pin-white.svg)) var(--dark, url(../img/icons/pin.svg)) center/contain no-repeat;
+}
+
+.comments-high .comment-item-self {
+
+}
+
 /* preloader */
 .lds-ellipsis,
 .lds-ellipsis div {
@@ -5720,6 +5760,16 @@ li a:hover,
 
     .comment-item-content {
         font-size: 16rem;
+    }
+
+    .comments-high .comment-item::before {
+        inset: -18rem -16rem;
+        max-width: 480rem;
+        width: calc(100% + 32rem);
+    }
+
+    .comments-high > .comment-item::after {
+        top: 2rem;
     }
 }
 
