@@ -376,6 +376,19 @@ $(document).ready(function() {
         });
     });
 
+    // show password
+    $('.show_password').click(function(e) {
+        e.preventDefault();
+        if ($(this).hasClass('showed')) {
+            $(this).parent().find('.input-text').attr('type', 'password');
+            $(this).removeClass('showed')
+        } else {
+            $(this).parent().find('.input-text').attr('type', 'text');
+            $(this).addClass('showed')
+        }
+        return false;
+    });
+
     // уведомления
     $.ajax({
         url:    '/lk/notification/get/',
@@ -893,6 +906,16 @@ $(document).ready(function() {
                     name: {
                         required: true 
                     },
+                    display_name: {
+                        required: true,
+                        display_name: true 
+                    },
+                    poe_profile: {
+                        poe_profile: true 
+                    },
+                    discord: {
+                        discord: true 
+                    },
                     email: {
                         required: true,
                         email: true 
@@ -923,7 +946,10 @@ $(document).ready(function() {
                 messages: {
                     required: "Заполните обязательное поле",
                     phone: 'Некорректный номер',
-                    email: 'Некорректный e-mail'
+                    email: 'Некорректный e-mail',
+                    display_name: 'Допустимы только символы A-Z, a-z, А-Я, а-я, Ёё, 0-9 и _',
+                    poe_profile: 'Допустимы только символы a-z, 0-9, _, #',
+                    discord: 'Допустимы только символы a-z, 0-9, _, . Длина от 2 до 32 символов.'
                 } 
             });
         });
@@ -932,6 +958,15 @@ $(document).ready(function() {
         });
         jQuery.validator.addMethod('phone', function (value, element) {
             return this.optional(element) || /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,9}$/.test(value);
+        });
+        jQuery.validator.addMethod('display_name', function (value, element) {
+            return this.optional(element) || /^[A-Za-zА-Яа-яЁё0-9_]+$/.test(value);
+        });
+        jQuery.validator.addMethod('poe_profile', function (value, element) {
+            return this.optional(element) || /^[a-z0-9_#]+$/.test(value);
+        });
+        jQuery.validator.addMethod('discord', function (value, element) {
+            return this.optional(element) || /^[a-z0-9_.]{2,32}$/.test(value);
         });
     }
     if($('.form').length) {

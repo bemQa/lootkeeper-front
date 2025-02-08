@@ -300,33 +300,57 @@
                                 <input type="text" class="input-text" name="name" required="">
                             </div>
                             <div class="ip-cell">
+                                <label class="input-label with-tooltip">
+                                    Отображаемый никнейм на сайте <span class="required-symbol">*</span>
+                                    <div class="tooltip-wrapper">
+                                        <div class="help-click tooltip-trigger"></div>
+                                        <div class="tooltip">
+                                            Будет отображаться в вашем профиле и им будут подписаны ваши комментарии. <br>
+                                            Должен быть уникальным
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="text" class="input-text" name="display_name" placeholder="x_X_Valera_X_x" pattern="^[A-Za-zА-Яа-яЁё0-9_]+$" title="Допустимы только символы A-Z, a-z, А-Я, а-я, Ёё, 0-9 и _" required="">
+                            </div>
+                            <div class="ip-cell">
                                 <label class="input-label">E-mail <span class="required-symbol">*</span></label>
                                 <input type="text" class="input-text" name="email" required="">
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label">Пароль <span class="required-symbol">*</span></label>
-                                <input type="password" id="password" class="input-text" name="password" required="">
+                                <input type="password" id="password" class="input-text input-password" name="password" required="">
                                 <span class="password-error" style="display: none;"></span>
+                                <div class="show_password"></div>
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label">Подтвердите пароль <span class="required-symbol">*</span></label>
-                                <input type="password" id="confirmPassword" class="input-text" name="confirmPassword" required="">
+                                <input type="password" id="confirmPassword" class="input-text input-password" name="confirmPassword" required="">
+                                <div class="show_password"></div>
                             </div>
                             <div class="ip-cell">
-                                <label class="input-label">Discord</label>
-                                <input type="text" class="input-text" name="discord">
+                                <label class="input-label with-tooltip">
+                                    Discord
+                                    <div class="tooltip-wrapper">
+                                        <div class="help-click tooltip-trigger"></div>
+                                        <div class="tooltip">
+                                            Не отображаемый никнейм на сервере, а именно <b>имя пользователя Discord.</b><br>
+                                            Можно посмотреть в настройках Discord
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="text" class="input-text" name="discord" placeholder="ValeraDiscord" minlength="2" maxlength="32" pattern="^[a-z0-9_.]{2,32}$" title="Допустимы только символы a-z, 0-9, _, . Длина от 2 до 32 символов.">
                             </div>
                             <div class="ip-cell">
                                 <label class="input-label with-tooltip">Профиль PoE 
                                     <div class="tooltip-wrapper">
                                         <div class="help-click tooltip-trigger"></div>
                                         <div class="tooltip">
-                                            Ваш никнейм который отображается в профиле на сайте Path of Exile. <br>
-                                            Не имя персонажа в игре!
+                                            Название вашего профиля, которое отображается на сайте Path of Exile. Обязательно в полном формате с решеткой и номером (например #1234).<br>
+									        <b>Не имя персонажа в игре!</b>
                                         </div>
                                     </div>
                                 </label>
-                                <input type="text" class="input-text" name="profile-poe">
+                                <input type="text" class="input-text" name="poe_profile" placeholder="Valera#1234" pattern="^[a-z0-9_#]+$" title="Допустимы только символы a-z, 0-9, _, #">
                             </div>
                             <div class="ch-buttons">
                                 <div class="ip-cell">

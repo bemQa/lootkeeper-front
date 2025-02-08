@@ -2401,6 +2401,7 @@ blockquote * {
 
 /* select */
 .nice-select {
+    width: 100%;
     height: 52rem;
     padding-left: 16rem;
     padding-right: 28rem;
@@ -2411,6 +2412,7 @@ blockquote * {
     font-size: 16rem;
     line-height: 50rem;
     white-space: normal;
+    color: var(--main-color);
 }
 
 .nice-select .current {
@@ -2768,6 +2770,10 @@ blockquote * {
     border: 1rem solid var(--border-color);
     border-radius: var(--small-border-radius);
     transition: all 0.3s ease;
+}
+
+.input-password {
+    padding-right: 40rem;
 }
 
 textarea.input-text {
@@ -4414,8 +4420,18 @@ li a:hover,
     background: var(--light, url(../img/icons/pin-white.svg)) var(--dark, url(../img/icons/pin.svg)) center/contain no-repeat;
 }
 
-.comments-high .comment-item-self {
+.show_password {
+    position: absolute;
+    top: 38rem;
+    right: 16rem;
+    width: 24rem;
+    height: 24rem;
+    background: var(--light, url(../img/icons/eye-white.svg)) var(--dark, url(../img/icons/eye.svg)) center/contain no-repeat;
+    cursor: pointer;
+}
 
+.show_password.showed {
+    background: var(--light, url(../img/icons/eye-off-white.svg)) var(--dark, url(../img/icons/eye-off.svg)) center/contain no-repeat;
 }
 
 /* preloader */
