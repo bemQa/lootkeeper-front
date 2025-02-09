@@ -948,8 +948,8 @@ $(document).ready(function() {
                     phone: 'Некорректный номер',
                     email: 'Некорректный e-mail',
                     display_name: 'Допустимы только символы A-Z, a-z, А-Я, а-я, Ёё, 0-9 и _',
-                    poe_profile: 'Допустимы только символы a-z, 0-9, _, #',
-                    discord: 'Допустимы только символы a-z, 0-9, _, . Длина от 2 до 32 символов.'
+                    poe_profile: 'Допустимы только символы A-Z, a-z, 0-9, _, #',
+                    discord: 'Допустимы только символы A-Z, a-z, 0-9, _, . Длина от 2 до 32 символов.'
                 } 
             });
         });
@@ -963,10 +963,10 @@ $(document).ready(function() {
             return this.optional(element) || /^[A-Za-zА-Яа-яЁё0-9_]+$/.test(value);
         });
         jQuery.validator.addMethod('poe_profile', function (value, element) {
-            return this.optional(element) || /^[a-z0-9_#]+$/.test(value);
+            return this.optional(element) || /^[A-Za-z0-9_#]+$/.test(value);
         });
         jQuery.validator.addMethod('discord', function (value, element) {
-            return this.optional(element) || /^[a-z0-9_.]{2,32}$/.test(value);
+            return this.optional(element) || /^[A-Za-z0-9_.]{2,32}$/.test(value);
         });
     }
     if($('.form').length) {

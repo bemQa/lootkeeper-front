@@ -2028,7 +2028,7 @@ blockquote * {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 36rem 0;
+    gap: 24rem 0;
     margin-top: 28rem;
 }
 
