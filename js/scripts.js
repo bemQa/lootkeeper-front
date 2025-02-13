@@ -1095,7 +1095,7 @@ $(document).ready(function() {
 				'settings_form', 
 				'/lk/settings/',
                 false,
-				false,
+				true,
 				"Настройки изменены",
 				"Ошибка",
                 '',
