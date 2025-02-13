@@ -2063,7 +2063,8 @@ blockquote * {
     padding-left: 12rem;
 }
 
-.show-hidden-comment {
+.show-hidden-comment,
+.show-deleted-comment {
     position: absolute;
     right: 0;
     margin-left: auto;
@@ -2072,7 +2073,8 @@ blockquote * {
     transition: all .3s ease;
 }
 
-.show-hidden-comment:hover {
+.show-hidden-comment:hover,
+.show-deleted-comment:hover {
     color: var(--hlines-color);
 }
 
@@ -2090,7 +2092,8 @@ blockquote * {
     line-height: 1.5;
 }
 
-.comment-item-content.hidden-comment {
+.comment-item-content.hidden-comment,
+.comment-item-content.deleted-comment {
     color: #B0B0B1;
 }
 
@@ -2098,7 +2101,12 @@ blockquote * {
     content: 'Комментарий скрыт';
 }
 
-.comment-item-content.hidden-comment * {
+.comment-item-content.deleted-comment::before {
+    content: 'Комментарий был удален пользователем';
+}
+
+.comment-item-content.hidden-comment *,
+.comment-item-content.deleted-comment * {
     display: none;
 }
 

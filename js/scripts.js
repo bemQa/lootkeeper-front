@@ -616,6 +616,10 @@ $(document).ready(function() {
         $(this).hide();
         $(this).parents('.comment-item').find('.comment-item-content').removeClass('hidden-comment');
     });
+    $('body').on('click', '.show-deleted-comment', function(){
+        $(this).hide();
+        $(this).parents('.comment-item').find('.comment-item-content').removeClass('deleted-comment');
+    });
     $('body').on('click', '.comments-refresh-btn', function(e){
         e.preventDefault();
         $('.comment-item.comment-dynamic-new').removeClass('comment-dynamic-new');
