@@ -346,12 +346,14 @@
                                 <p>
                                     <a href="">Ссылка на что-нибудь</a>
                                 </p>
-                                <ul class="list-elements">
+                                <!-- любому списку можно указать класс list-elements, можно не указывать -->
+                                <ul>
                                     <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, voluptatum.</li>
                                     <li>Qui atque aliquam maiores accusantium est voluptates accusamus dolore quae!</li>
                                     <li>Qui reprehenderit saepe placeat cumque perspiciatis tempora sint atque fugit!</li>
                                 </ul>
-                                <ol>
+                                <!-- если списку указать класс striped, то раскраска будет шашкой -->
+                                <ol class="striped">
                                     <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur autem rem a ducimus placeat cumque.</li>
                                     <li>Hic provident, officia quo facere eaque, nesciunt natus quisquam molestiae est nam asperiores error quas.</li>
                                     <li>Omnis et autem veritatis tenetur nobis, hic debitis deleniti temporibus, explicabo minima est, perferendis sint.</li>
@@ -370,11 +372,12 @@
 
                                 <h3>Прогрессия билда будет идти в четыре этапа и примерная стоимость каждой сборки:</h3>
 
+                                <!-- можно собрать кастомный внешний вид списка из div-элементов, в таком случае класс list-elements обязательный, иначе неоткуда наследовать стили элементам списка -->
                                 <div class="list-elements">
-                                    <div class="list-element"><b>1.</b> Начальная — около <b>20-50</b> <poeitem class="poe-items lk_color_30" data-template="test"><img src="img/metka.png" alt=""> Сфера хаоса</poeitem></div>
-                                    <div class="list-element"><b>2.</b> Переходная — около <b>5-10</b>        Божественная сфера</div>
-                                    <div class="list-element"><b>3.</b> Основная — около <b>40-70</b>        Божественная сфера</div>
-                                    <div class="list-element"><b>4.</b> Максимальная — около <b>110-250+</b>        Божественная сфера</div>
+                                    <div><b>1.</b> Начальная — около <b>20-50</b> <poeitem class="poe-items lk_color_30" data-template="test"><img src="img/metka.png" alt=""> Сфера хаоса</poeitem></div>
+                                    <div><b>2.</b> Переходная — около <b>5-10</b>        Божественная сфера</div>
+                                    <div><b>3.</b> Основная — около <b>40-70</b>        Божественная сфера</div>
+                                    <div><b>4.</b> Максимальная — около <b>110-250+</b>        Божественная сфера</div>
                                 </div>
                                 <p>
                                     Версии с              Охотник за головами или              Волшебная кровь — дороже в зависимости от цен на эти пояса.
@@ -390,51 +393,88 @@
                                 <h2><span>ПРЕИМУЩЕСТВА И НЕДОСТАТКИ</span></h2>
 
                                 <h3>Преимущества</h3>
-                                <div class="list-elements">
-                                    <div class="list-element list-element-yes">Богоподобная зачистка, без преувеличения одна из лучших в игре на данный момент</div>
-                                    <div class="list-element list-element-yes">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
-                                    <div class="list-element list-element-yes">Optio soluta ratione veritatis unde distinctio corporis! Et, cum quas!</div>
-                                    <div class="list-element list-element-yes">Ipsam quo cum aliquam error praesentium repellendus fugit molestiae cumque?</div>
-                                    <div class="list-element list-element-yes">Dolor, veniam. Eligendi accusamus blanditiis rem quia necessitatibus harum totam.</div>
-                                    <div class="list-element">Mollitia ullam cum voluptates doloremque dolorum dicta sit nisi dolores.</div>
-                                    <div class="list-element">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.</div>
+                                <!-- если дополнительно указать списку класс list-elements-yes, то вместо точек будут зеленые галочки -->
+                                <div class="list-elements list-elements-yes">
+                                    <div>Богоподобная зачистка, без преувеличения одна из лучших в игре на данный момент</div>
+                                    <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
+                                    <div>Optio soluta ratione veritatis unde distinctio corporis! Et, cum quas!</div>
+                                    <div>Ipsam quo cum aliquam error praesentium repellendus fugit molestiae cumque?</div>
+                                    <div>Dolor, veniam. Eligendi accusamus blanditiis rem quia necessitatibus harum totam.</div>
+                                    <div>Mollitia ullam cum voluptates doloremque dolorum dicta sit nisi dolores.</div>
+                                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.</div>
                                 </div>
 
                                 <h3>Недостатки</h3>
-                                <div class="list-elements">
-                                    <div class="list-element list-element-no">
+                                <!-- если дополнительно указать списку класс list-elements-no, то вместо точек будут красные крестики -->
+                                <div class="list-elements list-elements-no">
+                                    <div>
                                         <b>БИЛД НЕ ПОДХОДИТ ДЛЯ НАЧАЛА ЛИГИ ДЛЯ НОВИЧКОВ.</b> Если вы только начали осваивать PoE и у вас наблюдаются проблемы с валютой на ранних этапах игры - этим билдом <b>КАТЕГОРИЧЕСКИ НЕЛЬЗЯ ИГРАТЬ</b>. Без валюты вы не сможете нормально прогрессировать, соберете билд из говна и палок и он будет слаб, будете постоянно умирать, возненавидите авторов гайда, начнете бить жену, хамить людям в метро, в общем не стоит этого делать
                                     </div>
-                                    <div class="list-element list-element-no">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
-                                    <div class="list-element list-element-no">Optio soluta ratione veritatis unde distinctio corporis! Et, cum quas!</div>
-                                    <div class="list-element list-element-no">Ipsam quo cum aliquam error praesentium repellendus fugit molestiae cumque?</div>
-                                    <div class="list-element list-element-no">Dolor, veniam. Eligendi accusamus blanditiis rem quia necessitatibus harum totam.</div>
-                                    <div class="list-element">Mollitia ullam cum voluptates doloremque dolorum dicta sit nisi dolores.</div>
-                                    <div class="list-element">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.</div>
+                                    <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
+                                    <div>Optio soluta ratione veritatis unde distinctio corporis! Et, cum quas!</div>
+                                    <div>Ipsam quo cum aliquam error praesentium repellendus fugit molestiae cumque?</div>
+                                    <div>Dolor, veniam. Eligendi accusamus blanditiis rem quia necessitatibus harum totam.</div>
+                                    <div>Mollitia ullam cum voluptates doloremque dolorum dicta sit nisi dolores.</div>
+                                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.</div>
+                                </div>
+
+                                <h3>И плюсы и минусы</h3>
+                                <!-- можно указать галочки/крестики отдельным элементам списка, тогда родителю не нужно задавать общий класс list-elements-yes/list-elements-no -->
+                                <div class="list-elements">
+                                    <div class="list-element-yes">
+                                        <b>БИЛД НЕ ПОДХОДИТ ДЛЯ НАЧАЛА ЛИГИ ДЛЯ НОВИЧКОВ.</b> Если вы только начали осваивать PoE и у вас наблюдаются проблемы с валютой на ранних этапах игры - этим билдом <b>КАТЕГОРИЧЕСКИ НЕЛЬЗЯ ИГРАТЬ</b>. Без валюты вы не сможете нормально прогрессировать, соберете билд из говна и палок и он будет слаб, будете постоянно умирать, возненавидите авторов гайда, начнете бить жену, хамить людям в метро, в общем не стоит этого делать
+                                    </div>
+                                    <div class="list-element-no">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, incidunt?</div>
                                 </div>
                             </div>
                             <div class="build-page-content-block anchor-block" id="vozmozhnosti-bilda">
                                 <h2><span>ВОЗМОЖНОСТИ БИЛДА</span></h2>
                                 <div class="possibilities-block">
+                                    <!-- как и в других списках указываем possibility-can родителю - всё зеленое -->
                                     <div class="possibility possibility-can">
                                         <h3>Билд может</h3>
                                         <div class="possibility-list">
-                                            <div class="possibility-element possibility-element-can">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
-                                            <div class="possibility-element possibility-element-can">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
-                                            <div class="possibility-element possibility-element-can">Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
-                                            <div class="possibility-element possibility-element-can">Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
-                                            <div class="possibility-element possibility-element-can">Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
+                                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
+                                            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
+                                            <div>Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
+                                            <div>Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
+                                            <div>Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
                                         </div>
                                     </div>
+                                    <!-- как и в других списках указываем possibility-cant родителю - всё красное -->
                                     <div class="possibility possibility-cant">
                                         <h3>Билд не может</h3>
                                         <div class="possibility-list">
-                                            <div class="possibility-element possibility-element-cant">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
-                                            <div class="possibility-element possibility-element-cant">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
-                                            <div class="possibility-element possibility-element-cant">Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
-                                            <div class="possibility-element possibility-element-cant">Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
-                                            <div class="possibility-element possibility-element-cant">Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
-                                            <div class="possibility-element possibility-element-cant">Voluptatibus ad distinctio alias animi maxime? Eos a facere libero!</div>
+                                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
+                                            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
+                                            <div>Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
+                                            <div>Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
+                                            <div>Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
+                                            <div>Voluptatibus ad distinctio alias animi maxime? Eos a facere libero!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="possibilities-block">
+                                    <!-- если нужен кастом, например, вставить возможности тарифов (как на отдельной странице), тогда не указываем родителю доп класс, указываем класс с галочкой или крестиком только на нужные элементы -->
+                                    <div class="possibility">
+                                        <h3>Тарифы??</h3>
+                                        <div class="possibility-list">
+                                            <div class="possibility-element-can">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
+                                            <div class="possibility-element-cant">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
+                                            <div class="possibility-element-can">Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
+                                            <div class="possibility-element-cant">Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
+                                            <div class="possibility-element-can">Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
+                                        </div>
+                                    </div>
+                                    <div class="possibility">
+                                        <h3>Тарифы 2??</h3>
+                                        <div class="possibility-list">
+                                            <div class="possibility-element-cant">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, eveniet!</div>
+                                            <div class="possibility-element-can">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, quo!</div>
+                                            <div class="possibility-element-cant">Maxime consequatur officiis quibusdam veritatis rem ut quae aperiam natus!</div>
+                                            <div class="possibility-element-can">Sequi quos voluptatum perspiciatis, laboriosam odio animi necessitatibus officiis reiciendis.</div>
+                                            <div class="possibility-element-cant">Esse corporis deleniti numquam reprehenderit, nesciunt praesentium! Sed, aliquam excepturi?</div>
+                                            <div class="possibility-element-can">Voluptatibus ad distinctio alias animi maxime? Eos a facere libero!</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1150,6 +1190,120 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </footer>
+                                                                                </div>
+                                                                                <div class="comment-reply">
+                                                                                    <div class="comment-reply-self">
+                                                                                        <div class="comment-item">
+                                                                                            <div class="comment-item-self">
+                                                                                                <header class="comment-item-header">
+                                                                                                    <span class="comment-author"><span class="premium-nickname-comments premium-lite">Lozrak <img src="img/icon_goodboy.png" alt=""></span></span>
+                                                                                                    <a href="#73202" name="73202" class="comment-date-anchor">
+                                                                                                        <time class="comment-date" datetime="9 августа 2024 г. 13:19">1&nbsp;неделя, 1&nbsp;день
+                                                                                                            назад</time>
+                                                                                                    </a>
+                                                                                                </header>
+                                                                                                <div class="comment-item-content" style="color: #17F247;">
+                                                                                                    <p>
+                                                                                                        Френзи вынимай на картах с отражением
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                                <footer class="comment-item-footer">
+                                                                                                    <div class="comment-likes">
+                                                                                                        <button class="comment-like-button"></button>
+                                                                                                        <div class="comment-likes-count">-1</div>
+                                                                                                        <button class="comment-like-button"></button>
+                                                                                                    </div>
+                                                                                                    <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                                                                    <div class="tooltip-wrapper">
+                                                                                                        <button class="button-comment-more-info"></button>
+                                                                                                        <div class="tooltip comment-more-info">
+                                                                                                            <a href="" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                                                                            <a href="" class="comment-more-info-link comment-copy">Скопировать ссылку</a>
+                                                                                                            <a href="" class="comment-more-info-link comment-delete">Удалить</a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </footer>
+                                                                                            </div>
+                                                                                            <div class="comment-reply">
+                                                                                                <div class="comment-reply-self">
+                                                                                                    <div class="comment-item">
+                                                                                                        <div class="comment-item-self">
+                                                                                                            <header class="comment-item-header">
+                                                                                                                <span class="comment-author"><span class="premium-nickname-comments premium-lite">Lozrak <img src="img/icon_goodboy.png" alt=""></span></span>
+                                                                                                                <a href="#73202" name="73202" class="comment-date-anchor">
+                                                                                                                    <time class="comment-date" datetime="9 августа 2024 г. 13:19">1&nbsp;неделя, 1&nbsp;день
+                                                                                                                        назад</time>
+                                                                                                                </a>
+                                                                                                            </header>
+                                                                                                            <div class="comment-item-content" style="color: #17F247;">
+                                                                                                                <p>
+                                                                                                                    Френзи вынимай на картах с отражением
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <footer class="comment-item-footer">
+                                                                                                                <div class="comment-likes">
+                                                                                                                    <button class="comment-like-button"></button>
+                                                                                                                    <div class="comment-likes-count">-1</div>
+                                                                                                                    <button class="comment-like-button"></button>
+                                                                                                                </div>
+                                                                                                                <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                                                                                <div class="tooltip-wrapper">
+                                                                                                                    <button class="button-comment-more-info"></button>
+                                                                                                                    <div class="tooltip comment-more-info">
+                                                                                                                        <a href="" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                                                                                        <a href="" class="comment-more-info-link comment-copy">Скопировать ссылку</a>
+                                                                                                                        <a href="" class="comment-more-info-link comment-delete">Удалить</a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </footer>
+                                                                                                        </div>
+                                                                                                        <div class="comment-reply">
+                                                                                                            <div class="comment-reply-self">
+                                                                                                                <div class="comment-item">
+                                                                                                                    <div class="comment-item-self">
+                                                                                                                        <header class="comment-item-header">
+                                                                                                                            <span class="comment-author"><span class="premium-nickname-comments premium-lite">Lozrak <img src="img/icon_goodboy.png" alt=""></span></span>
+                                                                                                                            <a href="#73202" name="73202" class="comment-date-anchor">
+                                                                                                                                <time class="comment-date" datetime="9 августа 2024 г. 13:19">1&nbsp;неделя, 1&nbsp;день
+                                                                                                                                    назад</time>
+                                                                                                                            </a>
+                                                                                                                        </header>
+                                                                                                                        <div class="comment-item-content" style="color: #17F247;">
+                                                                                                                            <p>
+                                                                                                                                Френзи вынимай на картах с отражением
+                                                                                                                            </p>
+                                                                                                                        </div>
+                                                                                                                        <footer class="comment-item-footer">
+                                                                                                                            <div class="comment-likes">
+                                                                                                                                <button class="comment-like-button"></button>
+                                                                                                                                <div class="comment-likes-count">-1</div>
+                                                                                                                                <button class="comment-like-button"></button>
+                                                                                                                            </div>
+                                                                                                                            <button article="112" target="74191" class="comment-reply-btn" href="#comment">Ответить</button>
+                                                                                                                            <div class="tooltip-wrapper">
+                                                                                                                                <button class="button-comment-more-info"></button>
+                                                                                                                                <div class="tooltip comment-more-info">
+                                                                                                                                    <a href="" class="comment-more-info-link comment-report">Пожаловаться</a>
+                                                                                                                                    <a href="" class="comment-more-info-link comment-copy">Скопировать ссылку</a>
+                                                                                                                                    <a href="" class="comment-more-info-link comment-delete">Удалить</a>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </footer>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="hide-re-tree"></div>
+                                                                                                            <div class="expand-re-tree">Развернуть комментарии</div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="hide-re-tree"></div>
+                                                                                                <div class="expand-re-tree">Развернуть комментарии</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="hide-re-tree"></div>
+                                                                                    <div class="expand-re-tree">Развернуть комментарии</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
