@@ -1271,6 +1271,29 @@ $(document).ready(function() {
 		}
 	});
 
+    let search_query;
+    let item_lang;
+    if($('.section-search-result').length) {
+        search_query = $('.search-page-title i').text();
+        
+        // Регулярные выражения для проверки языка
+        const russianRegex = /[а-яА-ЯёЁ]/; // Проверка на наличие русских букв
+        const englishRegex = /[a-zA-Z]/;   // Проверка на наличие английских букв
+
+        const hasRussian = russianRegex.test(search_query);
+        const hasEnglish = englishRegex.test(search_query);
+
+        if (hasRussian && !hasEnglish) {
+            item_lang = 'ru';
+        } else if (hasEnglish && !hasRussian) {
+            item_lang = 'en';
+        } else if (hasRussian && hasEnglish) {
+            item_lang = 'ru';
+        } else {
+            item_lang = i_lang;
+        }
+    }
+
     function remakeItems(){
         //item colors and names
         $('poeitem').each( (e,el)=> { 
@@ -1315,7 +1338,7 @@ $(document).ready(function() {
             
                 instance._isFetching = true;
                 let target = instance.reference.getAttribute('data-target');
-                fetch('/lk/item/?item='+target+'&lang='+i_lang)
+                fetch('/lk/item/?item='+target+'&lang='+item_lang)
                     .then((response) => response.json())
                     .then((blob) => {
                         instance.setContent(_unescape(blob.data));
