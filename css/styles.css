@@ -1674,6 +1674,7 @@ h5 {
     font-weight: 500;
     color: var(--hlines-color);
     cursor: pointer;
+    user-select: none;
 }
 
 .accordion-title::after {
@@ -1746,6 +1747,10 @@ h5 {
 
 .tab-item.active {
     display: flex;
+}
+
+.tab-trigger {
+    user-select: none;
 }
 /* end tabs */
 
@@ -3359,6 +3364,7 @@ li a:hover,
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: baseline;
     gap: 20rem;
     margin-top: 30rem;
     padding: 36rem 30rem 24rem;
@@ -4497,6 +4503,10 @@ li a:hover,
 
 .show_password.showed {
     background: var(--light, url(../img/icons/eye-off-white.svg)) var(--dark, url(../img/icons/eye-off.svg)) center/contain no-repeat;
+}
+
+img[data-fancybox] {
+    cursor: pointer;
 }
 
 /* preloader */

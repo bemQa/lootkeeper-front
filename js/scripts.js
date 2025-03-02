@@ -152,7 +152,7 @@ $(document).ready(function() {
 
         elementClick = $(this).attr("href");
         destination = $(elementClick).offset().top-150;
-        $('html, body').animate( { scrollTop: destination }, 600, 'swing' );
+        $('html, body').animate( { scrollTop: destination }, 200, 'swing' );
         return false;
     });
 
@@ -243,7 +243,7 @@ $(document).ready(function() {
             }
 
             let goto = $(window.location.hash).offset().top;
-            $('html, body').animate({ scrollTop: goto }, 600, 'swing');
+            $('html, body').animate({ scrollTop: goto }, 200, 'swing');
         }, 100);
     }
 
@@ -358,8 +358,12 @@ $(document).ready(function() {
         defaultType: "inline", 
         dragToClose: false,
         touchMove: false,
-        backdropClick: false
+        backdropClick: false,
+        clickOutside: 'close'
     });
+
+    // не использовать якоря для фансибокса
+    Fancybox.defaults.Hash = false;
 
     // тултипы
     $('body').on('click', '.tooltip-trigger', function(e){
