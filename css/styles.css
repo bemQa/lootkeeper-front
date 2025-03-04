@@ -4506,7 +4506,24 @@ li a:hover,
 }
 
 img[data-fancybox] {
+    max-width: 480rem;
+    width: 100%;
+    margin: 0 auto;
     cursor: pointer;
+}
+
+.image-wrapper {
+    max-width: 480rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.wide-image {
+    max-width: 100%;
+}
+
+.wide-image img {
+    width: 100%;
 }
 
 .ru-poe,
