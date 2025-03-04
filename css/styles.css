@@ -4509,6 +4509,11 @@ img[data-fancybox] {
     cursor: pointer;
 }
 
+.ru-poe,
+.en-poe {
+	color: #FBAD8C;
+}
+
 /* preloader */
 .lds-ellipsis,
 .lds-ellipsis div {
