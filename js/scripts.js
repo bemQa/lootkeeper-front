@@ -277,6 +277,14 @@ $(document).ready(function() {
         $(this).parent().next().find('.tab-item[data-tab="'+ tab +'"]').addClass('active');
     });
 
+    $('.tab-trigger').each(function(i, e){
+        let tab = $(this).data('tab');
+        if(!$(this).parent().find('.tab-trigger.active').length) {
+            $(this).eq(0).addClass('active');
+            $(this).parent().next().find('.tab-item[data-tab="'+ tab +'"]').addClass('active');
+        }
+    });
+
     // кнопка копирования
     let clipboard_copy_link = new ClipboardJS('.copy-link', {
         text: function(trigger) {

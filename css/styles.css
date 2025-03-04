@@ -1556,7 +1556,7 @@ h5 {
 
 /* poe items */
 .poe-items {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
     font-weight: 600;
     cursor: pointer;
