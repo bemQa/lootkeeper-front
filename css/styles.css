@@ -4506,6 +4506,7 @@ li a:hover,
 }
 
 img[data-fancybox] {
+    display: block;
     max-width: 480rem;
     width: 100%;
     margin: 0 auto;
