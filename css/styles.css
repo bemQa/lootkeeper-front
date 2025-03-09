@@ -1543,7 +1543,7 @@ h5 {
 .list-element-no::after {
     content: '';
     position: absolute;
-    top: 12rem;
+    top: 8rem;
     left: 12rem;
     width: 15rem;
     height: 15rem;
