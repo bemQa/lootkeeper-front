@@ -167,7 +167,7 @@ li {
     margin-left: 20rem;
 }
 
-li:not(:last-child) {
+/* li:not(:last-child) {
     margin-bottom: 8rem;
 }
 
@@ -175,7 +175,7 @@ li:not(:last-child) {
     li:not(:last-child) {
         margin-bottom: 4rem;
     }
-}
+} */
 
 textarea {
     width: 100%;
@@ -1327,7 +1327,7 @@ h5 {
     display: flex;
     align-items: center;
     gap: 0 18rem;
-    background: var(--light, var(--main-bg)) var(--dark, var(--body-bg));
+    /* background: var(--light, var(--main-bg)) var(--dark, var(--body-bg)); */
 }
 
 .section-text-page h2 {
@@ -1340,7 +1340,7 @@ h5 {
     position: relative;
     display: inline-block;
     min-width: fit-content;
-    background: var(--light, var(--main-bg)) var(--dark, var(--body-bg));
+    /* background: var(--light, var(--main-bg)) var(--dark, var(--body-bg)); */
     z-index: 1;
 }
 
@@ -1459,10 +1459,10 @@ h5 {
 .section-text-page ol:not([class]) > *,
 .section-text-page ol.striped > * {
     position: relative;
-    padding: 6rem 18rem;
+    padding: 2rem 18rem;
 }
 
-.list-elements > li,
+.list-elements:not(.list-elements-yes, .list-elements-no) > li,
 .section-build-page ul:not([class]) > li:not([class]),
 .section-build-page ul.striped > li:not([class]),
 .section-build-page ol:not([class]) > li:not([class]),
@@ -1523,11 +1523,17 @@ h5 {
     position: relative;
 }
 
+.list-elements-yes,
+.list-elements-no {
+    list-style: none;
+}
+
 .list-elements-yes > *,
 .list-element-yes,
 .list-elements-no > *,
 .list-element-no {
     position: relative;
+    margin-left: 0;
     padding-left: 40rem;
 }
 
@@ -3438,11 +3444,13 @@ li a:hover,
     display: flex;
     flex-direction: column;
     gap: 18rem 0;
+    list-style: none;
 }
 
 .possibility-list > *,
 .possibility-element {
     position: relative;
+    margin-left: 0;
     padding-left: 38rem;
 }
 
@@ -5033,15 +5041,15 @@ img[data-fancybox] {
         font-size: 24rem;
     }
 
-    .build-page-content-block h2, 
+    /* .build-page-content-block h2, 
     .section-text-page h2 {
         background: var(--light, transparent) var(--dark, var(--body-bg));
-    }
+    } */
 
-    .build-page-content-block h2 span,
+    /* .build-page-content-block h2 span,
     .section-text-page h2 span {
         background: var(--light, transparent) var(--dark, var(--body-bg));
-    }
+    } */
     
     .build-page-content-column h3,
     .section-text-page h3,

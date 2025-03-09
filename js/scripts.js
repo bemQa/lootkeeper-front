@@ -365,9 +365,7 @@ $(document).ready(function() {
     Fancybox.bind("[data-fancybox]", {
         defaultType: "inline", 
         dragToClose: false,
-        touchMove: false,
-        backdropClick: false,
-        clickOutside: 'close'
+        touchMove: false
     });
 
     // не использовать якоря для фансибокса
@@ -670,7 +668,7 @@ $(document).ready(function() {
 
     //Генерация навигации (боковое меню) на странице статьи
 	let navigationHtml = '';
-	$('.section-build-page h2').each(function(){
+	$('.build-page-content-block[id] h2').each(function(){
 		let $this = $(this);
 		let title = $this.text();
 		let anchor = $this.parent().attr('id');
@@ -1416,12 +1414,17 @@ function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successTe
                 }
             }
             if (response.result == 'error') {
-                infoModal('Ошибка', 'Данные не верны.');
                 if (response.text == 'recaptcha error') {
                     infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
                 }
-                if (response.text.indexOf('Этот email уже занят') !== -1) {
+                else if (response.text.indexOf('Этот email уже занят') !== -1) {
                     infoModal('Ошибка', 'Этот email уже занят.');
+                }
+                else if (response.text.indexOf('Отображаемое имя занято') !== -1) {
+                    infoModal('Ошибка', 'Отображаемое имя занято.');
+                }
+                else {
+                    infoModal('Ошибка', 'Данные не верны.');
                 }
                 console.log(response.text);
             }
