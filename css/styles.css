@@ -4521,6 +4521,10 @@ img[data-fancybox] {
     cursor: pointer;
 }
 
+img.slide-image {
+    max-width: 100%;
+}
+
 .image-wrapper {
     max-width: 480rem;
     width: 100%;

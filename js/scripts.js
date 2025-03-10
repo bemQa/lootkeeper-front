@@ -339,6 +339,7 @@ $(document).ready(function() {
     // слайдер
     let slider_images = new Swiper('.slider-images', {
         loop: true,
+        autoHeight: true,
         pagination: {
             el: '.swiper-pagination',
         },
