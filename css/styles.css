@@ -1706,6 +1706,10 @@ h5 {
     display: none;
     padding-top: 12rem;
 }
+
+.accordion-text > p:not(:last-child) {
+    margin-bottom: 20rem;
+}
 /* end accordion */
 
 /* tabs */
@@ -4542,6 +4546,10 @@ img.slide-image {
 .ru-poe,
 .en-poe {
 	color: #FBAD8C;
+}
+
+.fancybox__caption {
+    max-width: 1200rem;
 }
 
 /* preloader */
