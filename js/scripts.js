@@ -1349,7 +1349,10 @@ $(document).ready(function() {
             
                 instance._isFetching = true;
                 let target = instance.reference.getAttribute('data-target');
-                fetch('/lk/item/?item='+target+'&lang='+item_lang)
+                let data_lang = instance.reference.getAttribute('data-lang');
+                let lang = data_lang ? data_lang : item_lang;
+                lang = lang ? lang : i_lang;
+                fetch('/lk/item/?item='+target+'&lang='+lang)
                     .then((response) => response.json())
                     .then((blob) => {
                         instance.setContent(_unescape(blob.data));
