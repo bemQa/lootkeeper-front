@@ -1446,7 +1446,7 @@ h5 {
 .section-text-page ul.striped,
 .section-text-page ol:not([class]),
 .section-text-page ol.striped {
-    margin: 4rem 0 16rem;
+    margin: 2rem 0;
 }
 
 .list-elements > *,
