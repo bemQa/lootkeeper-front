@@ -2069,6 +2069,9 @@ blockquote * {
     display: flex;
     flex-direction: column;
     gap: 24rem 0;
+}
+
+.init-comment-form-here ~ .comments-block {
     margin-top: 28rem;
 }
 
