@@ -174,24 +174,29 @@ $(document).ready(function() {
             let $this = $(this);
             let $parent = $(this).parent();
             let wrapper = $(this).parents('.accordion-block');
+            let title = wrapper.children().find('.accordion-title');
             let content = $this.next();
 
-            if (content.is(':visible')) {
+            if (content.hasClass('open')) {
                 if(wrapper.hasClass('single-accordion')) {
-                    wrapper.children().find('.accordion-title').removeClass('active');
-                    wrapper.children().find('.accordion-title').next().slideUp('fast');
+                    title.removeClass('active');
+                    // title.next().slideUp('fast');
+                    title.next().removeClass('open');
                 }
                 $this.removeClass('active');
                 $parent.removeClass('active');
-                content.slideUp('fast');
+                // content.slideUp('fast');
+                content.removeClass('open');
             } else {
                 if(wrapper.hasClass('single-accordion')) {
-                    wrapper.children().find('.accordion-title').removeClass('active');
-                    wrapper.children().find('.accordion-title').next().slideUp('fast');
+                    title.removeClass('active');
+                    // title.next().slideUp('fast');
+                    title.next().removeClass('open');
                 }
                 $this.addClass('active');
                 $parent.addClass('active');
-                content.slideDown('fast');
+                // content.slideDown('fast');
+                content.addClass('open');
             }
 
         });
