@@ -1470,7 +1470,8 @@ h5 {
 .section-text-page ul:not([class]) > li:not([class]),
 .section-text-page ul.striped > li:not([class]),
 .section-text-page ol:not([class]) > li:not([class]),
-.section-text-page ol.striped > li:not([class]) {
+.section-text-page ol.striped > li:not([class]),
+.section-text-page .article-big-list > li {
     margin-left: 40rem;
     padding-left: 0;
 }
@@ -1557,6 +1558,10 @@ h5 {
 .list-elements-no > *::after,
 .list-element-no::after {
     background: url(../img/icons/cross-red.svg) center/contain no-repeat;
+}
+
+.article-big-list > li {
+    margin-bottom: 20rem;
 }
 /* end lists */
 
@@ -1972,10 +1977,11 @@ blockquote * {
 
 .gallery-image {
     position: relative;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     max-width: 100%;
+    max-height: none !important;
     width: 100%;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -3374,7 +3380,7 @@ li a:hover,
     display: flex;
     flex-direction: column;
     gap: 20rem 0;
-    margin-bottom: 80rem;
+    margin-bottom: 46rem;
     overflow: hidden;
 }
 
@@ -3525,6 +3531,25 @@ li a:hover,
     border-radius: var(--border-radius);
     font-size: 18rem;
     line-height: 1.6;
+}
+
+span.article-npc-friendly > span {
+    color: #02bb10;
+    text-decoration: none
+}
+
+span.article-npc-enemy > span {
+    color: #b50606;
+    text-decoration: none
+}
+
+span.article-location > span {
+    color: #9c27b0;
+    text-decoration: none
+}
+
+.article-npc-friendly, .article-npc-enemy, .article-location {
+    font-weight: 600
 }
 
 .tarifs {
@@ -4559,6 +4584,10 @@ img.slide-image {
 
 .wide-image img {
     width: 100%;
+}
+
+img.wide-image[data-fancybox] {
+    max-height: none;
 }
 
 .ru-poe,
