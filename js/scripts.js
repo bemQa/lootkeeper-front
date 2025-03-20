@@ -1382,6 +1382,20 @@ $(document).ready(function() {
             placement: tippy_placement,
         });
     }
+
+    // Encode btn for poe article
+	$("#poe_encode_btn").click(function(e){
+        e.preventDefault();
+		var accNameEncoded = encodeURIComponent($("#poe_acc_name_before").val()),
+			$temp = $("<input>");
+		
+		$("body").append($temp);
+		$temp.val(accNameEncoded).select();
+		document.execCommand("copy");
+		$temp.remove();
+        tooltipCopy(this);
+	});
+	// Encode btn for poe article END
 });
 
 
