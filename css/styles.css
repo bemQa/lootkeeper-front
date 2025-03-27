@@ -609,7 +609,7 @@ a.dropdown-builds-list-title:hover {
     align-items: center;
     justify-content: flex-start;
     gap: 6rem;
-    padding: 5rem;
+    padding: 5rem 5rem 5rem 32rem;
     background: var(--block-bg);
     font-size: 16rem;
     line-height: 1.2;
@@ -620,6 +620,13 @@ a.dropdown-builds-list-title:hover {
 .dropdown-builds-list-link.current {
     background: var(--block-bg-hover);
     color: var(--main-color);
+}
+
+.dropdown-builds-list-link img {
+    position: absolute;
+    left: 5rem;
+    width: 22rem;
+    border-radius: 4rem;
 }
 
 .dropdown.active .dropdown-list {
@@ -1014,6 +1021,7 @@ a.dropdown-builds-list-title:hover {
 .header-main {
     height: 70rem;
     background: var(--main-bg);
+    user-select: none;
 }
 
 .header-main-wrapper {

@@ -111,17 +111,52 @@ $(document).ready(function() {
     });
 
     // выпадающие меню
-    $('body').on('click', '.dropdown', function(){
-        let $this = $(this);
-        $('.dropdown').not($this).removeClass('active');
-        $this.toggleClass('active');
-        $('body').on('click', function (e) {
-            let div = $('.dropdown, .dropdown-current');
+    function setupDropdown() {
+        const isMobile = window.innerWidth <= 480;
+    
+        if (isMobile) {
+            $('body').on('click', '.dropdown', function() {
+                let $this = $(this);
+                $('.dropdown').not($this).removeClass('active');
+                $this.toggleClass('active');
+            });
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown').removeClass('active');
+                }
+            });
+        } else {
+            let timeoutId;
+    
+            $('body').on('mouseenter', '.dropdown', function() {
+                let $this = $(this);
+                clearTimeout(timeoutId);
+                $('.dropdown').not($this).removeClass('active');
+                $this.addClass('active');
+            });
+    
+            $('body').on('mouseleave', '.dropdown', function() {
+                let $this = $(this);
+                timeoutId = setTimeout(function() {
+                    $this.removeClass('active');
+                }, 300);
+            });
+    
+            $('body').on('mouseenter', '.dropdown *', function() {
+                clearTimeout(timeoutId);
+            });
 
-            if (!div.is(e.target) && div.has(e.target).length === 0) {
-                $this.removeClass('active');
-            }
-        });
+            $(document).on('mouseenter', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    clearTimeout(timeoutId);
+                    $('.dropdown').removeClass('active');
+                }
+            });
+        }
+    }
+    setupDropdown();
+    $(window).on('resize', function() {
+        setupDropdown();
     });
 
     // уведомления
@@ -596,6 +631,11 @@ $(document).ready(function() {
     $('body').on('click', '#add-comment-btn', function(e) {
         e.preventDefault();
         sendAjaxForm("user_comment_form", "/lk/comment/", false, false, "", "Ошибка при добавлении комментария<br>Проверьте заполненные поля и попробуйте ещё раз", true, false);
+        setTimeout(function() {
+            $('#comment .comment-reply-info').remove();
+            $('#comment input[name="reply_id"]').val("");
+            $("#comment").detach().appendTo($(".init-comment-form-here"));
+        }, 1000);
         return false;
     });
     $('body').on('click', '#comment .comment-reply-info', function() {
@@ -902,6 +942,35 @@ $(document).ready(function() {
                 }
                 if (response.result == 'error') {
                     infoModal('Ошибка', 'Жалоба не зарегистрирована');
+                }
+                $this.prop('inert', false);
+            },
+            error: function(response) {
+                infoModal('Ошибка', 'Ошибка отправки, попробуйте ещё раз');
+                $this.prop('inert', false);
+            }
+        });
+        return false; 
+    });
+
+    // удалить комментарий
+    $('body').on('click', '.comment-delete', function(e){
+        e.preventDefault();
+        let $this = $(this);
+        let comment_data = 'comment_id=' + $this.parents('.comment-item').data('id');
+        $this.prop('inert', true);
+        $.ajax({
+            url:    '/lk/comment_delete/',
+            type:   "POST",
+            dataType: "html",
+            data: comment_data,
+            success: function(response) { 
+                response = $.parseJSON(response);
+                if (response.result == 'ok') {
+                    infoModal('Информация', 'Комментарий удален');
+                }
+                if (response.result == 'error') {
+                    infoModal('Ошибка', 'Комментарий не удален');
                 }
                 $this.prop('inert', false);
             },
