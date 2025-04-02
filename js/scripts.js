@@ -485,6 +485,9 @@ $(document).ready(function() {
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
                     $('.comments-high').html(response.data);
+                    if($('.comments-high').children().length) {
+                        $('.comments-high').css('display', 'flex');
+                    } else $('.comments-high').hide()
                 }
                 if (response.result == 'error') {
                     console.log('Ошибка получения комментариев');
@@ -967,7 +970,7 @@ $(document).ready(function() {
             success: function(response) { 
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
-                    infoModal('Информация', 'Комментарий удален');
+                    console.log('Комментарий удален');
                 }
                 if (response.result == 'error') {
                     infoModal('Ошибка', 'Комментарий не удален');
@@ -1225,8 +1228,15 @@ $(document).ready(function() {
     remakeItems();
 
   	// check poe
-	if (typeof poe !== 'undefined' && poe) {
-		$.ajax('/lk/poeleaguelist/')
+	if ((typeof poe !== 'undefined' && poe) || (typeof poe2 !== 'undefined' && poe2)) {
+        poe_slug = '';
+        if (typeof poe !== 'undefined' && poe) {
+            poe_slug = 'poe/';
+        }
+        if (typeof poe2 !== 'undefined' && poe2) {
+            poe_slug = 'poe2/';
+        }
+		$.ajax('/lk/poeleaguelist/'+poe_slug)
 		.done((response) => {
 			$.when.apply($, response.map((value) => {
 			    return $('select.poe-league-choose').append($('<option></option>').attr('value',value.slug).text(i_lang=='ru'?value.name:value.name_en)); 

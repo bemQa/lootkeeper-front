@@ -470,7 +470,7 @@ body {
 }
 
 .header-top .dropdown-block {
-    min-width: 114rem;
+    min-width: 130rem;
 }
 
 .dropdown-block::after {
@@ -1870,7 +1870,7 @@ h5 {
 table {
     border-spacing: 0;
     font-weight: normal;
-    font-size: 18rem;
+    font-size: 16rem;
     line-height: 1.4;
     text-align: left;
     color: var(--hlines-color);
@@ -1883,7 +1883,7 @@ th {
 
 th,
 td {
-    padding: 8rem 24rem;
+    padding: 6rem 12rem;
 }
 
 tr:nth-child(even) td {
@@ -2107,8 +2107,12 @@ blockquote * {
     gap: 24rem 0;
 }
 
-.init-comment-form-here ~ .comments-block {
+/* .init-comment-form-here ~ .comments-block {
     margin-top: 28rem;
+} */
+
+.init-comment-form-here ~ .comments-block .comments-high .comment-item:first-child {
+    margin-top: 18rem;
 }
 
 .comment-item-self {
