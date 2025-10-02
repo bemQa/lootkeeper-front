@@ -6429,6 +6429,16 @@ img.wide-image[data-fancybox] {
         padding: 0 16rem;
     }
 
+    .tarifs-title {
+        gap: 0;
+        font-size: 40rem;
+    }
+
+    .tarifs-title::before,
+    .tarifs-title::after {
+        display: none;
+    }
+
     .section-tarifs {
         padding: 24rem 0 40rem;
     }
