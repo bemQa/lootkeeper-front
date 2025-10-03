@@ -227,6 +227,12 @@ input {
 	text-decoration: underline;
 }
 
+.flex-align-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*styles config 
 for example:
 adaptive full-hd 1rem = calc(100vw / 1920)
