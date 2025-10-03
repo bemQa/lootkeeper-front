@@ -18,6 +18,9 @@ $(document).ready(function() {
     let league_list=[];
 	let i_lang='ru';
     let cookie_theme = $.cookie('theme') ? $.cookie('theme') : null;
+    if (cookie_theme !== 'theme-dark' && cookie_theme !== 'theme-light') {
+        cookie_theme = null;
+    }
     let expire_date = new Date();
 	expire_date.setTime(expire_date.getTime() + (15* 365 * 24 * 60 * 60 * 1000));
 
@@ -45,7 +48,8 @@ $(document).ready(function() {
                 switchElement.checked = true;
             });
             cookie_theme = 'theme-dark';
-            $.cookie('theme', cookie_theme, {expires: expire_date});
+            $.removeCookie('theme');
+            $.cookie('theme', cookie_theme, {expires: expire_date, path: '/'});
         } else {
             document.body.classList.add('theme-light');
             document.body.classList.remove('theme-default', 'theme-dark');
@@ -53,7 +57,8 @@ $(document).ready(function() {
                 switchElement.checked = false;
             });
             cookie_theme = 'theme-light';
-            $.cookie('theme', cookie_theme, {expires: expire_date});
+            $.removeCookie('theme');
+            $.cookie('theme', cookie_theme, {expires: expire_date, path: '/'});
         }
     } else {
         document.body.classList.remove('theme-dark', 'theme-light');
@@ -69,7 +74,8 @@ $(document).ready(function() {
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-default', 'theme-light');
                 cookie_theme = 'theme-dark';
-                $.cookie('theme', cookie_theme, {expires: expire_date});
+                $.removeCookie('theme');
+                $.cookie('theme', cookie_theme, {expires: expire_date, path: '/'});
             } else {
                 themeSwitches.forEach(function(switchElement) {
                     switchElement.checked = false;
@@ -77,7 +83,8 @@ $(document).ready(function() {
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-default', 'theme-dark');
                 cookie_theme = 'theme-light';
-                $.cookie('theme', cookie_theme, {expires: expire_date});
+                $.removeCookie('theme');
+                $.cookie('theme', cookie_theme, {expires: expire_date, path: '/'});
             }
         }
     });
@@ -831,9 +838,6 @@ $(document).ready(function() {
             success: function(response) { 
                 response = $.parseJSON(response);
                 if (response.result == 'ok') {
-                    // response.value == '+' + -
-                    // response.type == 'l' l d cl
-                    //console.log('лайк/дизлайк поставлен');
                     if(response.value == '+') {
                         if(response.type == 'l') {
                             $this.addClass('comment-like');
@@ -852,6 +856,9 @@ $(document).ready(function() {
                 }
                 if (response.result == 'error') {
                     console.log('ошибка'); 
+                    if(response.text){
+                        infoModal('Ошибка', response.text);
+                    }
                 }
                 $this.prop('inert', false);
             },
@@ -973,7 +980,7 @@ $(document).ready(function() {
                     console.log('Комментарий удален');
                 }
                 if (response.result == 'error') {
-                    infoModal('Ошибка', 'Комментарий не удален');
+                    infoModal('Ошибка', 'Ошибка при удалении комментария');
                 }
                 $this.prop('inert', false);
             },
@@ -1391,23 +1398,27 @@ $(document).ready(function() {
 
     function remakeItems(){
         //item colors and names
-        $('poeitem').each( (e,el)=> { 
+        $('a.poe-items').each( (e,el)=> { 
             $(el).find('img').remove();
             let color = $(el).attr('data-color');
             if(color){
                 $(el).css('color', color);
             }
             let name_ru = $(el).attr('data-name_ru');
+            let url_ru = $(el).attr('data-url_ru');
             if(i_lang=='ru' && name_ru){
                 $(el).text(name_ru);
+                $(el).attr('href', url_ru);
             }
             let name_en = $(el).attr('data-name_en');
+            let url_en = $(el).attr('data-url_en');
             if(i_lang=='en' && name_en){
                 $(el).text(name_en);
+                $(el).attr('href', url_en);
             }
             let image = $(el).attr('data-image');
             if(image){
-                $(el).prepend('<img class="item-image" src="'+image+'" />')
+                $(el).prepend('<img class="item-image" src="' + image + '" />')
             }
         });
         //remove old
@@ -1416,10 +1427,10 @@ $(document).ready(function() {
         }
         //add tooltips
         let tippy_placement = 'right';
-        if(window.innerWidth < 481) {
+        if (window.innerWidth < 481) {
             tippy_placement = 'top';
         }
-        tippyinst = tippy('poeitem', {
+        tippyinst = tippy('a.poe-items', {
             content: '...',
             onCreate(instance) {
                 // Setup our own custom state properties
@@ -1459,6 +1470,10 @@ $(document).ready(function() {
             followCursor: true,
             allowHTML: true,
             placement: tippy_placement,
+            arrow: false,
+
+            // use it for tests
+            // trigger: 'click'
         });
     }
 
@@ -1475,6 +1490,14 @@ $(document).ready(function() {
         tooltipCopy(this);
 	});
 	// Encode btn for poe article END
+
+    if($('.price-switch-input').prop('checked')) {
+        $('.tarifs-table, .tarifs').addClass('en-pricing');
+    }
+
+    $('.price-switch-input').click(function(e){
+        $('.tarifs-table, .tarifs').toggleClass('en-pricing');
+    });
 });
 
 
@@ -1519,11 +1542,8 @@ function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successTe
                 if (response.text == 'recaptcha error') {
                     infoModal('Ошибка reCAPTCHA', 'Попробуйте повторить попытку позднее.');
                 }
-                else if (response.text.indexOf('Этот email уже занят') !== -1) {
-                    infoModal('Ошибка', 'Этот email уже занят.');
-                }
-                else if (response.text.indexOf('Отображаемое имя занято') !== -1) {
-                    infoModal('Ошибка', 'Отображаемое имя занято.');
+                else if (response.text) {
+                    infoModal('Ошибка', response.text);
                 }
                 else {
                     infoModal('Ошибка', 'Данные не верны.');
@@ -1537,13 +1557,13 @@ function sendAjaxForm(ajax_form, url, needCaptcha=false, reload=false, successTe
             setTimeout(function() {
                 $("#" + ajax_form).prop('inert', false);
             }, 3000);
-            createNewToken();
+            //createNewToken();
         },
         error: function() {
             infoModal('Ошибка', 'Данные не отправлены.');
             console.log('Ошибка. Данные не отправлены.');
             $("#" + ajax_form).prop('inert', false);
-            createNewToken();
+            //createNewToken();
         }
     });
 }

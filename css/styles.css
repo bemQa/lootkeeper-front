@@ -290,6 +290,7 @@ body {
     --dark-hlines-color: #F9F9F9;
     --dark-gray-color: #A6A6C1;
     --dark-border-color: #2F2F2F;
+    --dark-mod-color: #FBAD8C;
 
     --white-body-bg: #F0F0F0;
     --white-heading-bg: #08080B;
@@ -299,6 +300,7 @@ body {
     --white-hlines-color: #161616;
     --white-gray-color: #79798B;
     --white-border-color: #DEDEDE;
+    --white-mod-color: #ff4d01;
 
     --accent-blue: #0B7FEA;
     --accent-blue-hover: #0560B5;
@@ -1500,7 +1502,7 @@ h5 {
 .section-text-page ol:not([class]) > li:not([class]),
 .section-text-page ol.striped > li:not([class]),
 .section-text-page .article-big-list > li {
-    margin-left: 40rem;
+    margin-left: 36rem;
     padding-left: 0;
 }
 
@@ -1572,7 +1574,7 @@ h5 {
 .list-element-no::after {
     content: '';
     position: absolute;
-    top: 8rem;
+    top: 7rem;
     left: 12rem;
     width: 15rem;
     height: 15rem;
@@ -1591,23 +1593,27 @@ h5 {
 .article-big-list > li {
     margin-bottom: 20rem;
 }
+
+.gems-list > li {
+    list-style: none;
+    margin-left: 16rem;
+}
 /* end lists */
 
 /* poe items */
 .poe-items {
     display: inline;
-    vertical-align: middle;
     font-weight: 600;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .poe-items img {
     max-width: 60rem;
-    max-height: 30rem;
-    height: auto;
-    margin-right: 5rem;
-    vertical-align: middle;
-    pointer-events: none;
+    /* max-height: 28rem; */
+    height: 28rem;
+    margin: -19rem 2rem -9rem 0;
+    /* pointer-events: none; */
 }
 /* end poe items */
 
@@ -3185,8 +3191,8 @@ input.error.ch + label::before {
     width: 100%;
     padding: var(--light, 36rem) var(--dark, 0);
     border-radius: var(--border-radius);
-    font-size: 17rem;
-    line-height: 1.6;
+    font-size: 16rem;
+    line-height: 1.5;
     /* overflow: hidden; */
 }
 
@@ -3537,7 +3543,7 @@ li a:hover,
 .possibility-element::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -1rem;
     left: 0;
     width: 26rem;
     height: 26rem;
@@ -4486,6 +4492,7 @@ span.article-location > span {
 .tippy-box {
     max-width: 400rem !important;
     font-size: 14rem;
+    background-color: #33333375;
 }
 
 .profile-comments-block,
@@ -4645,7 +4652,7 @@ img.wide-image[data-fancybox] {
 
 .ru-poe,
 .en-poe {
-	color: #FBAD8C;
+	color: var(--light, var(--white-mod-color)) var(--dark, var(--dark-mod-color));
 }
 
 .fancybox__caption {
@@ -4942,6 +4949,15 @@ img.wide-image[data-fancybox] {
     font-weight: bold;
     font-size: 24rem;
     line-height: 1.5;
+}
+
+.en-price,
+.en-pricing .ru-price {
+    display: none;
+}
+
+.en-pricing .en-price {
+    display: block;
 }
 
 .tarifs-table-info-title {
@@ -5561,6 +5577,25 @@ img.wide-image[data-fancybox] {
     /* end typography */
 
     /* lists */
+
+    .list-elements:not(.list-elements-yes, .list-elements-no) > li,
+    .section-build-page ul:not([class]) > li:not([class]),
+    .section-build-page ul.striped > li:not([class]),
+    .section-build-page ol:not([class]) > li:not([class]),
+    .section-build-page ol.striped > li:not([class]),
+    .section-text-page ul:not([class]) > li:not([class]),
+    .section-text-page ul.striped > li:not([class]),
+    .section-text-page ol:not([class]) > li:not([class]),
+    .section-text-page ol.striped > li:not([class]),
+    .section-text-page .article-big-list > li {
+        margin-left: 20rem;
+        padding-left: 0;
+    }
+
+    .section-build-page ul li, 
+    .section-build-page ol li{
+        padding-right: 0;
+    }
 
     /* end lists */
 
