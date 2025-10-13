@@ -1498,6 +1498,15 @@ $(document).ready(function() {
     $('.price-switch-input').click(function(e){
         $('.tarifs-table, .tarifs').toggleClass('en-pricing');
     });
+
+    $('.js-btn-tarif').on('click', function(e) {
+        e.preventDefault();
+        $this = $(this);
+        let title = $this.data('title'),
+            text = $this.data('text'),
+            checkboxes = $this.data('checkboxes');
+        tarifModal(title, text, checkboxes);
+    });
 });
 
 
@@ -1575,6 +1584,18 @@ function infoModal(title, text) {
     // Fancybox.close('#info_modal');
     Fancybox.show(
         [{src: '#info_modal',}],
+        {
+            defaultType: "inline"
+        }
+    );
+}
+
+function tarifModal(title, text, checkboxes) {
+    $('#tarif_modal .form-title').html(title);
+    $('#tarif_modal .form-text').html(text);
+    $('#tarif_modal .form-checkboxes').html(checkboxes);
+    Fancybox.show(
+        [{src: '#tarif_modal',}],
         {
             defaultType: "inline"
         }
