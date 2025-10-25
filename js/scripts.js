@@ -1505,7 +1505,22 @@ $(document).ready(function() {
         let title = $this.data('title'),
             text = $this.data('text'),
             checkboxes = $this.data('checkboxes');
-        tarifModal(title, text, checkboxes);
+        let link = $this.data('link') != undefined ? $this.data('link') : '';
+        tarifModal(title, text, checkboxes, link);
+    });
+
+    $('body').on('change', '.ch.required', function() {
+        const checkedCount = $('.form-checkboxes .ch.required:checked').length;
+        $('#tarif_modal .button').prop('disabled', checkedCount !== 2);
+    });
+
+    $('body').on('click', '#tarif_modal .button', function(e) {
+        e.preventDefault();
+        if($(this).attr('data-href')) {
+            document.location.href = $(this).attr('data-href');
+        } else {
+            $('#tarif_modal form').submit();
+        }
     });
 });
 
@@ -1590,10 +1605,16 @@ function infoModal(title, text) {
     );
 }
 
-function tarifModal(title, text, checkboxes) {
+function tarifModal(title, text, checkboxes, buttonLink) {
     $('#tarif_modal .form-title').html(title);
     $('#tarif_modal .form-text').html(text);
     $('#tarif_modal .form-checkboxes').html(checkboxes);
+    $('#tarif_modal .form-checkboxes .ch[required]').addClass('required');
+    if (buttonLink != '') {
+        $('#tarif_modal .button').attr('data-href', buttonLink);
+    } else {
+        $('#tarif_modal .button').removeAttr('data-href');
+    }
     Fancybox.show(
         [{src: '#tarif_modal',}],
         {

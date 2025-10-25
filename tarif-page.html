@@ -340,7 +340,31 @@
                             <div class="tarifs-table-row">
                                 <div class="tarifs-table-cell"><div class="tarifs-table-info-title">Возможности</div></div>
                                 <div class="tarifs-table-cell"></div>
-                                <div class="tarifs-table-cell popular"><a href="" class="button js-btn-tarif" data-title="Покупай випку" data-text="Покупай випку, читай правила" data-checkboxes='<div class="ip-cell"><input type="checkbox" id="tarif-chk1" name="personal-data" class="ch" value="1" required=""><label for="tarif-chk1">Я даю согласие на обработку моих <a href="">персональных данных</a></label></div>'>Подключить</a></div>
+                                <div class="tarifs-table-cell popular">
+                                    <a href="#!" 
+                                        class="button ru-price js-btn-tarif" 
+                                        data-title="Оплата подписки<br>уровень - Т3" 
+                                        data-text="Стоимость 123 ₽ за 30 дней доступа" 
+                                        data-checkboxes='
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk1" name="personal-data" class="ch" value="1"><label for="tarif-t3-chk1">Включить автоматическое продление подписки<br>В таком случае оплата будет списываться каждый месяц автоматически</label></div>
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk2" name="personal-data" class="ch" value="1" required=""><label for="tarif-t3-chk2">Я согласен с <a href="https://guides.lootkeeper.com/agreement" target="_blank">пользовательским соглашением</a> </label></div>
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk3" name="personal-data" class="ch" value="1" required=""><label for="tarif-t3-chk3">Я согласен с <a href="https://guides.lootkeeper.com/privacy-policy" target="_blank">политикой конфиденциальности</a> и даю согласие на обработку персональных данных  </label></div>'
+                                        >
+                                            Подключить
+                                    </a>
+                                    <a href="#!" 
+                                        class="button en-price js-btn-tarif"
+                                        data-title="Buy<br>level - Т3" 
+                                        data-text="Price 123 $ for 30 days of access" 
+                                        data-checkboxes='
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk1" name="personal-data" class="ch" value="1"><label for="tarif-t3-chk1">Enable automatic subscription renewal<br>In this case, payment will be debited every month automatically</label></div>
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk2" name="personal-data" class="ch" value="1" required=""><label for="tarif-t3-chk2">I agree to the <a href="https://guides.lootkeeper.com/agreement" target="_blank">user agreement</a> </label></div>
+                                            <div class="ip-cell"><input type="checkbox" id="tarif-t3-chk3" name="personal-data" class="ch" value="1" required=""><label for="tarif-t3-chk3">I agree to the <a href="https://guides.lootkeeper.com/privacy-policy" target="_blank">privacy policy</a> and consent to the processing of personal data</label></div>'
+                                        data-link="https://plati.ru"
+                                        >
+                                            Подключить
+                                    </a>
+                                </div>
                                 <div class="tarifs-table-cell"><a href="" class="button gray">Подключить</a></div>
                                 <div class="tarifs-table-cell"><a href="" class="button gray">Подключить</a></div>
                             </div>
@@ -678,7 +702,10 @@
                 <div class="form-wrapper">
                     <h3 class="form-title"></h3>
                     <div class="form-text"></div>
-                    <div class="form-checkboxes"></div>
+                    <form class="form">
+                        <div class="form-checkboxes"></div>
+                        <button class="button" disabled>Оплатить</button>
+                    </form>
                 </div>
             </div>
         </div>

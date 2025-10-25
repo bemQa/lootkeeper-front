@@ -4960,6 +4960,10 @@ img.wide-image[data-fancybox] {
     display: block;
 }
 
+.en-pricing .en-price.button {
+    display: flex;
+}
+
 .tarifs-table-info-title {
     font-weight: 600;
     font-size: 18rem;
@@ -5103,6 +5107,12 @@ img.wide-image[data-fancybox] {
 .section-faq .accordion-title {
     font-size: 18rem;
     line-height: 1.2;
+}
+
+.form-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12rem 0;
 }
 
 /*end main styles*/
@@ -6590,4 +6600,91 @@ img.wide-image[data-fancybox] {
 .grecaptcha-badge {
     opacity: 0;
     pointer-events: none;
+}
+
+.locked-article .card-bg-img {
+    filter: grayscale(100%);
+}
+
+.locked-article .card-long-img img {
+    filter: grayscale(100%);
+}
+
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.locked-overlay svg {
+    color: #fff;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.locked-time {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    background: var(--accent-blue);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.locked-article {
+    opacity: 0.85;
+}
+
+.locked-article:hover {
+    opacity: 1;
+}
+
+.locked-content-message {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.locked-content-message svg {
+    color: var(--accent-blue);
+    margin-bottom: 24px;
+}
+
+.locked-content-message h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.locked-content-message p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.locked-content-message .publish-date,
+.locked-content-message .min-tier-info {
+    font-weight: 600;
+    margin-bottom: 16px;
+    opacity: 1;
+}
+
+.locked-content-message .min-tier-info {
+    color: var(--accent-blue);
+}
+
+.locked-content-message .button {
+    display: inline-block;
+    margin-top: 12px;
 }
