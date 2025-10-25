@@ -1507,6 +1507,7 @@ $(document).ready(function() {
             checkboxes = $this.data('checkboxes');
         let link = $this.data('link') != undefined ? $this.data('link') : '';
         tarifModal(title, text, checkboxes, link);
+        $('#tarif_modal .button').prop('disabled', true);
     });
 
     $('body').on('change', '.ch.required', function() {
